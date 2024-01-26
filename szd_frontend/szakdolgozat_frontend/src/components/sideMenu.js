@@ -1,4 +1,4 @@
-import sideComponent from "./sideComponent"
+import SideComponent from "./SideComponent"
 
 export default function SideMenu(props) {
     return(

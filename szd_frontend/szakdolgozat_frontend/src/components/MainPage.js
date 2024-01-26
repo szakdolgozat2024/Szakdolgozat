@@ -1,8 +1,8 @@
-import Navbar from "./navbar";
-import sideComponent from "./sideComponent";
-import SideMenu from "./sideMenu";
+import Navbar from "./Navbar";
+import sideComponent from "./SideComponent";
+import SideMenu from "./SideMenu";
 
-export default function Mainpage(props) {
+export default function MainPage(props) {
     return(
         <main>
             <Navbar></Navbar>

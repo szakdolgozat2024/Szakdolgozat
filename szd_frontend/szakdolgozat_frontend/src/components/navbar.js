@@ -1,7 +1,7 @@
-import NavComponent from "./navComponent";
-import './navbar.css'
+import NavComponent from "./NavComponent";
+import './Navbar.css'
 
-export default function navbar() {
+export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="ms-5 navbar-brand" href="#">LOGO</a>
