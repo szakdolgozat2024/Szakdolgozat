@@ -1,13 +1,19 @@
-import Navbar from "./Navbar";
-import sideComponent from "./SideComponent";
-import SideMenu from "./SideMenu";
+import Navbar from "./navbar";
+import SideMenu from "./sideMenu";
+import ProductContainer from "./productContainer";
+import "./mainpage.css"
 
 export default function MainPage(props) {
-    return(
-        <main>
+    return (
+        <main className="text-center">
             <Navbar></Navbar>
-            <SideMenu></SideMenu>
+            <div className="container mx-auto mt-20 p-80">
+                <div className="row w-100">
+                    <SideMenu btsCol="col-2"></SideMenu>
+                    <ProductContainer btsCol="col-9"></ProductContainer>
+                </div>
+            </div>
         </main>
-        
+
     )
 }

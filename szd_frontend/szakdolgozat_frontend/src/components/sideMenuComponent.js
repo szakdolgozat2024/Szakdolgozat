@@ -1,4 +1,4 @@
-export default function SideComponent(props) {
+export default function SideMenuComponent(props) {
     return(
         <img src={props.icon}></img>
     )

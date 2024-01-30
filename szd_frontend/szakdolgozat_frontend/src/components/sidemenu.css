@@ -1,0 +1,22 @@
+.sideMenu{
+    margin: 2vw;
+    width: 100px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 25vw;
+}
+
+.sideMenu img{
+    width: 2vw;
+    cursor: pointer;
+    margin: 0.3vw;
+    border-radius: 3px;
+}
+
+.sideMenu img:hover{
+    background: rgb(224, 222, 222);
+}
+
+
+    

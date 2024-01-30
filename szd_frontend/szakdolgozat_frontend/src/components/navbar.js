@@ -1,5 +1,5 @@
-import NavComponent from "./NavComponent";
-import './Navbar.css'
+import NavComponent from "./navComponent";
+import './navbar.css'
 
 export default function Navbar() {
     return (
@@ -13,7 +13,7 @@ export default function Navbar() {
                 <ul className="navbar-nav mr-auto">
                     <NavComponent bootstrapListaElem="nav-item active">ABC</NavComponent>
                     <NavComponent bootstrapListaElem="nav-item">teszt</NavComponent>
-                    <NavComponent bootstrapListaElem="nav-item">12aaa</NavComponent>
+                    <NavComponent bootstrapListaElem="nav-item">bbb</NavComponent>
                     <NavComponent bootstrapListaElem="nav-item">hijk</NavComponent>
                 </ul>
             </div>
