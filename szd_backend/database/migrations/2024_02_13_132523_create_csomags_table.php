@@ -4,11 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCsomagTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
-        Schema::create('csomag', function (Blueprint $table) {
+        Schema::create('csomags', function (Blueprint $table) {
             $table->id('csom_azon');
             $table->foreignId('rendeles')->constrained('rendeles', 'rend_szam');
             $table->foreignId('futar')->constrained('futar', 'id');
@@ -17,8 +20,11 @@ class CreateCsomagTable extends Migration
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-        Schema::dropIfExists('csomag');
+        Schema::dropIfExists('csomags');
     }
-}
+};

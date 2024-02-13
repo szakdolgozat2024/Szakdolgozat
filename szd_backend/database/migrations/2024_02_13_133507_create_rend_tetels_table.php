@@ -4,9 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRendTetelTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::create('rend_tetel', function (Blueprint $table) {
             $table->foreignId('rendeles')->constrained('rendeles', 'rend_szam');
@@ -16,8 +19,11 @@ class CreateRendTetelTable extends Migration
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-        Schema::dropIfExists('rend_tetel');
+        Schema::dropIfExists('rend_tetels');
     }
-}
+};

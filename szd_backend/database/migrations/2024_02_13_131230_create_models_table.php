@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('termek', function (Blueprint $table) {
-            $table->id('ter_id');
-            $table->string('termek_nev');
-            $table->text('leiras');
-            $table->decimal('ar', 10, 2);
-            $table->foreignId('kategoria')->constrained('kategoria', 'kat_id');
+        Schema::create('models', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('termek');
+        Schema::dropIfExists('models');
     }
 };
