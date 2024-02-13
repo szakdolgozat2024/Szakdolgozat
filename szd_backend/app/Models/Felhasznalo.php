@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Felhasznalo extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nev',
+        'jelszo',
+        'hozzaferes',
+        'email',
+        'cim'
+    ];
+    
+    protected $hidden = [
+        'jelszo'
+    ];
 }

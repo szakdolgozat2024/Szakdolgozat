@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('termek', function (Blueprint $table) {
-            $table->id('ter_id');
-            $table->string('termek_nev');
-            $table->text('leiras');
-            $table->decimal('ar', 10, 2);
-            $table->foreignId('kategoria')->constrained('kategoria', 'kat_id');
+        Schema::create('model_tulajdonsags', function (Blueprint $table) {
+            $table->primary(['model', 'tulajdonsag']);
+            $table->foreignId('model')->references('mod_id')->on('modells');
+            $table->string('tulajdonsag');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('termeks');
+        Schema::dropIfExists('model_tulajdonsags');
     }
 };

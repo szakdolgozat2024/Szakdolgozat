@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Kategoria extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'kategoria_nev'
+    ];
 }

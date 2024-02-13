@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('model_tulajdonsags', function (Blueprint $table) {
-            $table->id();
+        Schema::create('termek', function (Blueprint $table) {
+            $table->id('ter_id');
+            $table->text('leiras');
+            $table->decimal('ar', 10, 2);
+            $table->foreign('model')->references('mod_id')->on('modells');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('model_tulajdonsags');
+        Schema::dropIfExists('termeks');
     }
 };
