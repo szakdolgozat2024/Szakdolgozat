@@ -1,17 +1,19 @@
 .sideMenu{
-    margin: 2vw;
-    width: 100px;
-    height: 100px;
+    width: 1vw;
     display: grid;
-    grid-template-columns: 1fr;
-    margin-top: 25vw;
+    grid-template-columns: max-content;
+    padding: 0;
+    text-align: right;
 }
+
 
 .sideMenu img{
     width: 2vw;
     cursor: pointer;
-    margin: 0.3vw;
     border-radius: 3px;
+    margin-left: 7vw;   
+    margin-top: auto;   
+    margin-bottom: auto;
 }
 
 .sideMenu img:hover{

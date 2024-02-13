@@ -1,8 +1,8 @@
 .product{
     border: 3px, solid, black;
-    padding: 8vw;
+    padding-bottom: 8vw;
+    padding-top: 8vw;
     background-size: cover;
-    margin: auto;
     cursor: pointer;
 }
 
