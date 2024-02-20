@@ -1,5 +1,10 @@
-import MainPage from "./components/MainPage";
+import MainPage from "./pages/MainPage";
 import { Context } from "./context/Context";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
+import Kategoriak from "./pages/Kategoriak";
+import Felhasznalo from "./pages/Felhasznalo";
+import Kosar from "./pages/Kosar";
 
 
 const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",
@@ -9,15 +14,18 @@ const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/c
 function App() {
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link>
-      </header>
-      <Context.Provider value={test}>
-        <MainPage></MainPage>
-      </Context.Provider>
-    </div>
+    <Context.Provider value={test}>
+      <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<Layout/>}>
+        <Route index element={<MainPage/>}/>
+        <Route path="kategoriak" element={<Kategoriak />} />
+        <Route path="felhasznalo" element={<Felhasznalo />} />
+        <Route path="kosar" element={<Kosar />} />
+      </Route>
+    </Routes>
+      </BrowserRouter>
+    </Context.Provider>
   );
 }
 
