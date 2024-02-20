@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Felhasznalo;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('felhasznalo', function (Blueprint $table) {
+        Schema::create('felhasznalos', function (Blueprint $table) {
             $table->id('azon');
             $table->string('nev');
             $table->string('jelszo');
@@ -20,6 +22,9 @@ return new class extends Migration
             $table->string('cim')->nullable();
             $table->timestamps();
         });
+
+        Felhasznalo::create(['nev' => "admin", 'jelszo' => Hash::make('jelszo'), 'hozzaferes' => 1, 'email' => "admin@admin.com"]);
+        Felhasznalo::create(['nev' => "vendeg", 'jelszo' => Hash::make('jelszo'), 'email' => "vendeg@vendeg.com"]);
     }
 
     /**

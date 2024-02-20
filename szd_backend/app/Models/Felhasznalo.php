@@ -20,4 +20,6 @@ class Felhasznalo extends Model
     protected $hidden = [
         'jelszo'
     ];
+
+    
 }

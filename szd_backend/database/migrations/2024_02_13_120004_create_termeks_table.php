@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('termeks', function (Blueprint $table) {
             $table->id('ter_id');
-            $table->text('leiras');
+            $table->text('leiras')->nullable();
             $table->decimal('ar', 10, 2);
             $table->foreignId('modell')->references('mod_id')->on('modells');
-            $table->string("anyag");
-            $table->string("szin");
+            $table->string("anyag")->nullable();
+            $table->string("szin")->nullable();
             $table->integer("keszlet");
             $table->timestamps();
         });
