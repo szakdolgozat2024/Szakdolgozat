@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\termek_tulajdonsag>
  */
-class TermekTulajdonsagFactory extends Factory
+class Termek_tulajdonsagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,9 @@ class TermekTulajdonsagFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'termek' => random_int(1,10),
+            'tulajdonsag' => random_int(1,10),
+            'ertek' => fake()->word()
         ];
     }
 }

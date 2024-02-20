@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Kategoria;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,9 @@ return new class extends Migration
             $table->string('kategoria_nev');
             $table->timestamps();
         });
+
+        Kategoria::create(['kategoria_nev' => 'konyhabútor']);
+        Kategoria::create(['kategoria_nev' => 'hálószobabútor']);
     }
 
     /**

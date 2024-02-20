@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\raktar>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tulajdonsag>
  */
-class RaktarFactory extends Factory
+class TulajdonsagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class RaktarFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nev' => fake()->word(),
+            'kategoria' => random_int(1,2)
         ];
     }
 }
