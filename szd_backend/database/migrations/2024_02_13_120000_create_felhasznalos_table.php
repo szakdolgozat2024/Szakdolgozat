@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('azon');
             $table->string('nev');
             $table->string('jelszo');
-            $table->int('hozzaferes')->default(0);
+            $table->integer('hozzaferes')->default(0);
             $table->string('email')->unique();
             $table->string('cim')->nullable();
             $table->timestamps();

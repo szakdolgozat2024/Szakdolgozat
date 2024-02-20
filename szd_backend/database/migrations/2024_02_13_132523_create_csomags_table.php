@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('csomags', function (Blueprint $table) {
             $table->id('csom_azon');
-            $table->foreignId('rendeles')->constrained('rendeles', 'rend_szam');
-            $table->foreignId('futar')->constrained('futar', 'id');
-            $table->string('allapot1');
+            $table->integer('allapot');
             $table->timestamps();
         });
     }

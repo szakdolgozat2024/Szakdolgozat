@@ -12,6 +12,8 @@ class Modell extends Model
     protected $fillable = [
         'nev',
         'leiras',
-        'kategoria'
+        'kategoria', 
+        'gyarto',
+        'kep'
     ];
 }

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Rend_tetel extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "rendeles", 
+        "termek",
+        "mennyiseg"
+    ];
 }

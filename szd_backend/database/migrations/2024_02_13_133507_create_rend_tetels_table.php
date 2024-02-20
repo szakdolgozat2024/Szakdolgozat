@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rend_tetel', function (Blueprint $table) {
             $table->foreignId('rendeles')->constrained('rendeles', 'rend_szam');
-            $table->foreignId('termek')->constrained('termek', 'ter_id');
+            $table->foreignId('termek')->constrained('termeks', 'ter_id');
             $table->integer('mennyiseg');
             $table->timestamps();
         });

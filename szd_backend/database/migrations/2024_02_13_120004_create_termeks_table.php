@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('termek', function (Blueprint $table) {
+        Schema::create('termeks', function (Blueprint $table) {
             $table->id('ter_id');
             $table->text('leiras');
             $table->decimal('ar', 10, 2);
-            $table->foreign('model')->references('mod_id')->on('modells');
+            $table->foreignId('modell')->references('mod_id')->on('modells');
+            $table->string("anyag");
+            $table->string("szin");
+            $table->integer("keszlet");
             $table->timestamps();
         });
     }

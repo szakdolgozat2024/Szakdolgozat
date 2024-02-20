@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('termek_tulajdonsag', function (Blueprint $table) {
-            $table->foreignId('termek')->constrained('termek', 'ter_id');
-            $table->string('nev');
+            $table->primary(['termek','tulajdonsag']);
+            $table->foreignId('termek')->constrained('termeks', 'ter_id');
+            $table->foreignId('tulajdonsag')->references('azonosito')->on('tulajdonsags');
             $table->string('ertek');
             $table->timestamps();
         });

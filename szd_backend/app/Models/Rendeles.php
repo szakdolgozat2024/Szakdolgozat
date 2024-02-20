@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Rendeles extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "felhasznalo", 
+        "csomag",
+        "kelt",
+        "kiszallitva"
+    ];
 }

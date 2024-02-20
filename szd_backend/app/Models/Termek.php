@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Termek extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "leiras",
+        "ar",
+        "modell",
+        "anyag",
+        "szin",
+        "keszlet"
+    ];
 }

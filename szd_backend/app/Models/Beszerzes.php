@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Beszerzes extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'termek',
+        'kelt',
+        'mennyiseg'
+    ];
 }

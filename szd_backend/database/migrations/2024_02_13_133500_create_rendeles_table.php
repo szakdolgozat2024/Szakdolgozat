@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('rendeles', function (Blueprint $table) {
             $table->id('rend_szam');
             $table->foreignId('felhasznalo')->constrained('felhasznalo', 'azon');
+            $table->foreignId('csomag')->references('csom_azon')->on('csomags')->nullable();
             $table->dateTime('kelt');
-            $table->dateTime('kiszallitva2')->nullable();
+            $table->dateTime('kiszallitva')->nullable();
             $table->timestamps();
         });
     }

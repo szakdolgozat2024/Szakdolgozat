@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id('mod_id');
             $table->string('nev');
             $table->string('leiras');
-            $table->foreign('kategoria')->references('kat_id')->on('kategorias');
+            $table->foreignId('kategoria')->references('kat_id')->on('kategorias');
+            $table->string("gyarto");
+            $table->string("kep")->nullable();
             $table->timestamps();
         });
     }
