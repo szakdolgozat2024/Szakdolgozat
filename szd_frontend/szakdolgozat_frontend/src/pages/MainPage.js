@@ -1,4 +1,3 @@
-import Navbar from "../components/navbar";
 import SideMenu from "../components/sideMenu";
 import ProductContainer from "../components/productContainer";
 import "./mainpage.css"
