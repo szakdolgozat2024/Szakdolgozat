@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Ramsey\Uuid\Type\Decimal;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\termek>
@@ -17,7 +18,11 @@ class TermekFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'ar' => random_int(10, 100000),
+            'modell' => random_int(1, 10),
+            'anyag' => fake()->word(),
+            'szin' => fake()->colorName(),
+            'keszlet' => random_int(10, 100)
         ];
     }
 }
