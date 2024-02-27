@@ -5,6 +5,8 @@ import Layout from "./Layout";
 import Kategoriak from "./pages/Kategoriak";
 import Felhasznalo from "./pages/Felhasznalo";
 import Kosar from "./pages/Kosar";
+import Bejelentkezes from "./pages/Bejelentkezes";
+import Regisztracio from "./pages/Regisztracio";
 
 
 const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",
@@ -22,6 +24,8 @@ function App() {
         <Route path="kategoriak" element={<Kategoriak />} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
         <Route path="kosar" element={<Kosar />} />
+        <Route path="bejelentkezes" element={<Bejelentkezes/>} />
+        <Route path="regisztracio" element={<Regisztracio/>} />
       </Route>
     </Routes>
       </BrowserRouter>

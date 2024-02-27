@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/token', function () {
+    return request()->session()->token();
+});
