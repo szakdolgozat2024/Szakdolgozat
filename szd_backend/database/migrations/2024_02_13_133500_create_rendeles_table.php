@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rendeles', function (Blueprint $table) {
             $table->id('rend_szam');
-            $table->foreignId('felhasznalo')->constrained('felhasznalos', 'azon');
+            $table->foreignId('user')->constrained('users', 'azon');
             $table->foreignId('csomag')->references('csom_azon')->on('csomags')->nullable();
             $table->dateTime('kelt');
             $table->dateTime('kiszallitva')->nullable();
