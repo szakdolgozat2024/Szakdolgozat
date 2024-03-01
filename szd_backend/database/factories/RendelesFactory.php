@@ -17,7 +17,9 @@ class RendelesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "felhasznalo"=>1, 
+        "kelt"=>getdate(),
+        "kiszallitva"
         ];
     }
 }

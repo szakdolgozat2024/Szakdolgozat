@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\felhasznalo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Users>
  */
-class FelhasznaloFactory extends Factory
+class UserFactory extends Factory
 {
     /**
      * The current password being used by the factory.
@@ -23,8 +23,8 @@ class FelhasznaloFactory extends Factory
     public function definition(): array
     {
         return [
-            'nev' => fake()->name(),
-            'jelszo' => static::$password ??= Hash::make('jelszo'),
+            'name' => fake()->name(),
+            'password' => static::$password ??= Hash::make('jelszo'),
             'email' => fake()->unique()->safeEmail(),
             'cim' => fake()->address()
         ];

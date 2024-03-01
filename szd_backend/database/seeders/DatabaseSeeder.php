@@ -8,6 +8,7 @@ use App\Models\Modell;
 use App\Models\Termek;
 use App\Models\Termek_tulajdonsag;
 use App\Models\Tulajdonsag;
+use App\Models\Rendeles;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,5 +28,6 @@ class DatabaseSeeder extends Seeder
         Termek::factory(10)->create();
         Tulajdonsag::factory(10)->create();
         Termek_tulajdonsag::factory(10)->create();
+        Rendeles::factory(10)->create();
     }
 }
