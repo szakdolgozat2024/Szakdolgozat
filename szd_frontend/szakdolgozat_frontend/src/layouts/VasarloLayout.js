@@ -46,7 +46,7 @@ function VasarloLayout() {
       </ul>
         </div>
       </nav>
-      <article>
+      <article className="container">
         <Outlet />
       </article>
     </div>
