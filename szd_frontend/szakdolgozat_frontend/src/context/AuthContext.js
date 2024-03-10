@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext();
+const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) => {
         name: "",
         email: "",
         password: "",
-        password_confirmation: "",
     });
     //const csrf = () => axios.get("/sanctum/csrf-cookie");
     let token = "";

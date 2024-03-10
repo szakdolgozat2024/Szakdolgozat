@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function Layout() {
+function VendegLayout() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,13 +34,8 @@ function Layout() {
         <input type="text" placeholder="Keresés" className=""/>
         
         <li className="nav-item">
-          <Link to="/felhasznalo" className="nav-link">
-            Felhasználó
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/kosar" className="nav-link">
-            Kosár
+          <Link to="/bejelentkezes" className="nav-link">
+            Bejelentkezés
           </Link>
         </li>
       </ul>
@@ -53,4 +48,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default VendegLayout;
