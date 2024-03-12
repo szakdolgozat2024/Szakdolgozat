@@ -17,7 +17,7 @@ class KategoriaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'Kat_nev' => $this->faker->word
         ];
     }
 }

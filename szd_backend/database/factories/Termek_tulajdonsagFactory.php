@@ -2,7 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Termek;
+use App\Models\Tulajdonsag;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\termek_tulajdonsag>
@@ -17,9 +21,13 @@ class Termek_tulajdonsagFactory extends Factory
     public function definition(): array
     {
         return [
-            'termek' => random_int(1,10),
-            'tulajdonsag' => random_int(1,10),
-            'ertek' => fake()->word()
+            'termek' => function () {
+                return Termek::factory()->create()->id;
+            },
+            'tulajdonsag' => function () {
+                return Tulajdonsag::factory()->create()->id;
+            },
+            'ertek' => $this->faker->word,
         ];
     }
 }

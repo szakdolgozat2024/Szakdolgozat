@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Csomag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,11 @@ class RendelesFactory extends Factory
     public function definition(): array
     {
         return [
-            "felhasznalo"=>1, 
-        "kelt"=>getdate(),
-        "kiszallitva"
+            'user'=>1, 
+        'kelt'=>fake()->dateTimeThisMonth(),
+        'csomag' => function(){
+            return Csomag::factory()->create()->id;
+        }
         ];
     }
 }

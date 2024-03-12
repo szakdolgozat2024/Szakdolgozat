@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriaController;
+use App\Http\Controllers\ModellController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::get('/kategoria_nevek', [KategoriaController::class, 'kategoria_nevek']);
+Route::get('/osszes_modell', [ModellController::class, 'osszes_modell']);

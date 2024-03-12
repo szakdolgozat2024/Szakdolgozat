@@ -17,7 +17,8 @@ class CsomagFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'csom_azon' => $this->faker->unique()->randomNumber(),
+            'allapot' => $this->faker->numberBetween(0, 3)
         ];
     }
 }
