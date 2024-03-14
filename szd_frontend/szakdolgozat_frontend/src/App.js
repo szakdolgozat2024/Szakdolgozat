@@ -1,6 +1,6 @@
 import MainPage from "./pages/MainPage";
 import { Context } from "./context/Context";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import VasarloLayout from "./layouts/VasarloLayout";
 import Kategoriak from "./pages/Kategoriak";
 import Felhasznalo from "./pages/Felhasznalo";
@@ -9,6 +9,7 @@ import Bejelentkezes from "./pages/Bejelentkezes";
 import Regisztracio from "./pages/Regisztracio";
 import VendegLayout from "./layouts/VendegLayout";
 import useAuthContext from "./context/AuthContext";
+import Modell from "./pages/Modell";
 
 
 const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",
@@ -36,6 +37,8 @@ function App() {
         <Route path="felhasznalo" element={<Felhasznalo />} />
         <Route path="bejelentkezes" element={<Bejelentkezes/>} />
         <Route path="regisztracio" element={<Regisztracio/>} />
+        <Route path="modell" element={<Modell/>} />
+
       </Route>
       )}
     </Routes>
