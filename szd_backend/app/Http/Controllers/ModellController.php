@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class ModellController extends Controller
 {
-    public function osszes_modell() {
+    public function osszes_modell() { /* amihez van termék */
         $modellek = DB::table('modells')
-        ->select('nev')
+        ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
+        ->select('modells.nev as nev')
+        ->distinct()
         ->get();
         return $modellek;
     }

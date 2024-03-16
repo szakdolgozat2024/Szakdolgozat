@@ -11,11 +11,11 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 import "./modell.css";
 
-export default function Modell() {
+export default function Modell(props) {
   const DS = new DataService();
   const [modellek, setModellek] = useState([""]);
   if (modellek[0] === "") {
-    DS.get("/api/modell_termekei/9", getKat);
+    DS.get("/api/modell_termekei/"+props.product, getKat);
   }
 
   function getKat(data) {
@@ -25,10 +25,10 @@ export default function Modell() {
   return (
     <Container fluid="true" className="ModellContainer h-60">
       <Row className="ModellRow">
-        <Col xs={8} className="ModellKepek">
+        <Col xs={8} key={1}  className="ModellKepek">
           <Carousel>
-            {modellek.map((mod) => (
-              <Carousel.Item>
+            {modellek.map((mod, i) => (
+              <Carousel.Item key={i}>
                 <img alt="" src="https://www.archiproducts.com/images/sharingimage/1390.jpg"></img>
                 <Carousel.Caption>{mod.szin}</Carousel.Caption>
               </Carousel.Item>
@@ -48,8 +48,8 @@ export default function Modell() {
                   title="válassz színt"
                   id="bg-nested-dropdown"
                 > 
-                  {modellek.map((mod) => (
-                    <Dropdown.Item eventKey="1">{mod.szin}</Dropdown.Item>
+                  {modellek.map((mod, index) => (
+                    <Dropdown.Item key={index} eventKey="1">{mod.szin}</Dropdown.Item>
                   ))}
                 </DropdownButton>
                 <h5>{1000}{"Ft"}</h5>
