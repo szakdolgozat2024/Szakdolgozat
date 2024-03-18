@@ -10,48 +10,6 @@ export default function CostumCard(props) {
     setData(props.link);
   }
 
-  function cardTitle() {
-    if (props.cardTitle !== undefined) {
-      return(<Card.Title>{props.cardTitle}</Card.Title>);
-    } else {
-      return null;
-    }
-  }
-
-  function cardText() {
-    if (props.cardText !== undefined) {
-      return(<Card.Text>{props.cardText}</Card.Text>);
-    } else {
-      return null;
-    }
-  }
-
-  function cardBody() {
-    if (props.cardTitle !== undefined && props.cardText !== undefined) {
-      return(<Card.Body>{cardTitle() + cardText()}</Card.Body>);
-    } else {
-      return null;
-    }
-  }
-
-  function cardImage() {
-    if (props.cardImage !== undefined) {
-      return(<Card.Img variant="top" src={props.cardImage} />);
-    } else {
-      return null;
-    }
-  }
-
-  function cardFooter() {
-    if (props.cardFooter !== undefined) {
-      return(<Card.Footer>
-        <small className="text-muted">{props.cardFooter}</small>
-      </Card.Footer>);
-    } else {
-      return null;
-    }
-  }
-
   const cardMain = () => (
     <Card className={props.cardClass} onClick={handleClick}>
       {props.cardImage && <Card.Img variant="top" src={props.cardImage} />}
