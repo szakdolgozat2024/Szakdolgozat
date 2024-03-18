@@ -4,8 +4,8 @@ import DataService from "../api/DataService";
 import Spinner from "react-bootstrap/Spinner";
 import { useState } from "react";
 import CostumCard from "./card";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 export default function ProductContainer(props) {
   const images = [
@@ -29,17 +29,18 @@ export default function ProductContainer(props) {
     <div className={props.btsCol + " productContainer"}>
       <Spinner animation="border" className="m-auto" id="spinner" />
       <Row xs={1} md={3} className="g-4">
-      {modellek.map((model, idx) => (
-  <Col key={idx}>
-    <CostumCard
-      bodyClass="productBody"
-      inCardGroup={true}
-      linkTo={"/termek/"}
-      cardImage={images[0]}
-      cardTitle={model.nev} 
-    />
-  </Col>
-))}
+        {modellek.map((model, idx) => (
+          <Col key={idx}>
+            <CostumCard
+              cardClass="productCard"            
+              bodyClass="productBody"
+              inCardGroup={true}
+              linkTo={"termek/"+ model.nev}
+              cardImage={images[0]}
+              cardTitle={model.nev}
+            />
+          </Col>
+        ))}
       </Row>
     </div>
   );

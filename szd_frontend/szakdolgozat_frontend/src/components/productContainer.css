@@ -1,3 +1,7 @@
+.productContainer{
+    width: 90%;
+    margin: 1vw;
+}
 
 .productCard{
     cursor: pointer;

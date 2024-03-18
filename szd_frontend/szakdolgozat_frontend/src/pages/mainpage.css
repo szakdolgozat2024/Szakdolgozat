@@ -1,3 +1,4 @@
-.mainContent{
-    margin: auto;
+.content{
+    display: flex;
+    justify-content: space-evenly;
 }

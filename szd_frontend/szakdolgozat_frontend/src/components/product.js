@@ -9,7 +9,7 @@ export default function Product(props) {
     }
     return(
         <Link to={"termek/"+props.link}>
-            <div onClick={handleClick}  className={props.btsCol+" product product_anim"} style={{backgroundImage: `url(${props.bgimage})`}}></div>
+            <div onClick={handleClick} style={{backgroundImage: `url(${props.bgimage})`}}></div>
         </Link>
     )
 }

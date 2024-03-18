@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../context/DataContext";
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+import Card from "react-bootstrap/Card";
+import CardGroup from "react-bootstrap/CardGroup";
 
 export default function CostumCard(props) {
   const { setData } = useContext(Context);
   function handleClick() {
-    setData(props.link);
+    setData(props.linkTo);
   }
 
   const cardMain = () => (
@@ -15,7 +15,11 @@ export default function CostumCard(props) {
       {props.cardImage && <Card.Img variant="top" src={props.cardImage} />}
       {(props.cardTitle || props.cardText) && (
         <Card.Body className={props.bodyClass}>
-          {props.cardTitle && <Card.Title className={props.titleClass}>{props.cardTitle}</Card.Title>}
+          {props.cardTitle && (
+            <Card.Title className={props.titleClass}>
+              {props.cardTitle}
+            </Card.Title>
+          )}
           {props.cardText && <Card.Text>{props.cardText}</Card.Text>}
         </Card.Body>
       )}
@@ -29,11 +33,9 @@ export default function CostumCard(props) {
 
   return props.inCardGroup ? (
     <CardGroup>
-      {cardMain()}
+      <Link to={props.linkTo}>{cardMain()}</Link>
     </CardGroup>
   ) : (
-    <Link to={props.linkTo}>
-      {cardMain()}
-    </Link>
+    <Link to={props.linkTo}>{cardMain()}</Link>
   );
 }

@@ -5,10 +5,10 @@ import "./mainpage.css"
 export default function MainPage(props) {
     return (
         <main className="text-center">
-            <div className="mainContent container mx-auto mt-20 p-80">
-                <div className="row w-100">
-                    <SideMenu btsCol="col-3"></SideMenu>
-                    <ProductContainer btsCol="col-9"></ProductContainer>
+            <div className="mainContent mx-auto mt-20 p-80">
+                <div className="row content">
+                    <SideMenu btsCol="col-1"></SideMenu>
+                    <ProductContainer btsCol="col-11"></ProductContainer>
                 </div>
             </div>
         </main>
