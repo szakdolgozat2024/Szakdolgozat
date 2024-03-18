@@ -1,13 +1,11 @@
-.product{
-    border: 3px, solid, black;
-    padding-bottom: 8vw;
-    padding-top: 8vw;
-    background-size: cover;
+
+.productCard{
     cursor: pointer;
+    
 }
 
 
 
-
+  
 
 
