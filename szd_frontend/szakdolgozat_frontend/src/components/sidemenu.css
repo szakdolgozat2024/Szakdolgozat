@@ -3,20 +3,22 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 30%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .sideMenu img{
     width: 3vw;
-    height: 3vw;
     cursor: pointer;
     border-radius: 3px;
-    
+    margin: 0.5vw;
 }
 
 .sideMenu img:hover{
     background: rgb(224, 222, 222);
 }
 
+.col{
+    padding: 0.2vw;
+}
 
-    

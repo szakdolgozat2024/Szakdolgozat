@@ -5,7 +5,15 @@
 
 .productCard{
     cursor: pointer;
-    
+    border-radius: 0;
+}
+
+.productCard img{
+    border-radius: 0;
+}
+
+.card-body{
+    padding: 0.5vw;
 }
 
 

@@ -7,7 +7,7 @@ import CardGroup from "react-bootstrap/CardGroup";
 export default function CostumCard(props) {
   const { setData } = useContext(Context);
   function handleClick() {
-    setData(props.linkTo);
+    setData(props.routeData);
   }
 
   const cardMain = () => (

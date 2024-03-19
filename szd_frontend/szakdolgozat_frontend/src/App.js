@@ -20,7 +20,7 @@ import Modell from "./pages/Modell";
 function App() {
 
   const { user} = useAuthContext();
-  const [data, setData] = useState({});
+  const [data, setData] = useState({"id": null, "name": null});
 
   return (
     <Context.Provider value={{ data, setData}}>
@@ -34,13 +34,14 @@ function App() {
       </Route>
       ) : (
         <Route path="/" element={<VendegLayout/>}>
+        <Route path={"termek/" + data.id +"="+ data.name} element={<Modell product={data.id} name={data.name}/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
         <Route path="bejelentkezes" element={<Bejelentkezes/>} />
         <Route path="regisztracio" element={<Regisztracio/>} />
         <Route path="modell" element={<Modell/>} />
-        <Route path={"termek/" + data} element={<Modell product={data}/>} />
+        
       </Route>
       )}
     </Routes>
