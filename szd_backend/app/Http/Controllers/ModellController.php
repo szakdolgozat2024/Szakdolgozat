@@ -16,4 +16,13 @@ class ModellController extends Controller
         ->get();
         return $modellek;
     }
+
+    public function modell_kereses($kereses) { 
+        $talalatok = DB::table('modells')
+        ->select('modells.nev as nev', 'modells.mod_id as mod_id')
+        ->where('leiras', 'like', "%".$kereses."%")
+        ->get();
+        return $talalatok;
+    }
+
 }
