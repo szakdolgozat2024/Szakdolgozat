@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import  useAuthContext  from "../context/AuthContext";
+import Card from 'react-bootstrap/Card';
 
 export default function Bejelentkezes() {
     const [email, setEmail] = useState("");
@@ -22,8 +23,10 @@ export default function Bejelentkezes() {
     };
 
     return (
-        <div className="m-auto" style={{ maxWidth: "400px" }}>
-            <h1 className="text-center">Bejelentkezés</h1>
+        <div className="m-auto container" style={{ maxWidth: "400px" }}>
+        <Card  className='m-auto mt-5 p-4'>
+            <Card.Title><h1>Bejelentkezés</h1></Card.Title>
+            <Card.Text className="text-muted">
             <form onSubmit={handleSubmit}>
                 <div className="mb-3 mt-3">
                     <label htmlFor="email" className="form-label">
@@ -71,20 +74,22 @@ export default function Bejelentkezes() {
                         )}
                     </div>
                 </div>
-
-                <div className=" text-center">
-                    <button type="submit" className="btn btn-primary w-100">
+            </form>
+            </Card.Text>
+            <button type="submit" className="btn btn-primary w-100">
                         Login
                     </button>
+            </Card>
+            <div className=" text-center">
+                    
 
                     <p>
-                        Még nincs felhaszálóneve?
+                        Még nincs fiókja? Regisztráljon most!
                         <Link className="nav-link text-info" to="/regisztracio">
                             Regisztráció
                         </Link>
                     </p>
                 </div>
-            </form>
         </div>
     );
 }
