@@ -11,15 +11,18 @@ import Regisztracio from "./pages/Regisztracio";
 import VendegLayout from "./layouts/VendegLayout";
 import useAuthContext from "./context/AuthContext";
 import Modell from "./pages/Modell";
+import Kategoria from "./pages/Kategoria";
 
 
 /* const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",
                 "https://www.archiproducts.com/images/sharingimage/1390.jpg", 
                "https://i0.wp.com/d2s30hray1l0uq.cloudfront.net/frontend/Prepare-your-furniture.jpg?fit=1024%2C512&ssl=1",
                "https://i.ytimg.com/vi/_BfUgCN7TYk/maxresdefault.jpg"]}; */
+               
 function App() {
 
   const { user} = useAuthContext();
+  //const user = "user";
   const [data, setData] = useState({"id": null, "name": null});
 
   return (
@@ -37,6 +40,7 @@ function App() {
         <Route path={"termek/" + data.id +"="+ data.name} element={<Modell product={data.id} name={data.name}/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
+        <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
         <Route path="bejelentkezes" element={<Bejelentkezes/>} />
         <Route path="regisztracio" element={<Regisztracio/>} />

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ require __DIR__.'/auth.php';
 Route::get('/token', function () {
     return request()->session()->token();
 });
+

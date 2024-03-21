@@ -25,3 +25,4 @@ Route::get('/kategoria_nevek', [KategoriaController::class, 'kategoria_nevek']);
 Route::get('/osszes_modell', [ModellController::class, 'osszes_modell']);
 Route::get('/modell_termekei/{modell}', [TermekController::class, 'modell_termekei']);
 Route::get('/modell_kereses/{kereses}', [ModellController::class, 'modell_kereses']);
+Route::get('/adott_kategoria/{kategoria_nev}', [KategoriaController::class, 'adott_kategoria']);

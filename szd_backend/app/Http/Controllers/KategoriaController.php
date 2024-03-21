@@ -12,4 +12,9 @@ class KategoriaController extends Controller
         $kategoria = DB::table('kategorias')->select('kategoria_nev')->get();
         return $kategoria;
     }
+
+    public function adott_kategoria($kategoria_nev) {
+        $kategoria = DB::table('modells as m')->join('kategorias as k', 'm.kategoria', '=', 'k.kat_id')->where('kategoria_nev', '=', $kategoria_nev)->get();
+        return $kategoria;
+    }
 }

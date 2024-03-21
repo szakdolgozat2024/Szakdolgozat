@@ -7,4 +7,5 @@ export default axios.create({
 
     //beállítjuk, hogy  a kérések azonosítása coockie-k segítségével történik.
     withCredentials: true,
+    withXSRFToken: true
 });
