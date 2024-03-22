@@ -13,7 +13,7 @@
   text-align: left;
 }
 
-.ModellAdatok h5{
+.ModellAdatok h5 {
   text-align: left;
   margin-left: 0;
   margin-bottom: 2vw;
@@ -31,6 +31,7 @@ img {
 h5 {
   margin-left: 70%;
 }
+
 .carousel {
   height: 100%;
 }
@@ -48,22 +49,37 @@ h5 {
   margin-left: 0;
 }
 
-.szinText{
-    margin-bottom: 0;
+.szinText {
+  margin-bottom: 0;
 }
 
-.termekAmount{
-    
-    margin: 1px;
-    margin-top: 1vw;
-    margin-bottom: 1vw;
-    margin-left: 2vw;
+.termekAmount {
+
+  margin: 1px;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+  margin-left: 2vw;
 }
-.kosarba{
-    margin-left: 5vw;
-    width: 10vw;
+
+.kosarba {
+  margin-left: 5vw;
+  width: 10vw;
 }
-.amountSetter{
-    width: 2vw;
-    margin: 2px;
+
+.amountSetter {
+  width: 3rem;
+  margin: 2px;
+}
+
+.eltunik {
+  display: none;
+}
+
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw; 
+  height: 10vw;
+  cursor: progress;
 }

@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class TermekController extends Controller
 {
-    public function modell_termekei($modell)
+    public function modell_termekei($modell, $modellNev)
     {
         $termekek = DB::table('termeks')
-            ->select('*')
-            ->where('modell', '=', $modell)
+            ->select("*")
+            ->join('modells', 'modells.mod_id', '=', 'termeks.modell')
+            ->where('termeks.modell', '=', $modell)
+            ->where('modells.nev', '=', $modellNev)
             ->get();
         return $termekek;
     }

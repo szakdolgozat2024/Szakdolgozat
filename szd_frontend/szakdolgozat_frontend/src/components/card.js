@@ -5,13 +5,9 @@ import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 
 export default function CostumCard(props) {
-  const { setData } = useContext(Context);
-  function handleClick() {
-    setData(props.routeData);
-  }
 
   const cardMain = () => (
-    <Card className={props.cardClass} onClick={handleClick}>
+    <Card className={props.cardClass}>
       {props.cardImage && <Card.Img variant="top" src={props.cardImage} />}
       {(props.cardTitle || props.cardText) && (
         <Card.Body className={props.bodyClass}>

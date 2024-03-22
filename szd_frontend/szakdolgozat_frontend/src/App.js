@@ -21,15 +21,15 @@ import Kategoria from "./pages/Kategoria";
                
 function App() {
 
-  const { user} = useAuthContext();
-  //const user = "user";
-  const [data, setData] = useState({"id": null, "name": null});
-
+  /* const { user} = useAuthContext(); */
+  const user = "user";
   return (
-    <Context.Provider value={{ data, setData}}>
+    <Context.Provider>
       <Routes>
       { user ? (
         <Route path="/" element={<VasarloLayout/>}>
+        <Route path={"termek/:termek" } element={<Modell />} />
+        <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
@@ -38,9 +38,9 @@ function App() {
       ) : (
         <Route path="/" element={<VendegLayout/>}>
         <Route path={"termek/" + data.id +"="+ data.name} element={<Modell product={data.id} name={data.name}/>} />
+        <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
-        <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
         <Route path="bejelentkezes" element={<Bejelentkezes/>} />
         <Route path="regisztracio" element={<Regisztracio/>} />
