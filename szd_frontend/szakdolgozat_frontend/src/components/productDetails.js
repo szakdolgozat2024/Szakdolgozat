@@ -51,18 +51,23 @@ export default function ProductDetails(props) {
           ></ToggleButton>
         ))}
       </ToggleButtonGroup>
-      <div className="d-flex align-items-center termekAmount">
-        <Button variant="primary" onClick={() => quantityChange(quantity - 1)}>-</Button>
-        <Form.Control
-          placeholder={quantity}
-          className="amountSetter"
-          type="amount"
-          id="amount"
-        />
-        <Button variant="primary" onClick={() => quantityChange(quantity + 1)}>+</Button>
+      <div className="d-flex align-items-center termekAmount amountSetter">
+        <InputGroup className="mb-3">
+          <Button variant="outline-secondary" id="button-addon1">
+            -
+          </Button>
+          <Form.Control 
+          
+            aria-label="Example text with button addon"
+            aria-describedby="basic-addon1"
+          />
+          <Button variant="outline-secondary" id="button-addon1">
+            +
+          </Button>
+        </InputGroup>
         <Button className="kosarba" variant="primary">Kosárba 🛒</Button>
       </div>
-      
+
       <Accordion defaultActiveKey="0">
         {/* defaultActiveKey automatikusan kinyitja a megadott elemet */}
         <Accordion.Item eventKey="1">
