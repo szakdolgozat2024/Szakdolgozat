@@ -37,7 +37,7 @@ function App() {
       </Route>
       ) : (
         <Route path="/" element={<VendegLayout/>}>
-        <Route path={"termek/" + data.id +"="+ data.name} element={<Modell product={data.id} name={data.name}/>} />
+        <Route path={"termek/:termek" } element={<Modell />} />
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
