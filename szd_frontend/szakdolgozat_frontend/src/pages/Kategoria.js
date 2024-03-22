@@ -11,6 +11,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 export default function Kategoria() {
   const [modellek, setModellek] = useState([""]);
   const locationPath = useLocation().pathname;
+  console.log(useLocation());
   const pathsArray = locationPath.split("/");
   const kateg = decodeURIComponent(pathsArray[2]);
   const DS = new DataService();
@@ -49,7 +50,7 @@ export default function Kategoria() {
               inCardGroup={true}
               cardImage={images[0]}
               cardTitle={model.nev}
-              linkTo={"termek/" + model.mod_id + "=" + model.nev} //link mint string Link komponenshez
+              linkTo={"/termek/" + model.mod_id + "=" + model.nev} //link mint string Link komponenshez
               routeData={{ id: model.mod_id, name: model.nev }} //object a routeoláshoz (ebből jön létre a link)
             />
           </Col>

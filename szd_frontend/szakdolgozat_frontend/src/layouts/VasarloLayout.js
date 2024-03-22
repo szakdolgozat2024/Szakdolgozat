@@ -6,7 +6,7 @@ function VasarloLayout() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-        <a className="ms-5 navbar-brand" href="/kezdolap">
+        <a className="ms-5 navbar-brand" href="/">
         LOGO
       </a>
       <button
@@ -49,6 +49,10 @@ function VasarloLayout() {
       <article className="container">
         <Outlet />
       </article>
+      <footer className="text-center pb-4 pt-2 bg-secondary-subtle">
+        <p className="font-italic">Készítette: Kun-Székely Bence és Szendefi Krisztofer Dániel</p>
+        
+      </footer>
     </div>
   );
 }

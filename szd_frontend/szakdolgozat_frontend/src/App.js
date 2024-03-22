@@ -21,8 +21,8 @@ import Kategoria from "./pages/Kategoria";
                
 function App() {
 
-  //const { user} = useAuthContext();
-  const user = "user";
+  const { user} = useAuthContext();
+  //const user = "user";
   const [data, setData] = useState({"id": null, "name": null});
 
   return (
