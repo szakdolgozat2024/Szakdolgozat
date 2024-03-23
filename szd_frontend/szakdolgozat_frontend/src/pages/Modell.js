@@ -30,7 +30,7 @@ export default function Modell(props) {
     setTermekek(data.data);
   }
 
-  +"="+mod_nev
+  
 
   return (
     <div>

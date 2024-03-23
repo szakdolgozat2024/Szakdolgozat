@@ -1,6 +1,6 @@
 import MainPage from "./pages/MainPage";
 import { useState } from "react";
-import { Context } from "./context/DataContext";
+import { DataContext } from "./context/DataContext";
 import { Routes, Route } from "react-router-dom";
 import VasarloLayout from "./layouts/VasarloLayout";
 import Kategoriak from "./pages/Kategoriak";
@@ -24,7 +24,7 @@ function App() {
   /* const { user} = useAuthContext(); */
   const user = "user";
   return (
-    <Context.Provider>
+
       <Routes>
       { user ? (
         <Route path="/" element={<VasarloLayout/>}>
@@ -49,7 +49,7 @@ function App() {
       </Route>
       )}
     </Routes>
-    </Context.Provider>
+
   );
 }
 

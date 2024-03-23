@@ -1,3 +1,5 @@
+
+
 .ModellKepek {
   margin: 0;
   padding: 0;
@@ -54,21 +56,18 @@ h5 {
 }
 
 .termekAmount {
-
-  margin: 1px;
-  margin-top: 1vw;
-  margin-bottom: 1vw;
-  margin-left: 2vw;
+  display: "flex";
+  flex-wrap: nowrap;
+  width: 80%;
 }
 
 .kosarba {
-  margin-left: 5vw;
-  width: 10vw;
+  margin: auto;
+  width: 12vw;
 }
 
-.amountSetter {
-  width: 3rem;
-  margin: 2px;
+.kosarCol {
+  text-align: center;
 }
 
 .eltunik {
@@ -79,7 +78,15 @@ h5 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10vw; 
+  width: 10vw;
   height: 10vw;
   cursor: progress;
+}
+
+.termekAmountText {
+  text-align: center;
+}
+
+.amountKosar {
+  margin: auto;
 }

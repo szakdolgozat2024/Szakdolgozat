@@ -1,6 +1,9 @@
 import Accordion from "react-bootstrap/Accordion";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
@@ -27,7 +30,7 @@ export default function ProductDetails(props) {
     <div>
       <h2 className="text-center">{props.name}</h2>
       <h5>{props.termekek[termek].ar + " Ft"}</h5>
-      <p>{props.termekek[termek].leiras}</p>
+      <p >{props.termekek[termek].leiras}</p>
       <p className="szinText">{"Szín: " + props.termekek[termek].szin}</p>
       <ToggleButtonGroup
         onChange={colorChange}
@@ -51,22 +54,31 @@ export default function ProductDetails(props) {
           ></ToggleButton>
         ))}
       </ToggleButtonGroup>
-      <div className="d-flex align-items-center termekAmount amountSetter">
-        <InputGroup className="mb-3">
-          <Button variant="outline-secondary" id="button-addon1">
-            -
-          </Button>
-          <Form.Control 
-          
-            aria-label="Example text with button addon"
-            aria-describedby="basic-addon1"
-          />
-          <Button variant="outline-secondary" id="button-addon1">
-            +
-          </Button>
-        </InputGroup>
-        <Button className="kosarba" variant="primary">Kosárba 🛒</Button>
-      </div>
+      <Container className="amountKosar">
+        <Row>
+          <Col>
+            <InputGroup className="mb-3 termekAmount">
+              <Button onClick={() => quantityChange(quantity - 1)} variant="outline-secondary" id="button-addon1">
+                -
+              </Button>
+              <Form.Control
+              className="termekAmountText"
+                placeholder={quantity}
+                aria-label="Example text with button addon"
+                aria-describedby="basic-addon1"
+              />
+              <Button onClick={() => quantityChange(quantity + 1)} variant="outline-secondary" id="button-addon1">
+                +
+              </Button>
+            </InputGroup>
+          </Col>
+          <Col xs={0} sm={6} md={6} lg={7} xl={8} xxl={8} className="kosarCol">
+            <Button className="kosarba" variant="primary">
+              Kosárba 🛒
+            </Button>
+          </Col>
+        </Row>
+      </Container>
 
       <Accordion defaultActiveKey="0">
         {/* defaultActiveKey automatikusan kinyitja a megadott elemet */}
