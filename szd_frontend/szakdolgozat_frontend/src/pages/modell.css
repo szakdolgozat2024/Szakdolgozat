@@ -59,6 +59,7 @@ h5 {
   display: "flex";
   flex-wrap: nowrap;
   width: 80%;
+  margin-top: 0;
 }
 
 .kosarba {
@@ -90,3 +91,9 @@ h5 {
 .amountKosar {
   margin: auto;
 }
+.col{
+  margin-top: 0;
+} 
+ .mennyisegCol{
+  padding-top: 0;
+ }

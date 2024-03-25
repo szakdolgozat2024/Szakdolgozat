@@ -4,10 +4,10 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import AmountCounter from "./amountCounter";
+import Cookies from 'js-cookie';
 
 export default function ProductDetails(props) {
   const [termek, setTermek] = useState(0);
@@ -17,20 +17,22 @@ export default function ProductDetails(props) {
     /* let elem = document.getElementById(params.target.id);
     elem.style.border = "10px solid #000"; */
     setTermek(params);
-    console.log(props);
   }
 
-  function quantityChange(params) {
-    if (params > 0) {
-      setQuantity(params);
-    }
+  function amauntChange (params) {
+    setQuantity(params);
+  };
+
+  function kosarba () {
+    Cookies.set("termek-"+ props.termekek[termek].ter_id, quantity);
+
   }
 
   return (
     <div>
       <h2 className="text-center">{props.name}</h2>
       <h5>{props.termekek[termek].ar + " Ft"}</h5>
-      <p >{props.termekek[termek].leiras}</p>
+      <p>{props.termekek[termek].leiras}</p>
       <p className="szinText">{"Szín: " + props.termekek[termek].szin}</p>
       <ToggleButtonGroup
         onChange={colorChange}
@@ -56,24 +58,11 @@ export default function ProductDetails(props) {
       </ToggleButtonGroup>
       <Container className="amountKosar">
         <Row>
-          <Col>
-            <InputGroup className="mb-3 termekAmount">
-              <Button onClick={() => quantityChange(quantity - 1)} variant="outline-secondary" id="button-addon1">
-                -
-              </Button>
-              <Form.Control
-              className="termekAmountText"
-                placeholder={quantity}
-                aria-label="Example text with button addon"
-                aria-describedby="basic-addon1"
-              />
-              <Button onClick={() => quantityChange(quantity + 1)} variant="outline-secondary" id="button-addon1">
-                +
-              </Button>
-            </InputGroup>
+          <Col className="mennyisegCol">
+            <AmountCounter quantityChange={amauntChange} defaultValue={quantity} quantity={quantity} maxAmount={15}></AmountCounter>
           </Col>
-          <Col xs={0} sm={6} md={6} lg={7} xl={8} xxl={8} className="kosarCol">
-            <Button className="kosarba" variant="primary">
+          <Col xs={0} sm={6} md={6} lg={7} xl={7} xxl={8} className="kosarCol">
+            <Button onClick={kosarba} className="kosarba" variant="primary">
               Kosárba 🛒
             </Button>
           </Col>
