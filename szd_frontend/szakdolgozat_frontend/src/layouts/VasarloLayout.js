@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function VasarloLayout() {
+function VasarloLayout(props) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,6 +37,12 @@ function VasarloLayout() {
           <Link to="/felhasznalo" className="nav-link">
             Felhasználó
           </Link>
+        </li>
+        <li className="nav-item">
+          { props.user.hozzaferes ? (
+            <Link to="/admin" className="nav-link">
+            Admin
+          </Link>) : null }
         </li>
         <li className="nav-item">
           <Link to="/kosar" className="nav-link">
