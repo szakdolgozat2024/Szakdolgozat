@@ -17,6 +17,7 @@ export default function ProductDetails(props) {
     /* let elem = document.getElementById(params.target.id);
     elem.style.border = "10px solid #000"; */
     setTermek(params);
+    setQuantity(1);
   }
 
   function amauntChange (params) {
@@ -26,15 +27,13 @@ export default function ProductDetails(props) {
   function kosarba () {
     let kosar = Cookies.get("kosar");
     if (kosar === undefined) {
-      Cookies.set("kosar", JSON.stringify({ [props.termekek[termek].ter_id]: quantity }));
+      kosar = {};
     } else {
-      kosar = kosar.split(";");
-    kosar.push(JSON.stringify({ [props.termekek[termek].ter_id]: quantity }));
-    Cookies.set("kosar", kosar.join(";"));
+      kosar = JSON.parse(kosar);
     }
-    
-    
-  }
+    kosar[props.termekek[termek].ter_id] = (kosar[props.termekek[termek].ter_id] || 0) + quantity;
+    Cookies.set("kosar", JSON.stringify(kosar));
+}
 
   return (
     <div>
