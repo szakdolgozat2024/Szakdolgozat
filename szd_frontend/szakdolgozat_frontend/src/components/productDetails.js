@@ -24,8 +24,16 @@ export default function ProductDetails(props) {
   };
 
   function kosarba () {
-    Cookies.set("termek-"+ props.termekek[termek].ter_id, quantity);
-
+    let kosar = Cookies.get("kosar");
+    if (kosar === undefined) {
+      Cookies.set("kosar", JSON.stringify({ [props.termekek[termek].ter_id]: quantity }));
+    } else {
+      kosar = kosar.split(";");
+    kosar.push(JSON.stringify({ [props.termekek[termek].ter_id]: quantity }));
+    Cookies.set("kosar", kosar.join(";"));
+    }
+    
+    
   }
 
   return (
