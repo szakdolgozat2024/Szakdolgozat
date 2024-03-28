@@ -25,7 +25,7 @@ function App() {
   /* const { user} = useAuthContext(); */
   const user = {name: "user",
   email: "user@email.com",
-  hozzaferes: 1}; //0-vasarlo 1-admin
+  hozzaferes: 0}; //0-vasarlo 1-admin
   return (
 
       <Routes>
@@ -36,8 +36,8 @@ function App() {
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
-        <Route path="admin" element={<Admin />} />
-        <Route path="kosar" element={<Kosar />} />
+        {user.hozzaferes ? (<Route path="admin" element={<Admin />} />) : (<Route path="kosar" element={<Kosar />} />)}
+        
       </Route>
       ) : (
         <Route path="/" element={<VendegLayout/>}>

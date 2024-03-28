@@ -11,6 +11,14 @@ export default function Kosar() {
     kosarLekerdezes();
   }
 
+  function vegosszeg() {
+    let osszeg = 0;
+    tartalom.forEach(elem => {
+      osszeg += parseFloat(elem.ar);
+    });
+    return osszeg;
+  }
+
   function getkosar() {
     let kosar = Cookies.get("kosar");
     if (kosar === undefined) {
@@ -24,6 +32,7 @@ export default function Kosar() {
   function kosarTorles() {
     Cookies.remove("kosar");
     setTartalom([""]);
+    window.location.reload();
   }
   async function kosarLekerdezes() {
     let kosar = getkosar();
@@ -42,6 +51,7 @@ export default function Kosar() {
 
   return (
     <div className="container mt-5 mb-5 text-center m-auto ">
+    
       <Card
         style={{ width: "50rem" }}
         className="m-auto"
@@ -59,8 +69,8 @@ export default function Kosar() {
                   <th scope="col">#</th>
                   <th scope="col">Termék</th>
                   <th scope="col">Szín</th>
-                  <th scope="col">Ár</th>
                   <th scope="col">Mennyiség</th>
+                  <th scope="col">Ár</th>
                 </tr>
               </thead>
               <tbody>
@@ -69,14 +79,16 @@ export default function Kosar() {
                     <th scope="row">#{index + 1}</th>
                     <td>{elem.nev}</td>
                     <td>{elem.szin}</td>
-                    <td>{elem.ar}</td>
                     <td>{elem.mennyiseg}</td>
+                    <td>{parseFloat(elem.ar)} Ft</td>
                   </tr>
                 ))}
               </tbody>
+              
             </table>
           </Card.Text>
           <div className="text-end">
+          <p className="me-3"><b>Végösszeg:</b> {vegosszeg()} Ft</p>
             <Button variant="danger" onClick={kosarTorles}>
               Kosár törlése
             </Button>

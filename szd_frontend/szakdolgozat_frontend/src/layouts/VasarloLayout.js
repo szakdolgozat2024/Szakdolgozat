@@ -42,13 +42,11 @@ function VasarloLayout(props) {
           { props.user.hozzaferes ? (
             <Link to="/admin" className="nav-link">
             Admin
-          </Link>) : null }
+          </Link>) : (<Link to="/kosar" className="nav-link">
+          Kosár
+        </Link>) }
         </li>
-        <li className="nav-item">
-          <Link to="/kosar" className="nav-link">
-            Kosár
-          </Link>
-        </li>
+        
       </ul>
         </div>
       </nav>
