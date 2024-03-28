@@ -25,7 +25,7 @@ function App() {
   /* const { user} = useAuthContext(); */
   const user = {name: "user",
   email: "user@email.com",
-  hozzaferes: 0}; //0-vasarlo 1-admin
+  hozzaferes: 1}; //0-vasarlo 1-admin
   return (
 
       <Routes>
