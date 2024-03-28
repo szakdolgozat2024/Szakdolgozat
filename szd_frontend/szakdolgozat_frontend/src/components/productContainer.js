@@ -25,8 +25,8 @@ export default function ProductContainer(props) {
               inCardGroup={true}
               cardImage={images[0]}
               cardTitle={model.nev}
-              linkTo={"termek/"+ model.mod_id+"="+model.nev} //link mint string Link komponenshez
-              routeData={{"id":model.mod_id, "name":model.nev}} //object a routeoláshoz (ebből jön létre a link)
+              linkTo={"termek/"+ model.mod_id+"="+model.nev} 
+              routeData={{"id":model.mod_id, "name":model.nev}} 
             />
           </Col>
         ))}
