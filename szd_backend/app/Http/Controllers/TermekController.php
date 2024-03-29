@@ -18,4 +18,13 @@ class TermekController extends Controller
             ->get();
         return $termekek;
     }
-}
+
+    public function adott_termek($id){
+        $termek = DB::table('termeks')
+            ->select("*")
+            ->join('modells', 'modells.mod_id', '=', 'termeks.modell')
+            ->where('ter_id', '=', $id)
+            ->get();
+        return $termek;
+    }
+}   
