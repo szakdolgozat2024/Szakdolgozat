@@ -3,3 +3,11 @@
     margin-top: 1vw;
     margin-bottom: 1vw;
 }
+
+.adminForm{
+    width: 50%;
+}
+
+.adminKep{
+    border: 1px solid black;
+}

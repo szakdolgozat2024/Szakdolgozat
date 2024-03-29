@@ -1,6 +1,6 @@
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import TermekAdatok from "../components/termekAdatok";
+import TermekAdatok from "../components/adminAdatok";
 import ListGroup from "react-bootstrap/ListGroup";
 import DataService from "../api/DataService";
 import { useState } from "react";
@@ -74,9 +74,10 @@ export default function Admin() {
                           <Button
                             as="input"
                             className="align-middle"
-                            style={{ width: "100%" }}
+                            style={{ width: "100%", color: "black" }}
                             type="submit"
-                            value="✏"
+                            variant="outline-warning"
+                            value="Szerkesztés"
                             onClick={() => handleValasztott(model.mod_id, model.nev)}
                           />
                         </td>
