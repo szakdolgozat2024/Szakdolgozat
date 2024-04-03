@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import AmountCounter from "./amountCounter";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 export default function ProductDetails(props) {
   const [termek, setTermek] = useState(0);
@@ -20,20 +20,21 @@ export default function ProductDetails(props) {
     setQuantity(1);
   }
 
-  function amauntChange (params) {
+  function amauntChange(params) {
     setQuantity(params);
-  };
+  }
 
-  function kosarba () {
+  function kosarba() {
     let kosar = Cookies.get("kosar");
     if (kosar === undefined) {
       kosar = {};
     } else {
       kosar = JSON.parse(kosar);
     }
-    kosar[props.termekek[termek].ter_id] = (kosar[props.termekek[termek].ter_id] || 0) + quantity;
+    kosar[props.termekek[termek].ter_id] =
+      (kosar[props.termekek[termek].ter_id] || 0) + quantity;
     Cookies.set("kosar", JSON.stringify(kosar));
-}
+  }
 
   return (
     <div>
@@ -66,7 +67,12 @@ export default function ProductDetails(props) {
       <Container className="amountKosar">
         <Row>
           <Col className="mennyisegCol">
-            <AmountCounter quantityChange={amauntChange} defaultValue={quantity} quantity={quantity} maxAmount={15}></AmountCounter>
+            <AmountCounter
+              quantityChange={amauntChange}
+              defaultValue={quantity}
+              quantity={quantity}
+              maxAmount={15}
+            ></AmountCounter>
           </Col>
           <Col xs={0} sm={6} md={6} lg={7} xl={7} xxl={8} className="kosarCol">
             <Button onClick={kosarba} className="kosarba" variant="primary">
@@ -81,7 +87,14 @@ export default function ProductDetails(props) {
         <Accordion.Item eventKey="1">
           <Accordion.Header>További adatok</Accordion.Header>
           <Accordion.Body>
-            <p>{"Anyag: " + props.termekek[termek].anyag}</p>
+            <Row>
+              <Col lg={9}>Anyag:</Col>
+              <Col>{props.termekek[termek].anyag}</Col>
+            </Row>
+            <Row>
+              <Col lg={9}>Anyag:</Col>
+              <Col>{props.termekek[termek].anyag}</Col>
+            </Row>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

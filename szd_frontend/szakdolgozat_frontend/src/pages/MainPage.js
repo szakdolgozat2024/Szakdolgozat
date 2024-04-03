@@ -7,28 +7,33 @@ import "./mainpage.css";
 
 export default function MainPage(props) {
   const DS = new DataService();
-  const [modellek, setModellek] = useState([""]);
-  const [tolt, setTolt] = useState(false);
+  const [state, setState] = useState({
+    modellek: [""],
+    tolt: false,
+  })
 
-  if (modellek[0] === "") {
+  function handleState(key, value) {
+    setState({ ...state, [key]: value });
+  }
+
+  if (state.modellek[0] === "") {
     DS.get("/api/osszes_modell", getKat);
-  } else if (modellek[0] !== "" && tolt == false) {
-    setTolt(true);
+  } else if (state.modellek[0] !== "" && state.tolt == false) {
+    handleState("tolt", true);
   }
   function getKat(data) {
-    setModellek(data.data);
+    handleState("modellek", data.data);
   }
 
   return (
     <main className="text-center">
       <div className="mainContent mx-auto mt-20 p-80">
         <div className="row content">
-          {tolt ? (
-            <>
-              <SideMenu btsCol="col-1"></SideMenu>
+          {state.tolt ? (
+            <>              
               <ProductContainer
                 btsCol="col-11"
-                modellek={modellek}
+                modellek={state.modellek}
               ></ProductContainer>
             </>
           ) : (

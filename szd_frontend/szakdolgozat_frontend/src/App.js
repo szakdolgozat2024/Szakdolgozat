@@ -13,6 +13,7 @@ import useAuthContext from "./context/AuthContext";
 import Modell from "./pages/Modell";
 import Kategoria from "./pages/Kategoria";
 import Admin from "./pages/Admin";
+import Kereses from "./pages/Kereses";
 
 
 /* const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",
@@ -25,13 +26,14 @@ function App() {
   /* const { user} = useAuthContext(); */
   const user = {name: "user",
   email: "user@email.com",
-  hozzaferes: 0}; //0-vasarlo 1-admin
+  hozzaferes: 1}; //0-vasarlo 1-admin
   return (
 
       <Routes>
       { user ? (
         <Route path="/" element={<VasarloLayout user = {user}/>}>
         <Route path={"termek/:termek" } element={<Modell />} />
+        <Route path={"search/:kereses" } element={<Kereses/>}/>
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
@@ -42,6 +44,7 @@ function App() {
       ) : (
         <Route path="/" element={<VendegLayout/>}>
         <Route path={"termek/:termek" } element={<Modell />} />
+        <Route path={"search/:kereses" } element={<Kereses/>}/>
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
