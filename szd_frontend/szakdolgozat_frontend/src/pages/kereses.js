@@ -3,7 +3,7 @@ import { useState } from "react";
 import DataService from "../api/DataService";
 import ProductContainer from "../components/productContainer";
 import { Spinner } from "react-bootstrap";
-import { useEffect } from "react";
+
 
 export default function Kereses(props) {
     const locationPath = useLocation().pathname;
@@ -19,15 +19,13 @@ export default function Kereses(props) {
       setState({ ...state, [key]: value });
     }
   
-    useEffect(() => {
-      if (state.modellek[0] === "") {
-        DS.get("/api/modell_kereses/" + searchWord, getKat);
-      }
-    }, [locationPath]); 
-  
+    if (state.modellek[0] === "") {
+      DS.get("/api/modell_kereses/" + searchWord, getKat);
+    } else if (state.modellek[0] !== "" && state.tolt == false) {
+      handleState("tolt", true);
+    }
     function getKat(data) {
       handleState("modellek", data.data);
-      handleState("tolt", true);
     }
   
     return (<>
