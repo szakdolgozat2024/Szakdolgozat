@@ -4,14 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function VasarloLayout(props) {
-  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (searchTerm !== "") {
-      navigate(`/search/${searchTerm}`);
-    }
-  }, [searchTerm, navigate]);
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -41,7 +35,12 @@ function VasarloLayout(props) {
                 Kategóriák
               </Link>
             </li>
-            <input type="text" onKeyDown={(e) => e.key === "Enter" && navigate(`/search/${searchTerm}`)} onChange={e => setSearchTerm(e.target.value)} placeholder="Keresés" className="" />
+            <input
+              type="text"
+              onKeyDown={(e) =>
+                e.key === "Enter" && navigate(`/search/${e.target.value}`)
+              }
+            />
 
             <li className="nav-item">
               <Link to="/felhasznalo" className="nav-link">

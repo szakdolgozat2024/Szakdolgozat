@@ -15,7 +15,7 @@ export default function ProductContainer(props) {
 
   
   return (
-    <div className={props.btsCol + " productContainer"}>
+    <div className={props.btsCol + " productContainer m-auto"}>
       <Row xs={1} md={3} lg={3} className="g-4">
         {props.modellek.map((model, idx) => (
           <Col key={idx}>
@@ -25,7 +25,7 @@ export default function ProductContainer(props) {
               inCardGroup={true}
               cardImage={images[0]}
               cardTitle={model.nev}
-              linkTo={"termek/"+ model.mod_id+"="+model.nev} 
+              linkTo={"/termek/"+ model.mod_id+"="+model.nev} 
               routeData={{"id":model.mod_id, "name":model.nev}} 
             />
           </Col>
