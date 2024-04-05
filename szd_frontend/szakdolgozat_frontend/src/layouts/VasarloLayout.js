@@ -38,7 +38,7 @@ function VasarloLayout(props) {
             <input
               type="text"
               onKeyDown={(e) =>
-                e.key === "Enter" && navigate(`/search/${e.target.value}`)
+                e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
               }
             />
 

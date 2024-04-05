@@ -33,8 +33,8 @@ function App() {
       { user ? (
         <Route path="/" element={<VasarloLayout user = {user}/>}>
         <Route path={"termek/:termek" } element={<Modell />} />
-        <Route path={"search/:kereses" } element={<Kereses/>}/>
-        <Route path={"search/" } element={<MainPage/>}/>
+        <Route path={"kereses/:kereses" } element={<Kereses/>}/>
+        <Route path={"kereses/" } element={<MainPage/>}/>
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
