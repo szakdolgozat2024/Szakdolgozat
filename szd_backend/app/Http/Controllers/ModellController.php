@@ -20,8 +20,10 @@ class ModellController extends Controller
 
     public function modell_kereses($kereses) { 
         $talalatok = DB::table('modells')
-        ->select('*')
-        ->where('leiras', 'like', "%".$kereses."%")
+        ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
+        ->select('modells.*')
+        ->where('modells.leiras', 'like', "%".$kereses."%")
+        ->distinct()
         ->get();
         return $talalatok;
     }
