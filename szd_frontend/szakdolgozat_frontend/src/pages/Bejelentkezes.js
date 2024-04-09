@@ -20,6 +20,7 @@ export default function Bejelentkezes() {
         };
 
         loginReg(adat, "/login");
+
     };
 
     return (

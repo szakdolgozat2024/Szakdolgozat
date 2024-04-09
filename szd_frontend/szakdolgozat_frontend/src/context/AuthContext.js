@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext({});
 
@@ -51,9 +52,10 @@ export const AuthProvider = ({ children }) => {
             console.log("siker");
             //sikeres bejelentkezés/regisztráció esetén
             //Lekérdezzük a usert
-            await getUser();
+            Cookies.set("bejelentkezett_user", JSON.stringify(adat));   
+            //await getUser();
             //elmegyünk  a kezdőlapra
-            navigate("/");
+            window.location.reload();
         } catch (error) {
             console.log(error);
             if (error.response.status === 422) {

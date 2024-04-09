@@ -1,9 +1,65 @@
+import { useState } from "react";
+import DataService from "../api/DataService";
 import Bejelentkezes from "./Bejelentkezes";
+import Cookies from "js-cookie";
+import Card from 'react-bootstrap/Card';
+import { useNavigate } from "react-router-dom";
+import Spinner from "react-bootstrap/esm/Spinner";
 
 export default function Felhasznalo(){
+
+    const navigate = useNavigate();
+    const DS = new DataService();
+  const [user, setUser] = useState("");
+  if (user === "") {
+    let tryuser = getUser();
+    if (tryuser != {}) {
+      DS.get(`/api/bejelentkezett_user/${tryuser.email}/${tryuser.password}`, getBejelentkezettUser);
+    }
+  } else {
+    document.getElementById("spinner").style.display = "none";
+}
+
+  function getBejelentkezettUser(data) {
+    console.log(data.data[0]);
+    setUser(data.data[0]);
+  }
+
+  function getUser() {
+    let tryuser = Cookies.get("bejelentkezett_user");
+    if (tryuser === undefined) {
+      tryuser = {};
+    } else {
+      tryuser = JSON.parse(tryuser);
+    }
+    return tryuser;
+  }
+
+
+  function kijelentkezes(){
+    Cookies.remove("bejelentkezett_user");
+    window.location.reload();
+  }
     return (
-        <div>
-            <Bejelentkezes/>
+        <div className="container">
+            <Card style={{ width: "50rem" }}
+            className="m-auto">
+                <Card.Title><h1>Felhasználói adatok</h1></Card.Title>
+                <Spinner animation="border" className="m-auto" id="spinner"/>
+                <Card.Body>
+                    <p><b>Név: </b>{user.name}</p>
+                    <p><b>Email: </b>{user.email}</p>
+                    <p><b>Hozzáférés: </b>{user.hozzaferes}</p>
+                </Card.Body>            
+                <div className="text-end container m-auto mb-4">
+            <button className="btn btn-danger" onClick={kijelentkezes}>Kijelentkezés</button>
+            </div>
+            </Card>
+            
+            
+            
+
+
         </div>
     )
 }

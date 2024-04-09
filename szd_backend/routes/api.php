@@ -3,6 +3,7 @@
 use App\Http\Controllers\KategoriaController;
 use App\Http\Controllers\ModellController;
 use App\Http\Controllers\TermekController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,4 @@ Route::get('/modell_termekei/{modell}/{modellNev}', [TermekController::class, 'm
 Route::get('/adott_termek/{termek}', [TermekController::class, 'adott_termek']);
 Route::get('/modell_kereses/{kereses}', [ModellController::class, 'modell_kereses']);
 Route::get('/adott_kategoria/{kategoria_nev}', [KategoriaController::class, 'adott_kategoria']);
+Route::get('bejelentkezett_user/{email}/{password}', [UserController::class, 'bejelentkezett_user']);
