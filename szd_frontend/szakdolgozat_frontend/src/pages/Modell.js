@@ -12,33 +12,53 @@ import "./modell.css";
 import Spinner from "react-bootstrap/esm/Spinner";
 
 export default function Modell(props) {
-  const [tolt, setTolt] = useState(false);
   const locationPath = useLocation().pathname;
   const pathsArray = locationPath.split("/");
   const mod_id = decodeURIComponent(pathsArray[2].split("=")[0]);
   const mod_nev = decodeURIComponent(pathsArray[2].split("=")[1]);
   const DS = new DataService();
-  const [termekek, setTermekek] = useState([""]);
-  if (termekek[0] === "") {
+  const [state, setState] = useState({tolt: false, termekek: [""], termekreszletek:{"init":false} });
+
+  function handleState(key, value) {
+    setState({ ...state, [key]: value });
+  }
+
+  if (state.termekek[0] === "") {
     DS.get("/api/modell_termekei/"+mod_id+"/"+mod_nev, getKat);
-    console.log(termekek);
-  } else if (termekek[0] !== "" && tolt == false) {
-    setTolt(true)
+  } else if (state.termekek[0] !== "" && state.tolt == false) {
+    handleState("tolt", true);
+  }
+
+  if (state.termekek[0] !== "" && state.termekreszletek.init == false) {
+    state.termekreszletek.init = true;
+    for (let index = 0; index < state.termekek.length; index++) {
+      let termek = state.termekek[index].ter_id
+      DS.get("/api/termek_tulajdonsagai/"+termek, getTer);
+    }
   }
 
   function getKat(data) {
-    setTermekek(data.data);
+    handleState("termekek", data.data);
+    console.log(state.termekek);
   }
 
+  function getTer(data) {
+    let meglevo = state.termekreszletek;
+    for (let index = 0; index < data.data.length; index++) {
+      meglevo[data.data[index].azonosito] = data.data[index];
+    }
+    handleState("termekreszletek", meglevo);
+    console.log(state.termekreszletek);
+  }
   
 
   return (
     <div>
-    {tolt ? (<Container fluid="true" className="ModellContainer h-60">
+    {state.tolt ? (<Container fluid="true" className="ModellContainer h-60">
     <Row className="ModellRow">
       <Col xs={8} key={1}  className="ModellKepek">
         <Carousel>
-          {termekek.map((mod, i) => (
+          {state.termekek.map((mod, i) => (
             <Carousel.Item key={i}>
               <img alt="" src="https://www.archiproducts.com/images/sharingimage/1390.jpg"></img>
               <Carousel.Caption>{mod.szin}</Carousel.Caption>
@@ -47,7 +67,7 @@ export default function Modell(props) {
         </Carousel>
       </Col>
       <Col className="ModellAdatok">
-        <ProductDetails name={mod_nev} termekek={termekek}/>
+        <ProductDetails name={mod_nev} termekek={state.termekek}/>
       </Col>
     </Row>
   </Container>) : (<Spinner animation="border" className="m-auto loadingSpinner" id="spinner"/>)}

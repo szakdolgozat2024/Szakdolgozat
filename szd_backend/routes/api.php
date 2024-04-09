@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KategoriaController;
 use App\Http\Controllers\ModellController;
+use App\Http\Controllers\Termek_tulajdonsagController;
 use App\Http\Controllers\TermekController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/termek_tulajdonsagai/{termek}', [Termek_tulajdonsagController::class, 'termek_tulajdonsagai']);
 Route::get('/kategoria_nevek', [KategoriaController::class, 'kategoria_nevek']);
 Route::get('/osszes_modell', [ModellController::class, 'osszes_modell']);
 Route::get('/modell_termekei/{modell}/{modellNev}', [TermekController::class, 'modell_termekei']);
