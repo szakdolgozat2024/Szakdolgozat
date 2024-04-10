@@ -49,4 +49,12 @@ class UserController extends Controller
         }
         return $user;
     }
+    
+    public function user_rendelesei($azon) {
+        $rendelesek = DB::table('rendeles')
+            ->select('*')
+            ->where('user', '=', $azon)
+            ->get();
+        return $rendelesek;
+    }
 }

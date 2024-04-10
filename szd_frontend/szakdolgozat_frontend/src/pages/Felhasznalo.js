@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/esm/Spinner";
+import Rendelesek from "../components/Rendelesek";
 
 export default function Felhasznalo(){
 
@@ -55,6 +56,8 @@ export default function Felhasznalo(){
             <button className="btn btn-danger" onClick={kijelentkezes}>Kijelentkezés</button>
             </div>
             </Card>
+            <Rendelesek user = {user}/>
+            
             
             
             

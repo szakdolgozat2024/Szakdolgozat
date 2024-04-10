@@ -30,4 +30,5 @@ Route::get('/modell_termekei/{modell}/{modellNev}', [TermekController::class, 'm
 Route::get('/adott_termek/{termek}', [TermekController::class, 'adott_termek']);
 Route::get('/modell_kereses/{kereses}', [ModellController::class, 'modell_kereses']);
 Route::get('/adott_kategoria/{kategoria_nev}', [KategoriaController::class, 'adott_kategoria']);
-Route::get('bejelentkezett_user/{email}/{password}', [UserController::class, 'bejelentkezett_user']);
+Route::get('/bejelentkezett_user/{email}/{password}', [UserController::class, 'bejelentkezett_user']);
+Route::get('/user_rendelesei/{azon}', [UserController::class, 'user_rendelesei']);

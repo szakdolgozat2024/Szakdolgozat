@@ -16,7 +16,7 @@ import Admin from "./pages/Admin";
 import Cookies from "js-cookie";
 import DataService from "./api/DataService";
 import NoPage from "./pages/NoPage";
-import Kereses from "./pages/Kereses";
+import Kereses from "./pages/kereses";
 
 
 /* const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",

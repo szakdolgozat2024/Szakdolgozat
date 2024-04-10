@@ -20,4 +20,37 @@ export default class DataService {
       // always executed
     })
   }
+
+  post(url, data) {
+    axios.post(url, data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
+  put(url, data) {
+    axios.put(url, data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
+  delete(url) {
+    axios.delete(url)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
 };
+
+  
