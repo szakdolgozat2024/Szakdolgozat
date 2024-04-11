@@ -14,7 +14,7 @@ export default function Admin() {
   const [modellek, setModellek] = useState([""]);
   const [tolt, setTolt] = useState(false);
   const [szerkesztes, setSzerkesztes] = useState(false);
-  const [valasztott, setValasztott] = useState([0, ""]);
+  const [valasztott, setValasztott] = useState([0, "", ""]);
 
   if (modellek[0] === "") {
     DS.get("/api/osszes_modell", getKat);
@@ -25,7 +25,7 @@ export default function Admin() {
     setModellek(data.data);
   }
 
-  function handleValasztott(modell, modellNev) {
+  function handleValasztott(modell, modellNev, modellSzin) {
     setSzerkesztes(true);
     setValasztott([modell, modellNev]);
   }
@@ -64,7 +64,7 @@ export default function Admin() {
                   </thead>
                   <tbody>
                     {modellek.map((model, index) => (
-                      <tr>
+                      <tr key={index}>
                         <td>{model.mod_id}</td>
                         <td>{model.nev}</td>
                         <td>{model.leiras}</td>

@@ -11,7 +11,8 @@ class ModellController extends Controller
     public function osszes_modell() { /* amihez van termék */
         $modellek = DB::table('modells')
         ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
-        ->select('modells.mod_id as mod_id', 'modells.nev as nev', 'modells.leiras as leiras', 'modells.kategoria as kategoria', 
+        ->join('kategorias', 'modells.kategoria', '=', 'kategorias.kat_id')
+        ->select('modells.mod_id as mod_id', 'modells.nev as nev', 'modells.leiras as leiras', 'kategorias.kategoria_nev as kategoria', 
         'modells.gyarto as gyarto', 'modells.gyarto as gyarto')
         ->distinct()
         ->get();
