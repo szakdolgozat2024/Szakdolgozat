@@ -14,6 +14,12 @@ class KategoriaController extends Controller
         return $kategoria;
     }
 
+    public function osszes_kategoria()
+    {
+        $kategoriak = DB::table('kategorias')->get();
+        return $kategoriak;
+    }
+
     public function adott_kategoria($kategoria_nev)
     {
         $kategoria = DB::table('modells as m')

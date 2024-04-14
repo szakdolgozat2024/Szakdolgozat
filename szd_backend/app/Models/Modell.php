@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Modell extends Model
 {
     use HasFactory;
-
+    protected  $primaryKey = 'mod_id';
     protected $fillable = [
         'nev',
         'leiras',

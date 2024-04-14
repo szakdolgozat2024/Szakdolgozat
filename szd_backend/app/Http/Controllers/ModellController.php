@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategoria;
+use App\Models\Modell;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +13,8 @@ class ModellController extends Controller
     public function osszes_modell() { /* amihez van termék */
         $modellek = DB::table('modells')
         ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
-        ->select('modells.mod_id as mod_id', 'modells.nev as nev', 'modells.leiras as leiras', 'modells.kategoria as kategoria', 
+        ->join('kategorias', 'modells.kategoria', '=', 'kategorias.kat_id')
+        ->select('modells.mod_id as mod_id', 'modells.nev as nev', 'modells.leiras as leiras', 'kategorias.kategoria_nev as kategoria', 
         'modells.gyarto as gyarto', 'modells.gyarto as gyarto')
         ->distinct()
         ->get();
@@ -28,4 +31,15 @@ class ModellController extends Controller
         return $talalatok;
     }
 
+    public function update_modell_kategoria(Request $request)
+    {
+        $affected = DB::table('modells')
+              ->where('mod_id', $request->mod_id)
+              ->update(['kategoria' => $request->kategoria]);
+              
+    }
+
+    public function create_modell($request){
+
+    }
 }

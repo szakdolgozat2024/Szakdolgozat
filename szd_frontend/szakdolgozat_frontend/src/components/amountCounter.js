@@ -20,17 +20,11 @@ import { useState } from "react";
 export default function AmountCounter(props) {
   function quantityChange(params) {
     if (params < (props.minAmount || 1)) {
-        props.quantityChange((props.minAmount || 1)); 
+        props.stateSet(props.minAmount || 1); 
     } else if(params > (props.maxAmount || 10)) {
-        props.quantityChange((props.maxAmount || 10)); 
+      props.stateSet(props.maxAmount || 10); 
     }else {
-        if ((props.stateKey !== undefined) && (props.state !== undefined)) {
-            console.log(props.state);
-            props.quantityChange({...props.state,[props.stateKey]: params});
-            
-        } else {
-            props.quantityChange(params);
-        }
+        props.stateSet(props.stateKey, params);
     }
   }
   return (
