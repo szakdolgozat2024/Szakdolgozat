@@ -10,7 +10,7 @@ class Rendeles extends Model
     use HasFactory;
 
     protected $fillable = [
-        "felhasznalo", 
+        "user", 
         "csomag",
         "kelt",
         "kiszallitva"

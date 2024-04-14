@@ -1,6 +1,5 @@
 import MainPage from "./pages/MainPage";
 import { useState } from "react";
-import { DataContext } from "./context/DataContext";
 import { Routes, Route, json } from "react-router-dom";
 import VasarloLayout from "./layouts/VasarloLayout";
 import Kategoriak from "./pages/Kategoriak";
@@ -61,12 +60,12 @@ function App() {
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
-        {user.hozzaferes ? (<Route path="admin" element={<Admin />} />) : (<Route path="kosar" element={<Kosar />} />)}
+        {user.hozzaferes ? (<Route path="admin" element={<Admin />} />) : (<Route path="kosar" element={<Kosar user = {user}/>} /> )}
         <Route path="*" element={<NoPage/>} />
       </Route>
       ) : (
         <Route path="/" element={<VendegLayout/>}>
-        <Route path={"termek/:termek" } element={<Modell />} />
+        <Route path={"termek/:termek" } element={<Modell vendeg={true}/>} />
         <Route path={"search/:kereses" } element={<Kereses/>}/>
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>

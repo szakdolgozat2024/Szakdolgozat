@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KategoriaController;
 use App\Http\Controllers\ModellController;
+use App\Http\Controllers\RendelesKontroller;
 use App\Http\Controllers\Termek_tulajdonsagController;
 use App\Http\Controllers\TermekController;
 use App\Http\Controllers\UserController;
@@ -32,3 +33,10 @@ Route::get('/modell_kereses/{kereses}', [ModellController::class, 'modell_kerese
 Route::get('/adott_kategoria/{kategoria_nev}', [KategoriaController::class, 'adott_kategoria']);
 Route::get('/bejelentkezett_user/{email}/{password}', [UserController::class, 'bejelentkezett_user']);
 Route::get('/user_rendelesei/{azon}', [UserController::class, 'user_rendelesei']);
+Route::get('/rendelestermekei/{rend_szam}', [RendelesKontroller::class, 'rendelesTermekei']);
+
+
+
+Route::post('/rendelesrogzites', [RendelesKontroller::class, 'rendelesRogzites']);
+Route::post('/rendelestetelrogzites', [RendelesKontroller::class, 'rendelesTetelRogzites']);
+Route::delete('/rendelestorles/{rend_szam}', [RendelesKontroller::class, 'rendelesTorles']);

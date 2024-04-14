@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/esm/Spinner";
-import Rendelesek from "../components/Rendelesek";
+import Rendelesek from "./Rendelesek";
 
 export default function Felhasznalo(){
 
@@ -42,15 +42,15 @@ export default function Felhasznalo(){
     window.location.reload();
   }
     return (
-        <div className="container">
+        <div className="container mt-5 mb-5 text-center m-auto">
             <Card style={{ width: "50rem" }}
             className="m-auto">
-                <Card.Title><h1>Felhasználói adatok</h1></Card.Title>
+                <Card.Title><h1 className="m-2">Felhasználói adatok</h1></Card.Title>
                 <Spinner animation="border" className="m-auto" id="spinner"/>
-                <Card.Body>
+                <Card.Body className="text-start ps-5">
                     <p><b>Név: </b>{user.name}</p>
                     <p><b>Email: </b>{user.email}</p>
-                    <p><b>Hozzáférés: </b>{user.hozzaferes}</p>
+                    <p><b>Hozzáférés: </b>{user.hozzaferes?"admin":"vásárló"}</p>
                 </Card.Body>            
                 <div className="text-end container m-auto mb-4">
             <button className="btn btn-danger" onClick={kijelentkezes}>Kijelentkezés</button>
