@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategoria;
+use App\Models\Modell;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,4 +31,15 @@ class ModellController extends Controller
         return $talalatok;
     }
 
+    public function update_modell_kategoria(Request $request)
+    {
+        $affected = DB::table('modells')
+              ->where('mod_id', $request->mod_id)
+              ->update(['kategoria' => $request->kategoria]);
+              
+    }
+
+    public function create_modell($request){
+
+    }
 }

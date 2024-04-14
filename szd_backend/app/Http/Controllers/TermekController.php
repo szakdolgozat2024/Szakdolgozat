@@ -10,11 +10,12 @@ class TermekController extends Controller
 {
     public function modell_termekei($modell, $modellNev)
     {
-        $termekek = DB::table('termeks')
-            ->select("*")
-            ->join('modells', 'modells.mod_id', '=', 'termeks.modell')
-            ->where('termeks.modell', '=', $modell)
-            ->where('modells.nev', '=', $modellNev)
+        $termekek = DB::table('termeks as t')
+            ->join('modells as m', 'm.mod_id', '=', 't.modell')
+            ->join('kategorias as k', 'm.kategoria', '=', 'k.kat_id')
+            ->select("m.*", "t.*" , "k.kategoria_nev as kategoria_nev")
+            ->where('t.modell', '=', $modell)
+            ->where('m.nev', '=', $modellNev)
             ->get();
         return $termekek;
     }

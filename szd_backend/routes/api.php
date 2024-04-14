@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::get('/termek_tulajdonsagai/{termek}', [Termek_tulajdonsagController::class, 'termek_tulajdonsagai']);
 Route::get('/kategoria_nevek', [KategoriaController::class, 'kategoria_nevek']);
+Route::get('/osszes_kategoria', [KategoriaController::class, 'osszes_kategoria']);
 Route::get('/osszes_modell', [ModellController::class, 'osszes_modell']);
 Route::get('/modell_termekei/{modell}/{modellNev}', [TermekController::class, 'modell_termekei']);
 Route::get('/adott_termek/{termek}', [TermekController::class, 'adott_termek']);
@@ -32,3 +33,5 @@ Route::get('/modell_kereses/{kereses}', [ModellController::class, 'modell_kerese
 Route::get('/adott_kategoria/{kategoria_nev}', [KategoriaController::class, 'adott_kategoria']);
 Route::get('/bejelentkezett_user/{email}/{password}', [UserController::class, 'bejelentkezett_user']);
 Route::get('/user_rendelesei/{azon}', [UserController::class, 'user_rendelesei']);
+
+Route::put('/update_modell_kategoria', [ModellController::class, 'update_modell_kategoria']);

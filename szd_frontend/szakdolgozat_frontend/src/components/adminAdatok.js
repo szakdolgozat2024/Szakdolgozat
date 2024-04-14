@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import AmountCounter from "./amountCounter";
 import Modal from "react-bootstrap/Modal";
 import htmlColorNames from "../colors";
+import axios from "../api/axios";
 
 export default function TermekAdatok(props) {
   const DS = new DataService();
@@ -17,40 +18,56 @@ export default function TermekAdatok(props) {
     besorolas: true,
     modell: true,
     termek: true,
+    kategoriak: [""],
     modellek: [""],
+    kategoria: undefined,
     tolt: false,
     ar: undefined,
     show: false,
     szin: undefined,
-    termekindex: [0,-1],
+    termekindex: [0, -1],
   });
   useEffect(() => {
-    if (state.szin === undefined || state.termekindex[1] !== state.termekindex[0]) {
+    if (
+      state.szin === undefined ||
+      state.termekindex[1] !== state.termekindex[0]
+    ) {
       handleState("szin", state.modellek[state.termekindex[0]].szin);
     } else {
       handleState("szin", state.szin);
     }
-    if (state.ar === undefined || state.termekindex[1] !== state.termekindex[0]) {
+    if (
+      state.ar === undefined ||
+      state.termekindex[1] !== state.termekindex[0]
+    ) {
       handleState("ar", parseInt(state.modellek[state.termekindex[0]].ar));
-    }else{
+    } else {
       handleState("ar", state.ar);
     }
   }, [state.modellek, state.termekindex]);
 
   function handleState(key, value) {
-    setState(prevState => ({ ...prevState, [key]: value }));
+    setState((prevState) => ({ ...prevState, [key]: value }));
   }
 
   if (state.modellek[0] === "") {
     DS.get(
       "/api/modell_termekei/" + props.mod_id + "/" + props.mod_nev,
-      getKat
+      getTer
     );
-  } else if (state.modellek[0] !== "" && state.tolt == false) {
+    DS.get("/api/osszes_kategoria", getKat);
+  } else if (
+    (state.modellek[0] !== "" || state.kategoriak[0] !== "") &&
+    state.tolt == false
+  ) {
     handleState("tolt", true);
   }
-  function getKat(data) {
+  function getTer(data) {
     handleState("modellek", data.data);
+  }
+
+  function getKat(data) {
+    handleState("kategoriak", data.data);
   }
 
   return (
@@ -69,10 +86,24 @@ export default function TermekAdatok(props) {
 
           <Form.Group className="mb-3 adminForm">
             <Form.Label className="fw-bold">Kategória:</Form.Label>
-            <Form.Select disabled={state.besorolas}>
-              <option>kat 1</option>
-              <option>kat 2</option>
-              <option>kat 3</option>
+            <Form.Select
+              value={state.kategoria || state.modellek[0].kategoria_nev}
+              onChange={(e) => {
+                handleState(
+                  "kategoria",
+                  e.target.options[e.target.options.selectedIndex].getAttribute(
+                    "kat_id"
+                  )
+                );
+                handleState("kategoria", e.target.value);
+              }}
+              disabled={state.besorolas}
+            >
+              {state.kategoriak.map((kat, index) => (
+                <option kat_id={kat.kat_id} key={index}>
+                  {kat.kategoria_nev}
+                </option>
+              ))}
             </Form.Select>
           </Form.Group>
           <Button
@@ -81,6 +112,17 @@ export default function TermekAdatok(props) {
             type="submit"
             value="Mentés"
             disabled={state.besorolas}
+            onClick={(event) => {
+              event.preventDefault();
+              axios({
+                method: "put",
+                url: "/api/update_modell_kategoria",
+                data: {
+                  mod_id: props.mod_id,
+                  kategoria: state.kategoria,
+                },
+              });
+            }}
           />
         </Card.Body>
       </Card>
@@ -204,10 +246,10 @@ export default function TermekAdatok(props) {
             <Form.Select
               defaultValue={state.modellek[0].ter_id}
               onChange={(e) =>
-                handleState(
-                  "termekindex",
-                  [e.target.options.selectedIndex,state.termekindex[0]]
-                )
+                handleState("termekindex", [
+                  e.target.options.selectedIndex,
+                  state.termekindex[0],
+                ])
               }
               disabled={state.termek}
             >
