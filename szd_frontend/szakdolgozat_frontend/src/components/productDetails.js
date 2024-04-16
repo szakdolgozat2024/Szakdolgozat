@@ -10,18 +10,24 @@ import AmountCounter from "./amountCounter";
 import Cookies from "js-cookie";
 
 export default function ProductDetails(props) {
-  const [termek, setTermek] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  const [state, setState] = useState({
+    termek: 0,
+    quantity: 1
+  });
+  
+  function handleState(key, value) {
+    setState((prevState) => ({ ...prevState, [key]: value }));
+  }
 
   function colorChange(params) {
     /* let elem = document.getElementById(params.target.id);
     elem.style.border = "10px solid #000"; */
-    setTermek(params);
-    setQuantity(1);
+    handleState("termek", params);
+    handleState("quantity", 1);
   }
 
   function amauntChange(params) {
-    setQuantity(params);
+    handleState("quantity", params);
   }
 
   function kosarba() {
@@ -31,17 +37,17 @@ export default function ProductDetails(props) {
     } else {
       kosar = JSON.parse(kosar);
     }
-    kosar[props.termekek[termek].ter_id] =
-      (kosar[props.termekek[termek].ter_id] || 0) + quantity;
+    kosar[props.termekek[state.termek].ter_id] =
+      (kosar[props.termekek[state.termek].ter_id] || 0) + state.quantity;
     Cookies.set("kosar", JSON.stringify(kosar));
   }
 
   return (
     <div>
       <h2 className="text-center">{props.name}</h2>
-      <h5>{props.termekek[termek].ar + " Ft"}</h5>
-      <p>{props.termekek[termek].leiras}</p>
-      <p className="szinText">{"Szín: " + props.termekek[termek].szin}</p>
+      <h5>{props.termekek[state.termek].ar + " Ft"}</h5>
+      <p>{props.termekek[state.termek].leiras}</p>
+      <p className="szinText">{"Szín: " + props.termekek[state.termek].szin}</p>
       <ToggleButtonGroup
         onChange={colorChange}
         type="radio"
@@ -55,7 +61,7 @@ export default function ProductDetails(props) {
             key={i}
             style={{
               backgroundColor: mod.szin,
-              ...(termek === i
+              ...(state.termek === i
                 ? { border: "3px solid #000" }
                 : { border: "3px solid transparent" }),
             }}
@@ -68,10 +74,15 @@ export default function ProductDetails(props) {
         <Row>
           <Col className="mennyisegCol">
             <AmountCounter
-              quantityChange={amauntChange}
-              defaultValue={quantity}
-              quantity={quantity}
-              maxAmount={15}
+              state={state}
+              stateSet={handleState}
+              stateKey={"quantity"}
+              className=""
+              quantity={state.quantity}
+              minusAmount={1}
+              plusAmount={1}
+              minAmount={1}
+              maxAmount={10}
             ></AmountCounter>
           </Col>
           <Col xs={0} sm={6} md={6} lg={7} xl={7} xxl={8} className="kosarCol">
@@ -89,11 +100,11 @@ export default function ProductDetails(props) {
           <Accordion.Body>
             <Row>
               <Col lg={9}>Anyag:</Col>
-              <Col>{props.termekek[termek].anyag}</Col>
+              <Col>{props.termekek[state.termek].anyag}</Col>
             </Row>
             <Row>
               <Col lg={9}>Anyag:</Col>
-              <Col>{props.termekek[termek].anyag}</Col>
+              <Col>{props.termekek[state.termek].anyag}</Col>
             </Row>
           </Accordion.Body>
         </Accordion.Item>

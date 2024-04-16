@@ -1,7 +1,9 @@
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import TermekAdatok from "../components/adminAdatok";
-import ListGroup from "react-bootstrap/ListGroup";
+import AdminAdatok from "../components/adminAdatok";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
 import DataService from "../api/DataService";
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
@@ -11,28 +13,35 @@ import "./admin.css";
 
 export default function Admin() {
   const DS = new DataService();
-  const [modellek, setModellek] = useState([""]);
-  const [tolt, setTolt] = useState(false);
-  const [szerkesztes, setSzerkesztes] = useState(false);
-  const [valasztott, setValasztott] = useState([0, "", ""]);
+  const [state, setState] = useState({
+    modellek: [""],
+    szerkesztes: false,
+    tolt: false,
+    ujModell: false,
+    valasztott: [[0, "", ""]],
+  });
 
-  if (modellek[0] === "") {
+  function handleState(key, value) {
+    setState((prevState) => ({ ...prevState, [key]: value }));
+  }
+
+  if (state.modellek[0] === "") {
     DS.get("/api/osszes_modell", getKat);
-  } else if (modellek[0] !== "" && tolt == false) {
-    setTolt(true);
+  } else if (state.modellek[0] !== "" && state.tolt == false) {
+    handleState("tolt", true);
   }
   function getKat(data) {
-    setModellek(data.data);
+    handleState("modellek", data.data);
   }
 
   function handleValasztott(modell, modellNev, modellSzin) {
-    setSzerkesztes(true);
-    setValasztott([modell, modellNev]);
+    handleState("szerkesztes", true);
+    handleState("valasztott", [modell, modellNev]);
   }
 
   return (
     <div>
-      {tolt ? (
+      {state.tolt ? (
         <Tabs
           defaultActiveKey="Modellek"
           id="uncontrolled-tab-example"
@@ -40,51 +49,94 @@ export default function Admin() {
         >
           <Tab eventKey="Modellek" title="Modellek kezelése">
             <div style={{ margin: "auto" }}>
-              {szerkesztes ? (
+              {state.szerkesztes ? (
                 <>
                   <Button
                     as="input"
                     className="align-middle"
-                    
                     type="submit"
                     value="Vissza"
-                    onClick={() => setSzerkesztes(false)}
+                    onClick={() => handleState("szerkesztes", false) }
                   />
-                  <TermekAdatok mod_id={valasztott[0]} mod_nev={valasztott[1]} />
+                  <AdminAdatok
+                    mod_id={state.valasztott[0]}
+                    mod_nev={state.valasztott[1]}
+                  />
                 </>
               ) : (
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      {Object.keys(modellek[0]).map((key) => (
-                        <th key={key}>{key}</th>
-                      ))}
-                      <th>Szerkesztés</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {modellek.map((model, index) => (
-                      <tr key={index}>
-                        <td>{model.mod_id}</td>
-                        <td>{model.nev}</td>
-                        <td>{model.leiras}</td>
-                        <td>{model.kategoria}</td>
-                        <td>{model.gyarto}</td>
-                        <td>
-                          <Button
-                            as="input"
-                            className="align-middle"
-                            style={{ width: "100%", color: "black" }}
-                            type="submit"
-                            variant="outline-warning"
-                            value="Szerkesztés"
-                            onClick={() => handleValasztott(model.mod_id, model.nev)}
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                <>
+                  {state.ujModell ? (
+                    <>
+                      <Button
+                    as="input"
+                    className="align-middle"
+                    type="submit"
+                    value="Vissza"
+                    onClick={() => handleState("ujModell", false)}
+                  />
+                      <AdminAdatok
+                        ujModell={true}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Form style={{ margin: "0.5vw" }}>
+                        <Row>
+                          <Col lg={10}>
+                            <Form.Label className="fw-bold" column sm={2}>
+                              Keresés:
+                            </Form.Label>
+                            <Form.Control
+                              style={{ width: "30%"}}
+                              placeholder="Modell neve"
+                            />
+                          </Col>
+                          <Col
+                            style={{ textAlign: "center", marginTop: "auto" }}
+                          >
+                            <Button onClick={() => handleState("ujModell", true)} style={{ width: "100%" }}>
+                              Új Modell hozzáadása
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Form>
+                      <Table striped bordered hover>
+                        <thead>
+                          <tr>
+                            {Object.keys(state.modellek[0]).map((key) => (
+                              <th key={key}>{key}</th>
+                            ))}
+                            <th>Szerkesztés</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {state.modellek.map((model, index) => (
+                            <tr key={index}>
+                              <td>{model.mod_id}</td>
+                              <td>{model.nev}</td>
+                              <td>{model.leiras}</td>
+                              <td>{model.kategoria}</td>
+                              <td>{model.gyarto}</td>
+                              <td>
+                                <Button
+                                  as="input"
+                                  className="align-middle"
+                                  style={{ width: "100%", color: "black" }}
+                                  type="submit"
+                                  variant="outline-warning"
+                                  value="Szerkesztés"
+                                  onClick={() =>
+                                    handleValasztott(model.mod_id, model.nev)
+                                  }
+                                />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </>
+                  )}
+                </>
               )}
             </div>
           </Tab>
