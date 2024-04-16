@@ -6,7 +6,7 @@ import Carousel from "react-bootstrap/Carousel";
 import ProductDetails from "../components/productDetails";
 import DataService from "../api/DataService";
 import { useLocation } from "react-router-dom";
-
+import Alert from 'react-bootstrap/Alert';
 
 import "./modell.css";
 import Spinner from "react-bootstrap/esm/Spinner";
@@ -67,7 +67,10 @@ export default function Modell(props) {
         </Carousel>
       </Col>
       <Col className="ModellAdatok">
-        <ProductDetails name={mod_nev} termekek={state.termekek}/>
+        <ProductDetails name={mod_nev} termekek={state.termekek} vendeg={props.vendeg}/>
+        <Alert className="mt-3" id="alert" variant="danger" style={{display: 'none'}}>
+          Kosárba tétel előtt jelentkezz be vagy regisztrálj!
+        </Alert>
       </Col>
     </Row>
   </Container>) : (<Spinner animation="border" className="m-auto loadingSpinner" id="spinner"/>)}

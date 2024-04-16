@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rend_tetel', function (Blueprint $table) {
+        Schema::create('rend_tetels', function (Blueprint $table) {
             $table->foreignId('rendeles')->constrained('rendeles', 'rend_szam');
             $table->foreignId('termek')->constrained('termeks', 'ter_id');
             $table->integer('mennyiseg');

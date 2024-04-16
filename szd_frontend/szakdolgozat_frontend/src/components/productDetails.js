@@ -31,7 +31,10 @@ export default function ProductDetails(props) {
   }
 
   function kosarba() {
-    let kosar = Cookies.get("kosar");
+    if (props.vendeg) {
+      document.getElementById("alert").style.display = "block";
+    } else {
+      let kosar = Cookies.get("kosar");
     if (kosar === undefined) {
       kosar = {};
     } else {
@@ -40,6 +43,7 @@ export default function ProductDetails(props) {
     kosar[props.termekek[state.termek].ter_id] =
       (kosar[props.termekek[state.termek].ter_id] || 0) + state.quantity;
     Cookies.set("kosar", JSON.stringify(kosar));
+    }
   }
 
   return (

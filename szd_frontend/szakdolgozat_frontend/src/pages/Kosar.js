@@ -3,18 +3,47 @@ import Card from "react-bootstrap/Card";
 import Cookies from "js-cookie";
 import axios from "../api/axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
+import KosarModal from "../components/KosarModal";
+import DataService from "../api/DataService";
 
-export default function Kosar() {
+export default function Kosar(props) {
   const [tartalom, setTartalom] = useState([""]);
+  const navigate = useNavigate();
+  const DS = new DataService();
+
+  //modal kezelesek
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   if (tartalom[0] === "") {
     kosarLekerdezes();
   }
 
+  const rendelesRogzites = async () => {
+    await feltoltes();
+    kosarTorles();
+    handleClose();
+  }
+
+  const feltoltes = async () => {
+    DS.post("/api/rendelesrogzites", {
+      user: props.user.azon,
+    })
+      tartalom.forEach(elem => {
+      DS.post("/api/rendelestetelrogzites", {
+        termek: elem.ter_id,
+        mennyiseg: elem.mennyiseg
+      })
+    })
+  }
+
   function vegosszeg() {
     let osszeg = 0;
     tartalom.forEach(elem => {
-      osszeg += parseFloat(elem.ar);
+      osszeg += (parseFloat(elem.ar) * elem.mennyiseg);
     });
     return osszeg;
   }
@@ -32,7 +61,7 @@ export default function Kosar() {
   function kosarTorles() {
     Cookies.remove("kosar");
     setTartalom([""]);
-    window.location.reload();
+    kosarLekerdezes();
   }
   async function kosarLekerdezes() {
     let kosar = getkosar();
@@ -42,11 +71,19 @@ export default function Kosar() {
         let adat = response.data[0];
         adat.mennyiseg = kosar[elem];
         list.push(adat);
-        
       });
     }
     setTartalom(list);
     console.log(tartalom);
+  }
+
+  function fizetes(){
+    if (vegosszeg() > 0) {
+      handleShow();
+    } else {
+      document.getElementById("alert").style.display = "block";
+    }
+
   }
 
   return (
@@ -80,7 +117,7 @@ export default function Kosar() {
                     <td>{elem.nev}</td>
                     <td>{elem.szin}</td>
                     <td>{elem.mennyiseg}</td>
-                    <td>{parseFloat(elem.ar)} Ft</td>
+                    <td>{parseFloat(elem.ar) * elem.mennyiseg} Ft</td>
                   </tr>
                 ))}
               </tbody>
@@ -92,12 +129,16 @@ export default function Kosar() {
             <Button variant="danger" onClick={kosarTorles}>
               Kosár törlése
             </Button>
-            <Button variant="primary m-2" >
+            <Button variant="primary m-2" onClick={fizetes}>
               Tovább a fizetéshez
             </Button>
           </div>
         </Card.Body>
+        <Alert className="m-3" id="alert" variant="danger" style={{display: 'none'}}>
+          A kosár üres, előbb vásárolj valalmit!
+        </Alert>
       </Card>
+      <KosarModal show = {show} handleClose = {handleClose} rendelesRogzites = {rendelesRogzites}/>
     </div>
   );
 }
