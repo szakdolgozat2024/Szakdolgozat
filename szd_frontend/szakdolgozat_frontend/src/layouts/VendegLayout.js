@@ -81,7 +81,7 @@ function VendegLayout() {
       </article>
       <footer className="text-center pb-4 pt-2 bg-secondary-subtle">
         <p>Készítette: Kun-Székely Bence és Szendefi Krisztofer Dániel</p>
-        <p className="text-secondary fw-light fst-italic">@All rights reserved</p>
+        <p className="text-secondary fw-light fst-italic">@All rights reserved (except those that are not)</p>
       </footer>
     </div>
   );
