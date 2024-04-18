@@ -43,8 +43,8 @@ export default function Felhasznalo(){
   }
     return (
         <div className="container mt-5 mb-5 text-center m-auto">
-            <Card style={{ width: "50rem" }}
-            className="m-auto">
+            <Card 
+            className="m-auto mt-5 p-4">
                 <Card.Title><h1 className="m-2">Felhasználói adatok</h1></Card.Title>
                 <Spinner animation="border" className="m-auto" id="spinner"/>
                 <Card.Body className="text-start ps-5">
@@ -52,7 +52,7 @@ export default function Felhasznalo(){
                     <p><b>Email: </b>{user.email}</p>
                     <p><b>Hozzáférés: </b>{user.hozzaferes?"admin":"vásárló"}</p>
                 </Card.Body>            
-                <div className="text-end container m-auto mb-4">
+                <div className="text-sm-end container m-auto mb-4">
             <button className="btn btn-danger" onClick={kijelentkezes}>Kijelentkezés</button>
             </div>
             </Card>

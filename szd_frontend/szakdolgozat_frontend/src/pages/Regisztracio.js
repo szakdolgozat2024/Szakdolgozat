@@ -1,3 +1,4 @@
+import Card from 'react-bootstrap/Card';
 import React, { useState } from "react";
 
 import useAuthContext from "../context/AuthContext";
@@ -26,6 +27,7 @@ export default function Regisztracio() {
 
   return (
     <div className=" m-auto" style={{ maxWidth: "400px" }}>
+    <Card className='m-auto mt-5 p-4'>
       <h1 className="text-center">Regisztráció</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3 mt-3">
@@ -119,12 +121,15 @@ export default function Regisztracio() {
           Regisztrálok
         </button>
       </form>
+      </Card>
+      <div className=" text-center">
       <p>
           Van már fiókja?
           <Link className="nav-link text-info" to="/bejelentkezes">
             Bejelentkezés
           </Link>
         </p>
+        </div>
     </div>
   );
 }

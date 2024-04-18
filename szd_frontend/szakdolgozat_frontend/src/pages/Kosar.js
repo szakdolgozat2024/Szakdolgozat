@@ -90,8 +90,7 @@ export default function Kosar(props) {
     <div className="container mt-5 mb-5 text-center m-auto ">
     
       <Card
-        style={{ width: "50rem" }}
-        className="m-auto"
+      lassName="m-auto mt-3 p-4"
         onClick={kosarLekerdezes}
       >
         <Card.Body>
@@ -100,7 +99,7 @@ export default function Kosar(props) {
           </Card.Title>
           <Card.Text className="text-muted" onClick={kosarLekerdezes}>
             <p id="eltunik">Itt jelenik meg a kosár tartalma.</p>
-            <table className="table-borderless  w-100 m-3" id="tabla">
+            <table className="table-borderless w-100  " id="tabla">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -124,8 +123,8 @@ export default function Kosar(props) {
               
             </table>
           </Card.Text>
-          <div className="text-end">
-          <p className="me-3"><b>Végösszeg:</b> {vegosszeg()} Ft</p>
+          <div className="text-sm-end text-center">
+          <p className="me-3 text-end"><b>Végösszeg:</b> {vegosszeg()} Ft</p>
             <Button variant="danger" onClick={kosarTorles}>
               Kosár törlése
             </Button>
