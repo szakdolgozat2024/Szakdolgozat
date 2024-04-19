@@ -31,8 +31,7 @@ export default function AdminAdatok(props) {
   useEffect(() => {
     if (props.ujModell) {
       handleState("szin", "Aliceblue");
-    }
-    else if (
+    } else if (
       state.szin === undefined ||
       state.termekindex[1] !== state.termekindex[0]
     ) {
@@ -42,8 +41,7 @@ export default function AdminAdatok(props) {
     }
     if (props.ujModell) {
       handleState("ar", 0);
-    }
-    else if (
+    } else if (
       state.ar === undefined ||
       state.termekindex[1] !== state.termekindex[0]
     ) {
@@ -58,10 +56,12 @@ export default function AdminAdatok(props) {
   }
 
   if (state.modellek[0] === "") {
-    props.ujModell ? (handleState("modellek", ["defined"])) : (DS.get(
-      "/api/modell_termekei/" + props.mod_id + "/" + props.mod_nev,
-      getTer
-    ))
+    props.ujModell
+      ? handleState("modellek", ["defined"])
+      : DS.get(
+          "/api/modell_termekei/" + props.mod_id + "/" + props.mod_nev,
+          getTer
+        );
     DS.get("/api/osszes_kategoria", getKat);
   } else if (
     (state.modellek[0] !== "" || state.kategoriak[0] !== "") &&
@@ -82,16 +82,17 @@ export default function AdminAdatok(props) {
       {state.ujModell ? (
         <>
           <h1 style={{ textAlign: "center" }}>Új modell</h1>
-          <Card className="szerkElem " style={{ width: "90%"}}>
+
+          <Card className="szerkElem" style={{ width: "90%" }}>
             <Card.Body>
               <Form.Check // prettier-ignore
                 type="switch"
                 id="custom-switch"
                 label="szrekesztés"
                 style={{ float: "right" }}
-                onClick={() => handleState("besorolas", !state.besorolas)}
+                onClick={() => handleState("modell", !state.modell)}
               />
-              <Card.Title>Besorolás</Card.Title>
+              <Card.Title>Modell létrehozása</Card.Title>
 
               <Form.Group className="mb-3 adminForm">
                 <Form.Label className="fw-bold">Kategória:</Form.Label>
@@ -106,7 +107,7 @@ export default function AdminAdatok(props) {
                     );
                     handleState("kategoria", e.target.value);
                   }}
-                  disabled={state.besorolas}
+                  disabled={state.modell}
                 >
                   {state.kategoriak.map((kat, index) => (
                     <option kat_id={kat.kat_id} key={index}>
@@ -115,36 +116,7 @@ export default function AdminAdatok(props) {
                   ))}
                 </Form.Select>
               </Form.Group>
-              <Button
-                as="input"
-                style={{ float: "right" }}
-                variant="primary"
-                type="submit"
-                value="Mentés"
-                disabled={state.besorolas}
-                onClick={(event) => {
-                  event.preventDefault();
-                  axios({
-                    method: "put",
-                    url: "/api/update_modell_kategoria",
-                    data: {
-                      mod_id: props.mod_id,
-                      kategoria: state.kategoria,
-                    },
-                  });
-                }}
-              />
-            </Card.Body>
-          </Card>
-          <Card className="szerkElem" style={{ width: "90%" }}>
-            <Card.Body>
-              <Form.Check // prettier-ignore
-                type="switch"
-                id="custom-switch"
-                label="szrekesztés"
-                style={{ float: "right" }}
-                onClick={() => handleState("modell", !state.modell)}
-              />
+
               <Card.Title>Modell</Card.Title>
               <Form.Group
                 as={Row}
@@ -171,11 +143,7 @@ export default function AdminAdatok(props) {
                   Gyártó:
                 </Form.Label>
                 <Col sm={10}>
-                  <Form.Control
-                    disabled={state.modell}
-                    type="email"
-                    
-                  />
+                  <Form.Control disabled={state.modell} type="email" />
                 </Col>
               </Form.Group>
               <Form.Group
@@ -183,12 +151,7 @@ export default function AdminAdatok(props) {
                 controlId="exampleForm.ControlTextarea1"
               >
                 <Form.Label>Leirás:</Form.Label>
-                <Form.Control
-                  disabled={state.modell}
-                  
-                  as="textarea"
-                  rows={3}
-                />
+                <Form.Control disabled={state.modell} as="textarea" rows={3} />
               </Form.Group>
               <Form.Group
                 controlId="formFile"
@@ -240,129 +203,6 @@ export default function AdminAdatok(props) {
                 style={{ float: "right" }}
                 type="submit"
                 value="Mentés"
-              />
-            </Card.Body>
-          </Card>
-          <Card className="szerkElem" style={{ width: "90%" }}>
-            <Card.Body>
-              <Form.Check // prettier-ignore
-                type="switch"
-                id="custom-switch"
-                label="szrekesztés"
-                style={{ float: "right" }}
-                onClick={() => handleState("termek", !state.termek)}
-              />
-              <Card.Title>Modell termékei</Card.Title>
-
-              <Form.Group className="mb-3 adminForm">
-                <Form.Label className="fw-bold">termék (id):</Form.Label>
-                <Form.Select
-                  
-                  onChange={(e) =>
-                    handleState("termekindex", [
-                      e.target.options.selectedIndex,
-                      state.termekindex[0],
-                    ])
-                  }
-                  disabled={state.termek}
-                >
-                  {state.modellek.map((model, key) => (
-                    <option key={key}>{model.ter_id}</option>
-                  ))}
-                </Form.Select>
-                <div style={{ marginTop: "1vw", marginBottom: "1vw" }}>
-                  <Row>
-                    <Col xl={1}>
-                      <p className="fw-bold" style={{ marginBottom: "0.5vw" }}>
-                        Ár:
-                      </p>
-                    </Col>
-                    <Col xl={4}>
-                      <AmountCounter
-                        state={state}
-                        stateSet={handleState}
-                        stateKey={"ar"}
-                        className="termekAmount"
-                        quantity={state.ar}
-                        minusAmount={1000}
-                        plusAmount={1000}
-                        quantityChange={1000}
-                        minAmount={1}
-                        maxAmount={10000000}
-                        disabled={state.termek}
-                      />
-                    </Col>
-                  </Row>
-                </div>
-              </Form.Group>
-
-              <Form.Group
-                as={Row}
-                className="mb-3 adminForm"
-                controlId="formModell"
-              >
-                <Form.Label className="fw-bold" column sm={2}>
-                  Anyag:
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Control
-                    disabled={state.termek}
-                    type="email"
-                    placeholder={props.mod_nev}
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group as={Row} className="mb-3 adminForm">
-                <Form.Label className="fw-bold">szín:</Form.Label>
-                <Col sm={10}>
-                  <Form.Select
-                    onChange={(e) => handleState("szin", e.target.value)}
-                    disabled={state.termek}
-                  >
-                    {Object.entries(htmlColorNames).map(([name, value]) => (
-                      <option key={value} value={name}>
-                        {name}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Col>
-                <Col sm={2}>
-                  {}
-                  <div
-                    style={{
-                      border: "1px solid black",
-                      width: "100%",
-                      height: "100%",
-                      background: state.szin,
-                    }}
-                  ></div>
-                </Col>
-              </Form.Group>
-              {/* =============== Gombok ================ */}
-
-              <Button
-                as="input"
-                style={{ float: "right" }}
-                type="submit"
-                value="Mentés"
-                disabled={state.termek}
-              />
-              <Button
-                onClick={() => handleState("show", true)}
-                as="input"
-                variant="danger"
-                style={{ float: "right", marginRight: "10px" }}
-                type="submit"
-                value="Termék törlése"
-                disabled={state.termek}
-              />
-              <Button
-                as="input"
-                style={{ float: "right", marginRight: "10px" }}
-                variant="success"
-                type="submit"
-                value="Új termék"
-                disabled={state.termek}
               />
             </Card.Body>
           </Card>

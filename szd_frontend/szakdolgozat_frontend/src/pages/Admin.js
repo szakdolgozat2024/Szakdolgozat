@@ -18,14 +18,14 @@ export default function Admin() {
     szerkesztes: false,
     tolt: false,
     ujModell: false,
-    valasztott: [[0, "", ""]],
+    valasztott: [[0, "", ""]]
   });
 
   function handleState(key, value) {
     setState((prevState) => ({ ...prevState, [key]: value }));
   }
 
-  if (state.modellek[0] === "") {
+  if (state.modellek[0] === "" || state.szerkesztett) {
     DS.get("/api/osszes_modell", getKat);
   } else if (state.modellek[0] !== "" && state.tolt == false) {
     handleState("tolt", true);
@@ -34,7 +34,7 @@ export default function Admin() {
     handleState("modellek", data.data);
   }
 
-  function handleValasztott(modell, modellNev, modellSzin) {
+  function handleValasztott(modell, modellNev) {
     handleState("szerkesztes", true);
     handleState("valasztott", [modell, modellNev]);
   }
@@ -56,7 +56,10 @@ export default function Admin() {
                     className="align-middle"
                     type="submit"
                     value="Vissza"
-                    onClick={() => handleState("szerkesztes", false) }
+                    onClick={() => {
+                      DS.get("/api/osszes_modell", getKat);
+                      handleState("szerkesztes", false);
+                    }}
                   />
                   <AdminAdatok
                     mod_id={state.valasztott[0]}
@@ -68,15 +71,16 @@ export default function Admin() {
                   {state.ujModell ? (
                     <>
                       <Button
-                    as="input"
-                    className="align-middle"
-                    type="submit"
-                    value="Vissza"
-                    onClick={() => handleState("ujModell", false)}
-                  />
-                      <AdminAdatok
-                        ujModell={true}
+                        as="input"
+                        className="align-middle"
+                        type="submit"
+                        value="Vissza"
+                        onClick={() => {
+                          DS.get("/api/osszes_modell", getKat);
+                          handleState("ujModell", false);
+                        }}
                       />
+                      <AdminAdatok ujModell={true} />
                     </>
                   ) : (
                     <>
@@ -87,14 +91,17 @@ export default function Admin() {
                               Keresés:
                             </Form.Label>
                             <Form.Control
-                              style={{ width: "30%"}}
+                              style={{ width: "30%" }}
                               placeholder="Modell neve"
                             />
                           </Col>
                           <Col
                             style={{ textAlign: "center", marginTop: "auto" }}
                           >
-                            <Button onClick={() => handleState("ujModell", true)} style={{ width: "100%" }}>
+                            <Button
+                              onClick={() => handleState("ujModell", true)}
+                              style={{ width: "100%" }}
+                            >
                               Új Modell hozzáadása
                             </Button>
                           </Col>
