@@ -76,7 +76,7 @@ export default function Bejelentkezes() {
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary w-100">
-                            Login
+                            Bejelentkezés
                         </button>
                     </form>
                 </Card.Text>

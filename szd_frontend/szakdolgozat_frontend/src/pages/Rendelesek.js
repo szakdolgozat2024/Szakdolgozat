@@ -39,7 +39,7 @@ export default function Rendelesek(props) {
   }
 
   return (
-    <Card style={{ width: "50rem" }} className="m-auto mt-3 p-4">
+    <Card className="m-auto mt-3 p-4">
       <Card.Title className="text-center">
         <h1>Rendelések</h1>
       </Card.Title>
@@ -56,7 +56,7 @@ export default function Rendelesek(props) {
                 <b>Csomag azonosító:</b> {elem.csomag} <br /> <b>Kelt: </b>
                 {elem.kelt} <br /> <b>Kiszállítva:</b> {elem.kiszallitva}
               </p>
-              <div className="text-end">
+              <div className="text-sm-end text-center">
                 <Button className="ms-3 m-2 " id={elem.rend_szam} onClick={rendelesReszletezes}>Részletek megtekintése</Button>
                 <Button className="ms-3 m-2 " variant="danger" key = {index} id = {elem.rend_szam} onClick={rendelesTorles}>
                   Rendelés törlése
