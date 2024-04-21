@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 
 function VasarloLayout(props) {
   const navigate = useNavigate();
+  
 
   return (
     <div>
@@ -30,71 +31,75 @@ function VasarloLayout(props) {
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action2">
-              <Link to="/felhasznalo" className="nav-link">
-              Felhasználó
-            </Link>
+                <Link to="/felhasznalo" className="nav-link">
+                  Felhasználó
+                </Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action2">
-              {props.user.hozzaferes ? (
-                <Link to="/admin" className="nav-link">
-                  Admin
-                </Link>
-              ) : (
-                <Link to="/kosar" className="nav-link">
-                  Kosár
-                </Link>
-              )}
+                {props.user.hozzaferes ? (
+                  <Link to="/admin" className="nav-link">
+                    Admin
+                  </Link>
+                ) : (
+                  <Link to="/kosar" className="nav-link">
+                    Kosár
+                  </Link>
+                )}
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <input
-              type="text" className="ms-2 me-2 "
-              onKeyDown={(e) =>
-                e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
-              }
-            />
+                type="text"
+                className="ms-2 me-2 "
+                onKeyDown={(e) =>
+                  e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
+                }
+              />
               <Button className="ms-2 me-2 btn btn-primary">Keresés</Button>
-              
             </NavDropdown>
           </button>
           <div className="text-end">
-          <ul className="nav navbar-collapse">
-            <li className="nav-item ">
-              <Link to="/" className="nav-link">
-                Kezdőoldal
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/kategoriak" className="nav-link">
-                Kategóriák
-              </Link>
-            </li>
-            <input
-              type="text"
-              placeholder="Keresés"
-              className="m-2 p-1 border border-1 rounded"
-              onKeyDown={(e) =>
-                e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
-              }
-            />
+            <ul className="nav collapse navbar-collapse">
+              <li className="nav-item ">
+                <Link to="/" className="nav-link">
+                  Kezdőoldal
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/kategoriak" className="nav-link">
+                  Kategóriák
+                </Link>
+              </li>
+              <input
+                type="text"
+                placeholder="Keresés"
+                className="m-2 p-1 border border-1 rounded"
+                onKeyDown={(e) =>
+                  e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
+                }
+              />
 
-            <li className="nav-item">
-              <Link to="/felhasznalo" className="nav-link">
-                Felhasználó
-              </Link>
-            </li>
-            <li className="nav-item">
-              {props.user.hozzaferes ? (
-                <Link to="/admin" className="nav-link">
-                  Admin
+              <li className="nav-item">
+                <Link to="/felhasznalo" className="nav-link">
+                  Felhasználó <br />
+                  <i className="text-muted">(Név: {props.user.name})</i>
                 </Link>
-              ) : (
-                <Link to="/kosar" className="nav-link">
-                  Kosár
-                </Link>
-              )}
-            </li>
-          </ul>
+              </li>
+              <li className="nav-item">
+                {props.user.hozzaferes ? (
+                  <Link to="/admin" className="nav-link">
+                    Admin
+                  </Link>
+                ) : (
+                  <Link to="/kosar" className="nav-link position-relative me-2 " style={{ backgroundColor: "lightgray" , borderRadius: "5px", color: "black"}}>
+                    Kosár
+                    <span class="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger">
+                      {props.kosarMenny}
+                    </span>
+                  </Link>
+                )}
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

@@ -23,15 +23,15 @@ export default function Rendelesek(props) {
   function getRendelesek(data) {
     setRendelesek(data.data);
   }
-  function rendelesTorles (event) {
+  function rendelesTorles(event) {
     DS.delete(`/api/rendelestorles/${event.target.id}`);
     DS.get(`/api/user_rendelesei/${user.azon}`, getRendelesek);
   }
 
-  function rendelesReszletezes (event) {
-        DS.get(`/api/rendelestermekei/${event.target.id}`, getRendelesReszletei);
+  function rendelesReszletezes(event) {
+    DS.get(`/api/rendelestermekei/${event.target.id}`, getRendelesReszletei);
 
-        handleShow();
+    handleShow();
   }
 
   function getRendelesReszletei(data) {
@@ -57,8 +57,20 @@ export default function Rendelesek(props) {
                 {elem.kelt} <br /> <b>Kiszállítva:</b> {elem.kiszallitva}
               </p>
               <div className="text-sm-end text-center">
-                <Button className="ms-3 m-2 " id={elem.rend_szam} onClick={rendelesReszletezes}>Részletek megtekintése</Button>
-                <Button className="ms-3 m-2 " variant="danger" key = {index} id = {elem.rend_szam} onClick={rendelesTorles}>
+                <Button
+                  className="ms-3 m-2 "
+                  id={elem.rend_szam}
+                  onClick={rendelesReszletezes}
+                >
+                  Részletek megtekintése
+                </Button>
+                <Button
+                  className="ms-3 m-2 "
+                  variant="danger"
+                  key={index}
+                  id={elem.rend_szam}
+                  onClick={rendelesTorles}
+                >
                   Rendelés törlése
                 </Button>
               </div>
@@ -66,7 +78,11 @@ export default function Rendelesek(props) {
           ))}
         </ListGroup>
       </Card.Text>
-      <RendelesModal show = {show} handleClose = {handleClose} rendelesReszletei = {rendelesReszletei}/>
+      <RendelesModal
+        show={show}
+        handleClose={handleClose}
+        rendelesReszletei={rendelesReszletei}
+      />
     </Card>
   );
 }

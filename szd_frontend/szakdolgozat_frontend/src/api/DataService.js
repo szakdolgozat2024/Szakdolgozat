@@ -34,10 +34,10 @@ export default class DataService {
   put(url, data) {
     axios.put(url, data)
     .then(function (response) {
-      console.log(response.data);
+      console.log(response);
     })
     .catch(function (error) {
-      console.log(error.response.data);
+      console.log(error.response);
     })
   }
 

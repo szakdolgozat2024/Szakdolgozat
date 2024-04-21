@@ -25,6 +25,8 @@ import Kereses from "./pages/kereses";
                
 function App() {
 
+  const [kosarMenny, setKosarMenny] = useState(0);
+
   const DS = new DataService();
   const [user, setUser] = useState("");
   if (user === "") {
@@ -52,15 +54,15 @@ function App() {
 
       <Routes>
       { user ? (
-        <Route path="/" element={<VasarloLayout user = {user}/>}>
-        <Route path={"termek/:termek" } element={<Modell />} />
+        <Route path="/" element={<VasarloLayout user = {user} kosarMenny = {kosarMenny}/>}>
+        <Route path={"termek/:termek" } element={<Modell setKosarMenny={setKosarMenny} kosarMenny={kosarMenny}/>} />
         <Route path={"kereses/:kereses" } element={<Kereses/>}/>
         <Route path={"kereses/" } element={<MainPage/>}/>
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
         <Route path="felhasznalo" element={<Felhasznalo />} />
-        {user.hozzaferes ? (<Route path="admin" element={<Admin />} />) : (<Route path="kosar" element={<Kosar user = {user}/>} /> )}
+        {user.hozzaferes ? (<Route path="admin" element={<Admin />} />) : (<Route path="kosar" element={<Kosar user = {user} setKosarMenny={setKosarMenny}/>} /> )}
         <Route path="*" element={<NoPage/>} />
       </Route>
       ) : (
@@ -72,7 +74,7 @@ function App() {
         <Route path="kategoriak" element={<Kategoriak />} />
         <Route path="bejelentkezes" element={<Bejelentkezes/>} />
         <Route path="regisztracio" element={<Regisztracio/>} />
-        <Route path="modell" element={<Modell/>} />
+        <Route path="modell" element={<Modell />} />
         <Route path="*" element={<NoPage/>} />
       </Route>
       )}

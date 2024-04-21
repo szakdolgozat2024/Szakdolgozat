@@ -43,6 +43,7 @@ export default function ProductDetails(props) {
     kosar[props.termekek[state.termek].ter_id] =
       (kosar[props.termekek[state.termek].ter_id] || 0) + state.quantity;
     Cookies.set("kosar", JSON.stringify(kosar));
+    props.setKosarMenny(props.kosarMenny + state.quantity);
     }
   }
 

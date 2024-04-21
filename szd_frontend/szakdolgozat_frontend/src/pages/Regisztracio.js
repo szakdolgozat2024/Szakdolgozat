@@ -22,7 +22,7 @@ export default function Regisztracio() {
       password: password,
       password_confirmation: password_confirmation,
     };
-    loginReg(adat, "/register");
+    loginReg(adat, "/api/uj_user");
   };
 
   return (

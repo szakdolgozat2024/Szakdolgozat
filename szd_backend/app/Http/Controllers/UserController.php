@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 
 use function Laravel\Prompts\select;
 
@@ -57,4 +59,41 @@ class UserController extends Controller
             ->get();
         return $rendelesek;
     }
+
+    public function update_user(Request $request, $azon){
+
+        $user = DB::table('users')
+            ->where('azon', $azon)
+            ->update([
+                'name' => "sanyi"
+            ]);
+    }
+    
+    public function user_torles($azon){
+        
+        DB::table('users')
+            ->where('azon', '=', $azon)
+            ->delete();
+
+    }
+
+    public function uj_user(Request $request){
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->cim = $request->cim;
+        $user->save();
+    }
+
+    public function uj_user_azonositoval(Request $request){
+        $user = new User();
+        $user->azon = $request->azon;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->cim = $request->cim;
+        $user->save();
+    }
+
 }

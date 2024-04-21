@@ -62,6 +62,7 @@ export default function Kosar(props) {
     Cookies.remove("kosar");
     setTartalom([""]);
     kosarLekerdezes();
+    props.setKosarMenny(0);
   }
   async function kosarLekerdezes() {
     let kosar = getkosar();

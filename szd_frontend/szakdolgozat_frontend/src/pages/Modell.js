@@ -67,7 +67,7 @@ export default function Modell(props) {
         </Carousel>
       </Col>
       <Col className="ModellAdatok">
-        <ProductDetails name={mod_nev} termekek={state.termekek} vendeg={props.vendeg}/>
+        <ProductDetails name={mod_nev} termekek={state.termekek} vendeg={props.vendeg} setKosarMenny={props.setKosarMenny} kosarMenny={props.kosarMenny}/>
         <Alert className="mt-3" id="alert" variant="danger" style={{display: 'none'}}>
           Kosárba tétel előtt jelentkezz be vagy regisztrálj!
         </Alert>
