@@ -25,9 +25,10 @@ export default class DataService {
     axios.post(url, data)
     .then(function (response) {
       console.log(response);
+      return response;
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(error.response.data);
     })
   }
 
@@ -37,7 +38,7 @@ export default class DataService {
       console.log(response);
     })
     .catch(function (error) {
-      console.log(error.response);
+      console.log(error.response.data);
     })
   }
 

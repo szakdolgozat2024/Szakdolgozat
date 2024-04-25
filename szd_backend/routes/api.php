@@ -43,12 +43,11 @@ Route::post('/rendelesrogzites', [RendelesKontroller::class, 'rendelesRogzites']
 Route::post('/rendelestetelrogzites', [RendelesKontroller::class, 'rendelesTetelRogzites']);
 Route::delete('/rendelestorles/{rend_szam}', [RendelesKontroller::class, 'rendelesTorles']);
 
-Route::put('/update_modell_kategoria', [ModellController::class, 'update_modell_kategoria']);
 
 
 Route::put('/update_user/{azon}', [UserController::class, 'update_modell_kategoria']);
 Route::delete('/user_torles/{azon}', [UserController::class, 'user_torles']);
 Route::post('/uj_user', [UserController::class, 'uj_user']);
 Route::post('/uj_user_azonositoval', [UserController::class, 'uj_user_azonositoval']);
-Route::post('/uj_modell', [UserController::class, 'uj_modell']);
+Route::post('/uj_modell', [ModellController::class, 'uj_modell']);
 Route::post('/update_modell', [ModellController::class, 'update_modell']);

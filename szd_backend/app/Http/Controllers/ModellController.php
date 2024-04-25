@@ -39,7 +39,8 @@ class ModellController extends Controller
         return $talalatok;
     }
 
-    public function uj_modell(Request $request){
+    public function uj_modell(Request $request)
+    {
         $modell = new Modell();
         $modell->nev = $request->nev;
         $modell->leiras = $request->leiras;
@@ -50,6 +51,7 @@ class ModellController extends Controller
 
     public function update_modell(Request $request)
     {
+        DB::table('modells')->where('mod_id', $request->mod_id)->delete();
         $modell = new Modell();
         $modell->mod_id = $request->mod_id;
         $modell->nev = $request->nev;

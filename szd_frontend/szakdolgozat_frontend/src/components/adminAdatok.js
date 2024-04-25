@@ -101,7 +101,7 @@ export default function AdminAdatok(props) {
                 id="custom-switch"
                 label="szrekesztés"
                 style={{ float: "right" }}
-                onClick={() => handleState("modell", !state.modell)}
+                onClick={() => {handleState("modell", !state.modell); handleState("kategoria", state.kategoriak[0].kat_id);}}
               />
               <Card.Title>Modell létrehozása</Card.Title>
 
@@ -116,7 +116,7 @@ export default function AdminAdatok(props) {
                         e.target.options.selectedIndex
                       ].getAttribute("kat_id")
                     );
-                    handleState("kategoria", e.target.value);
+                    
                   }}
                   disabled={state.modell}
                 >
@@ -226,7 +226,7 @@ export default function AdminAdatok(props) {
           </Card>
           <Button
             as="input"
-            disabled={state.ujmodellnev.length < 1}
+            disabled={state.ujmodellnev.length < 1 || state.ujModellgyarto.length < 1 || state.ujModellleiras.length < 1}
             style={{
               display: "flex",
               justifyContent: "center",
@@ -246,31 +246,6 @@ export default function AdminAdatok(props) {
               handleState("alert", true);
             }}
           />
-          <Modal
-            show={state.show}
-            onHide={() => handleState("show", false)}
-            backdrop="static"
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Termék törlése</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Biztosan törölni szeretné a terméket?</Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="danger"
-                onClick={() => handleState("show", false)}
-              >
-                Igen
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => handleState("show", false)}
-              >
-                Nem
-              </Button>
-            </Modal.Footer>
-          </Modal>
         </>
       ) : (
         <>
@@ -297,7 +272,6 @@ export default function AdminAdatok(props) {
                         e.target.options.selectedIndex
                       ].getAttribute("kat_id")
                     );
-                    handleState("kategoria", e.target.value);
                   }}
                   disabled={state.besorolas}
                 >
@@ -308,25 +282,6 @@ export default function AdminAdatok(props) {
                   ))}
                 </Form.Select>
               </Form.Group>
-              <Button
-                as="input"
-                style={{ float: "right" }}
-                value="Mentés"
-                variant="primary"
-                type="submit"
-                disabled={state.besorolas}
-                onClick={(event) => {
-                  event.preventDefault();
-                  axios({
-                    method: "put",
-                    url: "/api/update_modell_kategoria",
-                    data: {
-                      mod_id: props.mod_id,
-                      kategoria: state.kategoria,
-                    },
-                  });
-                }}
-              />
             </Card.Body>
           </Card>
           <Card className="szerkElem" style={{ width: "90%" }}>
@@ -352,6 +307,7 @@ export default function AdminAdatok(props) {
                     disabled={state.modell}
                     type="email"
                     placeholder={props.mod_nev}
+                    onChange={(e) => handleState("ujmodellnev", e.target.value)}
                   />
                 </Col>
               </Form.Group>
@@ -368,6 +324,7 @@ export default function AdminAdatok(props) {
                     disabled={state.modell}
                     type="email"
                     placeholder={state.modellek[0].gyarto}
+                    onChange={(e) => handleState("ujModellgyarto", e.target.value)}
                   />
                 </Col>
               </Form.Group>
@@ -381,6 +338,7 @@ export default function AdminAdatok(props) {
                   value={state.modellek[0].leiras}
                   as="textarea"
                   rows={3}
+                  onChange={(e) => handleState("ujModellleiras", e.target.value)}
                 />
               </Form.Group>
               <Form.Group
@@ -427,15 +385,31 @@ export default function AdminAdatok(props) {
                   </Col>
                 </Row>
               </Container>
-              <Button
-                disabled={state.modell}
-                as="input"
-                style={{ float: "right" }}
-                type="submit"
-                value="Mentés"
-              />
             </Card.Body>
           </Card>
+          <Button
+            as="input"
+            disabled={state.ujmodellnev.length < 1 || state.ujModellgyarto.length < 1 || state.ujModellleiras.length < 1}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+              marginTop: "1vw",
+            }}
+            type="submit"
+            value="Mentés és feltöltés"
+            onClick={() => {
+              DS.post("/api/update_modell", {
+                mod_id: props.mod_id,
+                nev: state.ujmodellnev,
+                kategoria: state.kategoria,
+                gyarto: state.ujModellgyarto,
+                leiras: state.ujModellleiras,
+              });
+              handleState("alertmessage", "Új modell feltöltve");
+              handleState("alert", true);
+            }}
+          />
           <Card className="szerkElem" style={{ width: "90%" }}>
             <Card.Body>
               <Form.Check // prettier-ignore
@@ -536,14 +510,6 @@ export default function AdminAdatok(props) {
                 </Col>
               </Form.Group>
               {/* =============== Gombok ================ */}
-
-              <Button
-                as="input"
-                style={{ float: "right" }}
-                type="submit"
-                value="Mentés"
-                disabled={state.termek}
-              />
               <Button
                 onClick={() => handleState("show", true)}
                 as="input"
