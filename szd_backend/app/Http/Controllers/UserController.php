@@ -96,4 +96,25 @@ class UserController extends Controller
         $user->save();
     }
 
+    public function uj_user_azonositoval_hozzaferessel(Request $request){
+        $user = new User();
+        $user->azon = $request->azon;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->cim = $request->cim;
+        $user->hozzaferes = $request->hozzaferes;
+        $user->save();
+    }
+
+    public function osszes_user (){
+        return DB::table('users')
+        ->select('azon', 'name', 'email', 'cim', 'hozzaferes')
+        ->get();
+    }
+
+    public function torol_user ($id){
+        User::destroy($id);
+    }
+
 }

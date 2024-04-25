@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Beszerzes;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BeszerzesController extends Controller
 {
@@ -17,5 +18,10 @@ class BeszerzesController extends Controller
         $beszerzes->save();
     }
 
-    function beszerzesek(){return Beszerzes::all();}
+    function beszerzesek(){
+        return DB::table('beszerzes')
+            ->select('*')
+            ->orderBy('kelt', 'desc')
+            ->get();
+        }
 }
