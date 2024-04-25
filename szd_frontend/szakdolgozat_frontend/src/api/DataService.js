@@ -5,7 +5,7 @@ export default class DataService {
     
   };
 
-  get(url, callback) {
+  async get(url, callback) {
     axios.get(url)
     .then(function (response) {
       // handle success

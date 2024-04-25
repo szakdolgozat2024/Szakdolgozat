@@ -51,13 +51,13 @@ class ModellController extends Controller
 
     public function update_modell(Request $request)
     {
-        DB::table('modells')->where('mod_id', $request->mod_id)->delete();
+        //DB::table('modells')->where('mod_id', $request->mod_id)->delete();
         $modell = new Modell();
         $modell->mod_id = $request->mod_id;
         $modell->nev = $request->nev;
         $modell->leiras = $request->leiras;
         $modell->kategoria = $request->kategoria;
         $modell->gyarto = $request->gyarto;
-        $modell->save();
+        $modell->update();
     }
 }

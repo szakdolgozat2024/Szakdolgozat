@@ -51,4 +51,8 @@ class RendelesKontroller extends Controller
             ->get();
             return $rendeles_termekei;
     }
+
+    function osszesRendeles()  {
+        return Rendeles::all();
+    }
 }

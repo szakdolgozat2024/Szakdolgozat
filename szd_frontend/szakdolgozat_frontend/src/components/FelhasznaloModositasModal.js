@@ -3,7 +3,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function FelhasznaloModositasModal(props) {
-  
+
+  function emailClick() {
+    document.getElementById("alert").style.display = "block";
+  }
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Modal.Header closeButton>
@@ -30,9 +33,15 @@ function FelhasznaloModositasModal(props) {
             placeholder={props.user.email}
             className="form-control"
             onChange={(e) => {
-                props.setEmail(e.target.value);
+              props.setEmail(e.target.value);
             }}
+            onClick={emailClick}
           ></input>
+
+          <br />
+          <div class="alert alert-warning" id="alert" role="alert" style={{ display: "none" }}>
+            Az email cím módosítása után újbóli bejelentkezés szükéges!
+          </div>
         </p>
         <p>
           <b>Cim: </b>
@@ -41,7 +50,7 @@ function FelhasznaloModositasModal(props) {
             placeholder={props.user.cim}
             className="form-control"
             onChange={(e) => {
-                props.setCim(e.target.value);
+              props.setCim(e.target.value);
             }}
           ></input>
         </p>
