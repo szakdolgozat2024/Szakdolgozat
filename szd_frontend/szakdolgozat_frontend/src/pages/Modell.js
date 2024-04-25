@@ -56,7 +56,7 @@ export default function Modell(props) {
     <div>
     {state.tolt ? (<Container fluid="true" className="ModellContainer h-60">
     <Row className="ModellRow">
-      <Col xs={8} key={1}  className="ModellKepek">
+      <Col md={8} sm={12} xs={12} key={1}  className="ModellKepek">
         <Carousel>
           {state.termekek.map((mod, i) => (
             <Carousel.Item key={i}>
