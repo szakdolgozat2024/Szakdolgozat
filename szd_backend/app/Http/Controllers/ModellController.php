@@ -10,36 +10,54 @@ use Illuminate\Support\Facades\DB;
 
 class ModellController extends Controller
 {
-    public function osszes_modell() { /* amihez van termék */
+    public function osszes_modell()
+    { /* amihez van termék */
         $modellek = DB::table('modells')
-        ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
-        ->join('kategorias', 'modells.kategoria', '=', 'kategorias.kat_id')
-        ->select('modells.mod_id as mod_id', 'modells.nev as nev', 'modells.leiras as leiras', 'kategorias.kategoria_nev as kategoria', 
-        'modells.gyarto as gyarto', 'modells.gyarto as gyarto')
-        ->distinct()
-        ->get();
+            ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
+            ->join('kategorias', 'modells.kategoria', '=', 'kategorias.kat_id')
+            ->select(
+                'modells.mod_id as mod_id',
+                'modells.nev as nev',
+                'modells.leiras as leiras',
+                'kategorias.kategoria_nev as kategoria',
+                'modells.gyarto as gyarto',
+                'modells.gyarto as gyarto'
+            )
+            ->distinct()
+            ->get();
         return $modellek;
     }
 
-    public function modell_kereses($kereses) { 
+    public function modell_kereses($kereses)
+    {
         $talalatok = DB::table('modells')
-        ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
-        ->select('modells.*')
-        ->where('modells.leiras', 'like', "%".$kereses."%")
-        ->distinct()
-        ->get();
+            ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
+            ->select('modells.*')
+            ->where('modells.leiras', 'like', "%" . $kereses . "%")
+            ->distinct()
+            ->get();
         return $talalatok;
     }
 
-    public function update_modell_kategoria(Request $request)
+    public function uj_modell(Request $request)
     {
-        $affected = DB::table('modells')
-              ->where('mod_id', $request->mod_id)
-              ->update(['kategoria' => $request->kategoria]);
-              
+        $modell = new Modell();
+        $modell->nev = $request->nev;
+        $modell->leiras = $request->leiras;
+        $modell->kategoria = $request->kategoria;
+        $modell->gyarto = $request->gyarto;
+        $modell->save();
     }
 
-    public function create_modell($request){
-
+    public function update_modell(Request $request)
+    {
+        DB::table('modells')->where('mod_id', $request->mod_id)->delete();
+        $modell = new Modell();
+        $modell->mod_id = $request->mod_id;
+        $modell->nev = $request->nev;
+        $modell->leiras = $request->leiras;
+        $modell->kategoria = $request->kategoria;
+        $modell->gyarto = $request->gyarto;
+        $modell->save();
     }
 }

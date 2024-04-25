@@ -10,6 +10,7 @@ class Modell extends Model
     use HasFactory;
     protected  $primaryKey = 'mod_id';
     protected $fillable = [
+        'mod_id',
         'nev',
         'leiras',
         'kategoria', 

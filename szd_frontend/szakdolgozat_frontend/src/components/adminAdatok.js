@@ -11,6 +11,7 @@ import AmountCounter from "./amountCounter";
 import Modal from "react-bootstrap/Modal";
 import htmlColorNames from "../colors";
 import axios from "../api/axios";
+import Alert from "react-bootstrap/Alert";
 
 export default function AdminAdatok(props) {
   const DS = new DataService();
@@ -27,6 +28,11 @@ export default function AdminAdatok(props) {
     szin: undefined,
     termekindex: [0, -1],
     ujModell: props.ujModell,
+    alert: false,
+    alertmessage: "",
+    ujmodellnev: "",
+    ujModellgyarto: "",
+    ujModellleiras: "",
   });
   useEffect(() => {
     if (props.ujModell) {
@@ -79,6 +85,11 @@ export default function AdminAdatok(props) {
 
   return (
     <div>
+      {state.alert && (
+        <Alert variant="success" style={{ margin: "1vh" }}>
+          {state.alertmessage}
+        </Alert>
+      )}
       {state.ujModell ? (
         <>
           <h1 style={{ textAlign: "center" }}>Új modell</h1>
@@ -90,7 +101,7 @@ export default function AdminAdatok(props) {
                 id="custom-switch"
                 label="szrekesztés"
                 style={{ float: "right" }}
-                onClick={() => handleState("modell", !state.modell)}
+                onClick={() => {handleState("modell", !state.modell); handleState("kategoria", state.kategoriak[0].kat_id);}}
               />
               <Card.Title>Modell létrehozása</Card.Title>
 
@@ -105,7 +116,7 @@ export default function AdminAdatok(props) {
                         e.target.options.selectedIndex
                       ].getAttribute("kat_id")
                     );
-                    handleState("kategoria", e.target.value);
+                    
                   }}
                   disabled={state.modell}
                 >
@@ -131,187 +142,7 @@ export default function AdminAdatok(props) {
                     disabled={state.modell}
                     type="email"
                     placeholder={props.mod_nev}
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3 adminForm"
-                controlId="formModell"
-              >
-                <Form.Label className="fw-bold" column sm={2}>
-                  Gyártó:
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Control disabled={state.modell} type="email" />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                className="mb-3 adminForm fw-bold"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Label>Leirás:</Form.Label>
-                <Form.Control disabled={state.modell} as="textarea" rows={3} />
-              </Form.Group>
-              <Form.Group
-                controlId="formFile"
-                className="mb-3 fw-bold adminForm"
-              >
-                <Form.Label>Modell képei:</Form.Label>
-                <Form.Control disabled={state.modell} type="file" />
-              </Form.Group>
-              <Container>
-                <Row className="adminGallery">
-                  <Col xs={4} md={2}>
-                    <Image
-                      className="adminKep"
-                      src={
-                        props.Image ||
-                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
-                      }
-                      rounded
-                      fluid
-                    />
-                  </Col>
-                  <Col xs={4} md={2}>
-                    <Image
-                      className="adminKep"
-                      src={
-                        props.Image ||
-                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
-                      }
-                      rounded
-                      fluid
-                    />
-                  </Col>
-                  <Col xs={4} md={2}>
-                    <Image
-                      className="adminKep"
-                      src={
-                        props.Image ||
-                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
-                      }
-                      rounded
-                      fluid
-                    />
-                  </Col>
-                </Row>
-              </Container>
-              <Button
-                disabled={state.modell}
-                as="input"
-                style={{ float: "right" }}
-                type="submit"
-                value="Mentés"
-              />
-            </Card.Body>
-          </Card>
-          <Modal
-            show={state.show}
-            onHide={() => handleState("show", false)}
-            backdrop="static"
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Termék törlése</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Biztosan törölni szeretné a terméket?</Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="danger"
-                onClick={() => handleState("show", false)}
-              >
-                Igen
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => handleState("show", false)}
-              >
-                Nem
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      ) : (
-        <>
-          <h1 style={{ textAlign: "center" }}>{props.mod_nev}</h1>
-          <Card className="szerkElem" style={{ width: "90%" }}>
-            <Card.Body>
-              <Form.Check // prettier-ignore
-                type="switch"
-                id="custom-switch"
-                label="szrekesztés"
-                style={{ float: "right" }}
-                onClick={() => handleState("besorolas", !state.besorolas)}
-              />
-              <Card.Title>Besorolás</Card.Title>
-
-              <Form.Group className="mb-3 adminForm">
-                <Form.Label className="fw-bold">Kategória:</Form.Label>
-                <Form.Select
-                  value={state.kategoria || state.modellek[0].kategoria_nev}
-                  onChange={(e) => {
-                    handleState(
-                      "kategoria",
-                      e.target.options[
-                        e.target.options.selectedIndex
-                      ].getAttribute("kat_id")
-                    );
-                    handleState("kategoria", e.target.value);
-                  }}
-                  disabled={state.besorolas}
-                >
-                  {state.kategoriak.map((kat, index) => (
-                    <option kat_id={kat.kat_id} key={index}>
-                      {kat.kategoria_nev}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-              <Button
-                as="input"
-                style={{ float: "right" }}
-                value="Mentés"
-                variant="primary"
-                type="submit"
-                disabled={state.besorolas}
-                onClick={(event) => {
-                  event.preventDefault();
-                  axios({
-                    method: "put",
-                    url: "/api/update_modell_kategoria",
-                    data: {
-                      mod_id: props.mod_id,
-                      kategoria: state.kategoria,
-                    },
-                  });
-                }}
-              />
-            </Card.Body>
-          </Card>
-          <Card className="szerkElem" style={{ width: "90%" }}>
-            <Card.Body>
-              <Form.Check // prettier-ignore
-                type="switch"
-                id="custom-switch"
-                label="szrekesztés"
-                style={{ float: "right" }}
-                onClick={() => handleState("modell", !state.modell)}
-              />
-              <Card.Title>Modell</Card.Title>
-              <Form.Group
-                as={Row}
-                className="mb-3 adminForm"
-                controlId="formModell"
-              >
-                <Form.Label className="fw-bold" column sm={2}>
-                  Modell név:
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Control
-                    disabled={state.modell}
-                    type="email"
-                    placeholder={props.mod_nev}
+                    onChange={(e) => handleState("ujmodellnev", e.target.value)}
                   />
                 </Col>
               </Form.Group>
@@ -327,7 +158,9 @@ export default function AdminAdatok(props) {
                   <Form.Control
                     disabled={state.modell}
                     type="email"
-                    placeholder={state.modellek[0].gyarto}
+                    onChange={(e) =>
+                      handleState("ujModellgyarto", e.target.value)
+                    }
                   />
                 </Col>
               </Form.Group>
@@ -338,9 +171,11 @@ export default function AdminAdatok(props) {
                 <Form.Label>Leirás:</Form.Label>
                 <Form.Control
                   disabled={state.modell}
-                  value={state.modellek[0].leiras}
                   as="textarea"
                   rows={3}
+                  onChange={(e) =>
+                    handleState("ujModellleiras", e.target.value)
+                  }
                 />
               </Form.Group>
               <Form.Group
@@ -387,15 +222,194 @@ export default function AdminAdatok(props) {
                   </Col>
                 </Row>
               </Container>
-              <Button
-                disabled={state.modell}
-                as="input"
-                style={{ float: "right" }}
-                type="submit"
-                value="Mentés"
-              />
             </Card.Body>
           </Card>
+          <Button
+            as="input"
+            disabled={state.ujmodellnev.length < 1 || state.ujModellgyarto.length < 1 || state.ujModellleiras.length < 1}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+              marginTop: "1vw",
+            }}
+            type="submit"
+            value="Mentés és feltöltés"
+            onClick={() => {
+              DS.post("/api/uj_modell", {
+                nev: state.ujmodellnev,
+                kategoria: state.kategoria,
+                gyarto: state.ujModellgyarto,
+                leiras: state.ujModellleiras,
+              });
+              handleState("alertmessage", "Új modell feltöltve");
+              handleState("alert", true);
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <h1 style={{ textAlign: "center" }}>{props.mod_nev}</h1>
+          <Card className="szerkElem" style={{ width: "90%" }}>
+            <Card.Body>
+              <Form.Check // prettier-ignore
+                type="switch"
+                id="custom-switch"
+                label="szrekesztés"
+                style={{ float: "right" }}
+                onClick={() => handleState("besorolas", !state.besorolas)}
+              />
+              <Card.Title>Besorolás</Card.Title>
+
+              <Form.Group className="mb-3 adminForm">
+                <Form.Label className="fw-bold">Kategória:</Form.Label>
+                <Form.Select
+                  value={state.kategoria || state.modellek[0].kategoria_nev}
+                  onChange={(e) => {
+                    handleState(
+                      "kategoria",
+                      e.target.options[
+                        e.target.options.selectedIndex
+                      ].getAttribute("kat_id")
+                    );
+                  }}
+                  disabled={state.besorolas}
+                >
+                  {state.kategoriak.map((kat, index) => (
+                    <option kat_id={kat.kat_id} key={index}>
+                      {kat.kategoria_nev}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            </Card.Body>
+          </Card>
+          <Card className="szerkElem" style={{ width: "90%" }}>
+            <Card.Body>
+              <Form.Check // prettier-ignore
+                type="switch"
+                id="custom-switch"
+                label="szrekesztés"
+                style={{ float: "right" }}
+                onClick={() => handleState("modell", !state.modell)}
+              />
+              <Card.Title>Modell</Card.Title>
+              <Form.Group
+                as={Row}
+                className="mb-3 adminForm"
+                controlId="formModell"
+              >
+                <Form.Label className="fw-bold" column sm={2}>
+                  Modell név:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    disabled={state.modell}
+                    type="email"
+                    placeholder={props.mod_nev}
+                    onChange={(e) => handleState("ujmodellnev", e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group
+                as={Row}
+                className="mb-3 adminForm"
+                controlId="formModell"
+              >
+                <Form.Label className="fw-bold" column sm={2}>
+                  Gyártó:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    disabled={state.modell}
+                    type="email"
+                    placeholder={state.modellek[0].gyarto}
+                    onChange={(e) => handleState("ujModellgyarto", e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group
+                className="mb-3 adminForm fw-bold"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>Leirás:</Form.Label>
+                <Form.Control
+                  disabled={state.modell}
+                  value={state.modellek[0].leiras}
+                  as="textarea"
+                  rows={3}
+                  onChange={(e) => handleState("ujModellleiras", e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group
+                controlId="formFile"
+                className="mb-3 fw-bold adminForm"
+              >
+                <Form.Label>Modell képei:</Form.Label>
+                <Form.Control disabled={state.modell} type="file" />
+              </Form.Group>
+              <Container>
+                <Row className="adminGallery">
+                  <Col xs={4} md={2}>
+                    <Image
+                      className="adminKep"
+                      src={
+                        props.Image ||
+                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
+                      }
+                      rounded
+                      fluid
+                    />
+                  </Col>
+                  <Col xs={4} md={2}>
+                    <Image
+                      className="adminKep"
+                      src={
+                        props.Image ||
+                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
+                      }
+                      rounded
+                      fluid
+                    />
+                  </Col>
+                  <Col xs={4} md={2}>
+                    <Image
+                      className="adminKep"
+                      src={
+                        props.Image ||
+                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
+                      }
+                      rounded
+                      fluid
+                    />
+                  </Col>
+                </Row>
+              </Container>
+            </Card.Body>
+          </Card>
+          <Button
+            as="input"
+            disabled={state.ujmodellnev.length < 1 || state.ujModellgyarto.length < 1 || state.ujModellleiras.length < 1}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+              marginTop: "1vw",
+            }}
+            type="submit"
+            value="Mentés és feltöltés"
+            onClick={() => {
+              DS.post("/api/update_modell", {
+                mod_id: props.mod_id,
+                nev: state.ujmodellnev,
+                kategoria: state.kategoria,
+                gyarto: state.ujModellgyarto,
+                leiras: state.ujModellleiras,
+              });
+              handleState("alertmessage", "Új modell feltöltve");
+              handleState("alert", true);
+            }}
+          />
           <Card className="szerkElem" style={{ width: "90%" }}>
             <Card.Body>
               <Form.Check // prettier-ignore
@@ -496,14 +510,6 @@ export default function AdminAdatok(props) {
                 </Col>
               </Form.Group>
               {/* =============== Gombok ================ */}
-
-              <Button
-                as="input"
-                style={{ float: "right" }}
-                type="submit"
-                value="Mentés"
-                disabled={state.termek}
-              />
               <Button
                 onClick={() => handleState("show", true)}
                 as="input"

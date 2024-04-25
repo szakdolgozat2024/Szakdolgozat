@@ -7,6 +7,7 @@ use App\Http\Controllers\RendelesKontroller;
 use App\Http\Controllers\Termek_tulajdonsagController;
 use App\Http\Controllers\TermekController;
 use App\Http\Controllers\UserController;
+use App\Models\Modell;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,6 @@ Route::post('/rendelesrogzites', [RendelesKontroller::class, 'rendelesRogzites']
 Route::post('/rendelestetelrogzites', [RendelesKontroller::class, 'rendelesTetelRogzites']);
 Route::delete('/rendelestorles/{rend_szam}', [RendelesKontroller::class, 'rendelesTorles']);
 
-Route::put('/update_modell_kategoria', [ModellController::class, 'update_modell_kategoria']);
 
 
 Route::put('/update_user/{azon}', [UserController::class, 'update_modell_kategoria']);
@@ -52,3 +52,5 @@ Route::post('/uj_user_azonositoval', [UserController::class, 'uj_user_azonositov
 
 Route::post('/uj_beszerzes', [BeszerzesController::class, 'ujBeszerzes']);
 Route::get('/beszerzesek', [BeszerzesController::class, 'beszerzesek']);
+Route::post('/uj_modell', [ModellController::class, 'uj_modell']);
+Route::post('/update_modell', [ModellController::class, 'update_modell']);
