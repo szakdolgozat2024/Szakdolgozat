@@ -11,6 +11,7 @@ import AmountCounter from "./amountCounter";
 import Modal from "react-bootstrap/Modal";
 import htmlColorNames from "../colors";
 import axios from "../api/axios";
+import Alert from "react-bootstrap/Alert";
 
 export default function AdminAdatok(props) {
   const DS = new DataService();
@@ -27,6 +28,11 @@ export default function AdminAdatok(props) {
     szin: undefined,
     termekindex: [0, -1],
     ujModell: props.ujModell,
+    alert: false,
+    alertmessage: "",
+    ujmodellnev: "",
+    ujModellgyarto: "",
+    ujModellleiras: "",
   });
   useEffect(() => {
     if (props.ujModell) {
@@ -79,6 +85,11 @@ export default function AdminAdatok(props) {
 
   return (
     <div>
+      {state.alert && (
+        <Alert variant="success" style={{ margin: "1vh" }}>
+          {state.alertmessage}
+        </Alert>
+      )}
       {state.ujModell ? (
         <>
           <h1 style={{ textAlign: "center" }}>Új modell</h1>
@@ -131,6 +142,7 @@ export default function AdminAdatok(props) {
                     disabled={state.modell}
                     type="email"
                     placeholder={props.mod_nev}
+                    onChange={(e) => handleState("ujmodellnev", e.target.value)}
                   />
                 </Col>
               </Form.Group>
@@ -143,7 +155,13 @@ export default function AdminAdatok(props) {
                   Gyártó:
                 </Form.Label>
                 <Col sm={10}>
-                  <Form.Control disabled={state.modell} type="email" />
+                  <Form.Control
+                    disabled={state.modell}
+                    type="email"
+                    onChange={(e) =>
+                      handleState("ujModellgyarto", e.target.value)
+                    }
+                  />
                 </Col>
               </Form.Group>
               <Form.Group
@@ -151,7 +169,14 @@ export default function AdminAdatok(props) {
                 controlId="exampleForm.ControlTextarea1"
               >
                 <Form.Label>Leirás:</Form.Label>
-                <Form.Control disabled={state.modell} as="textarea" rows={3} />
+                <Form.Control
+                  disabled={state.modell}
+                  as="textarea"
+                  rows={3}
+                  onChange={(e) =>
+                    handleState("ujModellleiras", e.target.value)
+                  }
+                />
               </Form.Group>
               <Form.Group
                 controlId="formFile"
@@ -197,15 +222,30 @@ export default function AdminAdatok(props) {
                   </Col>
                 </Row>
               </Container>
-              <Button
-                disabled={state.modell}
-                as="input"
-                style={{ float: "right" }}
-                type="submit"
-                value="Mentés"
-              />
             </Card.Body>
           </Card>
+          <Button
+            as="input"
+            disabled={state.ujmodellnev.length < 1}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+              marginTop: "1vw",
+            }}
+            type="submit"
+            value="Mentés és feltöltés"
+            onClick={() => {
+              DS.post("/api/uj_modell", {
+                nev: state.ujmodellnev,
+                kategoria: state.kategoria,
+                gyarto: state.ujModellgyarto,
+                leiras: state.ujModellleiras,
+              });
+              handleState("alertmessage", "Új modell feltöltve");
+              handleState("alert", true);
+            }}
+          />
           <Modal
             show={state.show}
             onHide={() => handleState("show", false)}
