@@ -10,6 +10,9 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/esm/Button";
 import Spinner from "react-bootstrap/esm/Spinner";
 import "./admin.css";
+import Beszerzes from "../components/Beszerzes";
+import RendelesekAdmin from "../components/RendelesekAdmin";
+import FelhasznalokAdmin from "../components/FelhasznalokAdmin";
 
 export default function Admin() {
   const DS = new DataService();
@@ -151,10 +154,13 @@ export default function Admin() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </Tab>
           <Tab eventKey="Felhasznalok" title="Felhasználókezelés">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <FelhasznalokAdmin/>
           </Tab>
           <Tab eventKey="Rendelesek" title="Rendelések">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <RendelesekAdmin/>
+          </Tab>
+          <Tab eventKey="Beszerzés" title="Beszerzés" >
+            <Beszerzes/>
           </Tab>
         </Tabs>
       ) : (
