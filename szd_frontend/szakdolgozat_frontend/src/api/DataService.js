@@ -21,6 +21,18 @@ export default class DataService {
     })
   }
 
+  async testget(url) {
+    try {
+        const response = await axios.get(url);
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+
   post(url, data) {
     axios.post(url, data)
     .then(function (response) {

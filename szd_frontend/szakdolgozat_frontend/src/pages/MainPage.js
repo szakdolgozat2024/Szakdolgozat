@@ -17,7 +17,7 @@ export default function MainPage(props) {
   }
 
   if (state.modellek[0] === "") {
-    DS.get("/api/osszes_modell", getKat);
+    DS.get("/api/osszes_modell_termekkel", getKat);
   } else if (state.modellek[0] !== "" && state.tolt == false) {
     handleState("tolt", true);
   }

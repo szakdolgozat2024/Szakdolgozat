@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class ModellController extends Controller
 {
-    public function osszes_modell()
-    { /* amihez van termék */
+    public function osszes_modell_termekkel()
+    { 
         $modellek = DB::table('modells')
             ->join('termeks', 'modells.mod_id', '=', 'termeks.modell')
             ->join('kategorias', 'modells.kategoria', '=', 'kategorias.kat_id')
@@ -21,9 +21,15 @@ class ModellController extends Controller
                 'modells.leiras as leiras',
                 'kategorias.kategoria_nev as kategoria',
                 'modells.gyarto as gyarto',
-                'modells.gyarto as gyarto'
             )
             ->distinct()
+            ->get();
+        return $modellek;
+    }
+
+    public function osszes_modell(){
+        $modellek = DB::table('modells')
+            ->select("mod_id", "nev", "leiras", "kategoria", "gyarto")
             ->get();
         return $modellek;
     }

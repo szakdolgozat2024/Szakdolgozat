@@ -20,7 +20,8 @@ export default function AdminAdatok(props) {
     modell: true,
     termek: true,
     kategoriak: [""],
-    modellek: [""],
+    termekek: [""],
+    kategoria_nev: "",
     kategoria: undefined,
     tolt: false,
     ar: undefined,
@@ -41,7 +42,7 @@ export default function AdminAdatok(props) {
       state.szin === undefined ||
       state.termekindex[1] !== state.termekindex[0]
     ) {
-      handleState("szin", state.modellek[state.termekindex[0]].szin);
+      handleState("szin", state.termekek[state.termekindex[0]].szin);
     } else {
       handleState("szin", state.szin);
     }
@@ -51,32 +52,34 @@ export default function AdminAdatok(props) {
       state.ar === undefined ||
       state.termekindex[1] !== state.termekindex[0]
     ) {
-      handleState("ar", parseInt(state.modellek[state.termekindex[0]].ar));
+      handleState("ar", parseInt(state.termekek[state.termekindex[0]].ar));
     } else {
       handleState("ar", state.ar);
     }
-  }, [state.modellek, state.termekindex]);
+  }, [state.termekek, state.termekindex]);
 
   function handleState(key, value) {
     setState((prevState) => ({ ...prevState, [key]: value }));
   }
 
-  if (state.modellek[0] === "") {
-    props.ujModell
-      ? handleState("modellek", ["defined"])
-      : DS.get(
-          "/api/modell_termekei/" + props.mod_id + "/" + props.mod_nev,
-          getTer
-        );
+  if ((state.termekek[0] === "" || state.termekek[0] == "defined") && !props.ujModell) {
+    DS.get(
+      "/api/modell_termekei/" + props.mod_id + "/" + props.mod_nev,
+      getTer
+    );
     DS.get("/api/osszes_kategoria", getKat);
-  } else if (
-    (state.modellek[0] !== "" || state.kategoriak[0] !== "") &&
+  } else if (state.termekek[0] == "" && props.ujModell) {
+    handleState("termekek", ["defined"]);
+    DS.get("/api/osszes_kategoria", getKat);
+  }
+   else if (
+    (state.termekek[0] !== "" || state.kategoriak[0] !== "") &&
     state.tolt == false
   ) {
     handleState("tolt", true);
   }
   function getTer(data) {
-    handleState("modellek", data.data);
+    handleState("termekek", data.data);
   }
 
   function getKat(data) {
@@ -99,16 +102,19 @@ export default function AdminAdatok(props) {
               <Form.Check // prettier-ignore
                 type="switch"
                 id="custom-switch"
-                label="szrekesztés"
+                label="szerkesztés"
                 style={{ float: "right" }}
-                onClick={() => {handleState("modell", !state.modell); handleState("kategoria", state.kategoriak[0].kat_id);}}
+                onClick={() => {
+                  handleState("modell", !state.modell);
+                  handleState("kategoria", state.kategoriak[0].kat_id);
+                }}
               />
               <Card.Title>Modell létrehozása</Card.Title>
 
               <Form.Group className="mb-3 adminForm">
                 <Form.Label className="fw-bold">Kategória:</Form.Label>
                 <Form.Select
-                  value={state.kategoria}
+                  value={state.kategoria_nev}
                   onChange={(e) => {
                     handleState(
                       "kategoria",
@@ -116,7 +122,7 @@ export default function AdminAdatok(props) {
                         e.target.options.selectedIndex
                       ].getAttribute("kat_id")
                     );
-                    
+                    handleState("kategoria_nev", e.target.value);
                   }}
                   disabled={state.modell}
                 >
@@ -226,7 +232,11 @@ export default function AdminAdatok(props) {
           </Card>
           <Button
             as="input"
-            disabled={state.ujmodellnev.length < 1 || state.ujModellgyarto.length < 1 || state.ujModellleiras.length < 1}
+            disabled={
+              state.ujmodellnev.length < 1 ||
+              state.ujModellgyarto.length < 1 ||
+              state.ujModellleiras.length < 1
+            }
             style={{
               display: "flex",
               justifyContent: "center",
@@ -255,7 +265,7 @@ export default function AdminAdatok(props) {
               <Form.Check // prettier-ignore
                 type="switch"
                 id="custom-switch"
-                label="szrekesztés"
+                label="szerkesztés"
                 style={{ float: "right" }}
                 onClick={() => handleState("besorolas", !state.besorolas)}
               />
@@ -264,7 +274,7 @@ export default function AdminAdatok(props) {
               <Form.Group className="mb-3 adminForm">
                 <Form.Label className="fw-bold">Kategória:</Form.Label>
                 <Form.Select
-                  value={state.kategoria || state.modellek[0].kategoria_nev}
+                  value={state.kategoria_nev}
                   onChange={(e) => {
                     handleState(
                       "kategoria",
@@ -272,6 +282,7 @@ export default function AdminAdatok(props) {
                         e.target.options.selectedIndex
                       ].getAttribute("kat_id")
                     );
+                    handleState("kategoria_nev", e.target.value);
                   }}
                   disabled={state.besorolas}
                 >
@@ -289,7 +300,7 @@ export default function AdminAdatok(props) {
               <Form.Check // prettier-ignore
                 type="switch"
                 id="custom-switch"
-                label="szrekesztés"
+                label="szerkesztés"
                 style={{ float: "right" }}
                 onClick={() => handleState("modell", !state.modell)}
               />
@@ -323,8 +334,10 @@ export default function AdminAdatok(props) {
                   <Form.Control
                     disabled={state.modell}
                     type="email"
-                    placeholder={state.modellek[0].gyarto}
-                    onChange={(e) => handleState("ujModellgyarto", e.target.value)}
+                    placeholder={state.termekek[0].gyarto}
+                    onChange={(e) =>
+                      handleState("ujModellgyarto", e.target.value)
+                    }
                   />
                 </Col>
               </Form.Group>
@@ -335,10 +348,12 @@ export default function AdminAdatok(props) {
                 <Form.Label>Leirás:</Form.Label>
                 <Form.Control
                   disabled={state.modell}
-                  value={state.modellek[0].leiras}
+                  value={state.termekek[0].leiras}
                   as="textarea"
                   rows={3}
-                  onChange={(e) => handleState("ujModellleiras", e.target.value)}
+                  onChange={(e) =>
+                    handleState("ujModellleiras", e.target.value)
+                  }
                 />
               </Form.Group>
               <Form.Group
@@ -389,7 +404,11 @@ export default function AdminAdatok(props) {
           </Card>
           <Button
             as="input"
-            disabled={state.ujmodellnev.length < 1 || state.ujModellgyarto.length < 1 || state.ujModellleiras.length < 1}
+            disabled={
+              state.ujmodellnev.length < 1 ||
+              state.ujModellgyarto.length < 1 ||
+              state.ujModellleiras.length < 1
+            }
             style={{
               display: "flex",
               justifyContent: "center",
@@ -415,7 +434,7 @@ export default function AdminAdatok(props) {
               <Form.Check // prettier-ignore
                 type="switch"
                 id="custom-switch"
-                label="szrekesztés"
+                label="szerkesztés"
                 style={{ float: "right" }}
                 onClick={() => handleState("termek", !state.termek)}
               />
@@ -424,7 +443,7 @@ export default function AdminAdatok(props) {
               <Form.Group className="mb-3 adminForm">
                 <Form.Label className="fw-bold">termék (id):</Form.Label>
                 <Form.Select
-                  defaultValue={state.modellek[0].ter_id}
+                  defaultValue={state.termekek[0].ter_id}
                   onChange={(e) =>
                     handleState("termekindex", [
                       e.target.options.selectedIndex,
@@ -433,7 +452,7 @@ export default function AdminAdatok(props) {
                   }
                   disabled={state.termek}
                 >
-                  {state.modellek.map((model, key) => (
+                  {state.termekek.map((model, key) => (
                     <option key={key}>{model.ter_id}</option>
                   ))}
                 </Form.Select>
@@ -483,12 +502,12 @@ export default function AdminAdatok(props) {
                 <Form.Label className="fw-bold">szín:</Form.Label>
                 <Col sm={10}>
                   <Form.Select
-                    defaultValue={state.modellek[state.termekindex[0]].szin}
+                    defaultValue={state.termekek[state.termekindex[0]].szin}
                     onChange={(e) => handleState("szin", e.target.value)}
                     disabled={state.termek}
                   >
-                    <option value={state.modellek[state.termekindex[0]].szin}>
-                      {state.modellek[state.termekindex[0]].szin}
+                    <option value={state.termekek[state.termekindex[0]].szin}>
+                      {state.termekek[state.termekindex[0]].szin}
                     </option>
                     {Object.entries(htmlColorNames).map(([name, value]) => (
                       <option key={value} value={name}>

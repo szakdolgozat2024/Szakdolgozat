@@ -15,7 +15,7 @@ import Admin from "./pages/Admin";
 import Cookies from "js-cookie";
 import DataService from "./api/DataService";
 import NoPage from "./pages/NoPage";
-import Kereses from "./pages/kereses";
+import Kereses from "./pages/Kereses";
 
 
 /* const test = { "link": ["https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",
@@ -57,7 +57,7 @@ function App() {
         <Route path="/" element={<VasarloLayout user = {user} kosarMenny = {kosarMenny}/>}>
         <Route path={"termek/:termek" } element={<Modell setKosarMenny={setKosarMenny} kosarMenny={kosarMenny}/>} />
         <Route path={"kereses/:kereses" } element={<Kereses/>}/>
-        <Route path={"kereses/" } element={<MainPage/>}/>
+        <Route path={"kereses/" } element={<Kereses/>}/>
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
@@ -68,7 +68,7 @@ function App() {
       ) : (
         <Route path="/" element={<VendegLayout/>}>
         <Route path={"termek/:termek" } element={<Modell vendeg={true}/>} />
-        <Route path={"search/:kereses" } element={<Kereses/>}/>
+        <Route path={"kereses/:kereses" } element={<Kereses/>}/>
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />

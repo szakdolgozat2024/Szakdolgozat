@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import DataService from "../api/DataService";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/esm/Button";
 import Spinner from "react-bootstrap/esm/Spinner";
@@ -13,6 +13,7 @@ import "./admin.css";
 import Beszerzes from "../components/Beszerzes";
 import RendelesekAdmin from "../components/RendelesekAdmin";
 import FelhasznalokAdmin from "../components/FelhasznalokAdmin";
+
 
 export default function Admin() {
   const DS = new DataService();
@@ -24,15 +25,18 @@ export default function Admin() {
     valasztott: [[0, "", ""]]
   });
 
+  useEffect(() => {
+    if (state.modellek[0] === "" && !state.tolt) {
+      DS.get("/api/osszes_modell", getKat);
+      handleState("tolt", true);
+    }
+  }, [state.modellek, state.tolt]);
+
   function handleState(key, value) {
     setState((prevState) => ({ ...prevState, [key]: value }));
   }
 
-  if (state.modellek[0] === "" || state.szerkesztett) {
-    DS.get("/api/osszes_modell", getKat);
-  } else if (state.modellek[0] !== "" && state.tolt == false) {
-    handleState("tolt", true);
-  }
+  
   function getKat(data) {
     handleState("modellek", data.data);
   }
@@ -62,11 +66,14 @@ export default function Admin() {
                     onClick={() => {
                       DS.get("/api/osszes_modell", getKat);
                       handleState("szerkesztes", false);
+                      handleState("modellek", [""]);
+                      handleState("tolt", false);
                     }}
                   />
                   <AdminAdatok
                     mod_id={state.valasztott[0]}
                     mod_nev={state.valasztott[1]}
+
                   />
                 </>
               ) : (

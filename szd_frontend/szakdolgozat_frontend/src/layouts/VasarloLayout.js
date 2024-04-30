@@ -16,7 +16,7 @@ function VasarloLayout(props) {
           <a className="ms-5 navbar-brand" href="/">
             LOGO
           </a>
-          
+
           <div className="text-end">
             <ul className="nav collapse navbar-collapse">
               <li className="nav-item ">
@@ -38,7 +38,12 @@ function VasarloLayout(props) {
                   e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
                 }
               />
-              <Button className="m-2 ms-0 p-1 btn btn-secondary rounded-0 rounded-end pe-2 ps-2" onClick={() => navigate(`/kereses/${kereses}`)}>Keresés</Button>
+              <Button
+                className="m-2 ms-0 p-1 btn btn-secondary rounded-0 rounded-end pe-2 ps-2"
+                onClick={() => navigate(`/kereses/${kereses}`)}
+              >
+                Keresés
+              </Button>
 
               <li className="nav-item">
                 <Link to="/felhasznalo" className="nav-link">
@@ -52,7 +57,15 @@ function VasarloLayout(props) {
                     Admin
                   </Link>
                 ) : (
-                  <Link to="/kosar" className="nav-link position-relative me-2 " style={{ backgroundColor: "lightgray" , borderRadius: "5px", color: "black"}}>
+                  <Link
+                    to="/kosar"
+                    className="nav-link position-relative me-2 "
+                    style={{
+                      backgroundColor: "lightgray",
+                      borderRadius: "5px",
+                      color: "black",
+                    }}
+                  >
                     Kosár
                     <span class="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger">
                       {props.kosarMenny}
@@ -93,20 +106,25 @@ function VasarloLayout(props) {
                   </Link>
                 )}
               </NavDropdown.Item>
-              <NavDropdown.Divider/>
+              <NavDropdown.Divider />
               <div className="text-center">
-              <input
-                type="text"
-                placeholder="Keress itt..."
-                className="ms-2 me-2  p-2 border border-1 rounded"
-                onChange={(e) => setKereses(e.target.value)}
-                onKeyDown={(e) =>
-                  e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
-                }
-              />
-              <Button className="ms-2 me-2 mt-2 p-2 btn btn-secondary" onClick={() => navigate(`/kereses/${kereses}`)}>Keresés</Button>
+                <input
+                  type="text"
+                  placeholder="Keress itt..."
+                  className="ms-2 me-2  p-2 border border-1 rounded"
+                  onChange={(e) => setKereses(e.target.value)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
+                  }
+                />
+                <Button
+                  className="ms-2 me-2 mt-2 p-2 btn btn-secondary"
+                  onClick={() => navigate(`/kereses/${kereses}`)}
+                >
+                  Keresés
+                </Button>
               </div>
-              </NavDropdown>
+            </NavDropdown>
           </button>
         </div>
       </nav>
@@ -114,7 +132,15 @@ function VasarloLayout(props) {
         <Outlet />
       </article>
       <footer className="text-center pb-4 pt-2 bg-secondary-subtle">
-        <p className="font-italic">
+        <p className="text-muted me-5 ms-5 m-2 mb-0">
+          Ha bármilyen kérdése van, vagy további információra van szüksége az
+          applikációval kapcsolatban, kérjük, forduljon hozzánk bizalommal.
+          Nagyra értékeljük érdeklődését, és mindig készek vagyunk további
+          részletekkel szolgálni az applikáció jobb megértése érdekében. Kérjük,
+          hogy megkereséseit a következő címre küldje el:<b> E-mail:
+          webshopszksz@gmail.com</b>
+        </p>
+        <p className="font-italic text-muted mb-0">
           Készítette: Kun-Székely Bence és Szendefi Krisztofer Dániel
         </p>
       </footer>

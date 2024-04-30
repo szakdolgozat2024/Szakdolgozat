@@ -30,6 +30,7 @@ Route::get('/termek_tulajdonsagai/{termek}', [Termek_tulajdonsagController::clas
 Route::get('/kategoria_nevek', [KategoriaController::class, 'kategoria_nevek']);
 Route::get('/osszes_kategoria', [KategoriaController::class, 'osszes_kategoria']);
 Route::get('/osszes_modell', [ModellController::class, 'osszes_modell']);
+Route::get('/osszes_modell_termekkel', [ModellController::class, 'osszes_modell_termekkel']);
 Route::get('/modell_termekei/{modell}/{modellNev}', [TermekController::class, 'modell_termekei']);
 Route::get('/adott_termek/{termek}', [TermekController::class, 'adott_termek']);
 Route::get('/modell_kereses/{kereses}', [ModellController::class, 'modell_kereses']);
