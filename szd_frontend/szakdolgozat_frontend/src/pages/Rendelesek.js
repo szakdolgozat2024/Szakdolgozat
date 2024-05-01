@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import DataService from "../api/DataService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import RendelesModal from "../components/RendelesModal";
 
@@ -16,9 +16,9 @@ export default function Rendelesek(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  if (rendelesek[0] === "") {
+  useEffect(() => {
     DS.get(`/api/user_rendelesei/${user.azon}`, getRendelesek);
-  }
+  }, []);
 
   function getRendelesek(data) {
     setRendelesek(data.data);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DataService from "../api/DataService";
 import Card from "react-bootstrap/Card";
 
@@ -6,9 +6,9 @@ export default function RendelesekAdmin() {
     const DS = new DataService();
     const [rendelesek, setRendelesek] = useState([""]);
 
-    if (rendelesek[0] === "") {
-        DS.get("/api/osszes_rendeles", getRendelesek);
-    }
+    useEffect(() => {
+      DS.get("/api/osszes_rendeles", getRendelesek);
+    }, []);
 
     function getRendelesek(data) {
         setRendelesek(data.data);

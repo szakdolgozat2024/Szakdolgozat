@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import Bejelentkezes from "./Bejelentkezes";
 import Spinner from "react-bootstrap/esm/Spinner";
 import DataService from "../api/DataService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CostumCard from "../components/card";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
@@ -15,9 +15,11 @@ export default function Kategoria() {
   const pathsArray = locationPath.split("/");
   const kateg = decodeURIComponent(pathsArray[2]);
   const DS = new DataService();
-  if (modellek[0] === "") {
+
+  useEffect(() => {
     DS.get("/api/adott_kategoria/" + kateg, getAdottModell);
-  } else {
+  }, []);
+  if (modellek[0] !== "") {
     document.getElementById("spinner").style.display = "none";
   }
 

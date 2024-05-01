@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DataService from "../api/DataService";
 import Bejelentkezes from "./Bejelentkezes";
 import Cookies from "js-cookie";
@@ -13,7 +13,8 @@ export default function Felhasznalo() {
   const DS = new DataService();
 
   const [user, setUser] = useState("");
-  if (user === "") {
+
+  useEffect(() => {
     let tryuser = getUser();
     if (tryuser != {}) {
       DS.get(
@@ -21,7 +22,8 @@ export default function Felhasznalo() {
         getBejelentkezettUser
       );
     }
-  } else {
+  }, []);
+  if (user !== "") {
     document.getElementById("spinner").style.display = "none";
   }
 

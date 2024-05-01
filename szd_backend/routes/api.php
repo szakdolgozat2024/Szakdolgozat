@@ -47,6 +47,8 @@ Route::delete('/rendelestorles/{rend_szam}', [RendelesKontroller::class, 'rendel
 
 
 Route::put('/update_user/{azon}', [UserController::class, 'update_user']);
+Route::put('/user_update_hozzaferes/{azon}', [UserController::class, 'user_update_hozzaferes']);
+
 Route::delete('/user_torles/{azon}', [UserController::class, 'user_torles']);
 Route::post('/uj_user', [UserController::class, 'uj_user']);
 Route::post('/uj_user_azonositoval', [UserController::class, 'uj_user_azonositoval']);
@@ -58,4 +60,4 @@ Route::delete('/torol_user/{id}', [UserController::class, 'torol_user']);
 Route::post('/uj_beszerzes', [BeszerzesController::class, 'ujBeszerzes']);
 Route::get('/beszerzesek', [BeszerzesController::class, 'beszerzesek']);
 Route::post('/uj_modell', [ModellController::class, 'uj_modell']);
-Route::put('/update_modell', [ModellController::class, 'update_modell']);
+Route::put('/update_modell/{mod_id}', [ModellController::class, 'update_modell']);

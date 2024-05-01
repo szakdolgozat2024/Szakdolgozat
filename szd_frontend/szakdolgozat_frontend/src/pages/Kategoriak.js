@@ -1,15 +1,16 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import DataService from "../api/DataService";
 import Spinner from 'react-bootstrap/Spinner';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Kategoriak(){    
     const DS = new DataService();
     const [kategoriak, setKategoriak] = useState([""]);
-    const { kateg } = useParams();
-    if (kategoriak[0] === "") {
+
+    useEffect(() => {
         DS.get("/api/kategoria_nevek", getKat)
-    } else {
+    }, []);
+    if (kategoriak[0] !== "") {
         document.getElementById("spinner").style.display = "none";
     }
     function getKat(data){

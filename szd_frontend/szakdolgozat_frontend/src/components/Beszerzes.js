@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import DataService from "../api/DataService";
 
@@ -11,13 +11,10 @@ export default function Beszerzes() {
   const [modell, setModell] = useState("");
   const [termek, setTermek] = useState("");
 
-  if (beszerzesek[0] === "") {
+  useEffect(() => {
     DS.get("/api/beszerzesek", getBeszerzesek);
-  }
-
-  if (modellek[0] === "") {
     DS.get("/api/osszes_modell", getModellek);
-  }
+  }, []);
 
   if (mennyiseg < 0) {
     setMennyiseg(0);

@@ -1,5 +1,5 @@
 import MainPage from "./pages/MainPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, json } from "react-router-dom";
 import VasarloLayout from "./layouts/VasarloLayout";
 import Kategoriak from "./pages/Kategoriak";
@@ -29,12 +29,13 @@ function App() {
 
   const DS = new DataService();
   const [user, setUser] = useState("");
-  if (user === "") {
+  useEffect(() => {
     let tryuser = getUser();
     if (tryuser != {}) {
       DS.get(`/api/bejelentkezett_user/${tryuser.email}/${tryuser.password}`, getBejelentkezettUser);
     }
-  }
+  } , []);
+  
 
   function getBejelentkezettUser(data) {
     setUser(data.data[0]);

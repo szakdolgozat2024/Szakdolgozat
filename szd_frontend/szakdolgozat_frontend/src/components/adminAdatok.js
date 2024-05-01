@@ -418,8 +418,7 @@ export default function AdminAdatok(props) {
             type="submit"
             value="Mentés és feltöltés"
             onClick={() => {
-              DS.put("/api/update_modell", {
-                mod_id: props.mod_id,
+              DS.put("/api/update_modell/" + props.mod_id, {
                 nev: state.ujmodellnev,
                 kategoria: state.kategoria,
                 gyarto: state.ujModellgyarto,

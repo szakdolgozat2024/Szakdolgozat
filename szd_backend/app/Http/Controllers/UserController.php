@@ -68,6 +68,14 @@ class UserController extends Controller
                 'name' => "sanyi"
             ]);
     }
+
+    public function user_update_hozzaferes(Request $request, $azon){
+        $user = DB::table('users')
+            ->where('azon', $azon)
+            ->update([
+                'hozzaferes' => $request->hozzaferes
+            ]);
+    }
     
     public function user_torles($azon){
         

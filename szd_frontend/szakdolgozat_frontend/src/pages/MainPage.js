@@ -1,6 +1,6 @@
 import SideMenu from "../components/sideMenu";
 import ProductContainer from "../components/productContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DataService from "../api/DataService";
 import Spinner from "react-bootstrap/esm/Spinner";
 import "./mainpage.css";
@@ -16,9 +16,10 @@ export default function MainPage(props) {
     setState({ ...state, [key]: value });
   }
 
-  if (state.modellek[0] === "") {
+  useEffect(() => {
     DS.get("/api/osszes_modell_termekkel", getKat);
-  } else if (state.modellek[0] !== "" && state.tolt == false) {
+  }, []);
+  if (state.modellek[0] !== "" && state.tolt == false) {
     handleState("tolt", true);
   }
   function getKat(data) {

@@ -18,9 +18,9 @@ export default function Kosar(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  if (tartalom[0] === "") {
+  useEffect(() => {
     kosarLekerdezes();
-  }
+  }, []);
 
   const rendelesRogzites = async () => {
     await feltoltes();

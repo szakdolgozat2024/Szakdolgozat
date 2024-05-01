@@ -13,6 +13,7 @@ import "./admin.css";
 import Beszerzes from "../components/Beszerzes";
 import RendelesekAdmin from "../components/RendelesekAdmin";
 import FelhasznalokAdmin from "../components/FelhasznalokAdmin";
+import KategoriakAdmin from "../components/KategoriakAdmin";
 
 
 export default function Admin() {
@@ -158,7 +159,7 @@ export default function Admin() {
             </div>
           </Tab>
           <Tab eventKey="Kategoriak" title="Kategóriák kezelése">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <KategoriakAdmin/>
           </Tab>
           <Tab eventKey="Felhasznalok" title="Felhasználókezelés">
             <FelhasznalokAdmin/>
