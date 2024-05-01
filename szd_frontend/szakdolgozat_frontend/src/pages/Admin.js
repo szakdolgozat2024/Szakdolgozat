@@ -15,31 +15,38 @@ import RendelesekAdmin from "../components/RendelesekAdmin";
 import FelhasznalokAdmin from "../components/FelhasznalokAdmin";
 import KategoriakAdmin from "../components/KategoriakAdmin";
 
-
 export default function Admin() {
   const DS = new DataService();
   const [state, setState] = useState({
     modellek: [""],
+    kategoriak: [""],
     szerkesztes: false,
-    tolt: false,
+    tolt: true,
     ujModell: false,
-    valasztott: [[0, "", ""]]
+    valasztott: [[0, "", ""]],
   });
 
   useEffect(() => {
-    if (state.modellek[0] === "" && !state.tolt) {
-      DS.get("/api/osszes_modell", getKat);
-      handleState("tolt", true);
+    DS.get("/api/osszes_modell", getMod);
+    DS.get("/api/osszes_kategoria", getKat);
+  }, []);
+
+  useEffect(() => {
+    if (state.modellek[0] !== "") {
+      handleState("tolt", false);
     }
-  }, [state.modellek, state.tolt]);
+  }, [state.modellek]);
 
   function handleState(key, value) {
     setState((prevState) => ({ ...prevState, [key]: value }));
   }
 
-  
-  function getKat(data) {
+  function getMod(data) {
     handleState("modellek", data.data);
+  }
+
+  function getKat(data) {
+    handleState("kategoriak", data.data);
   }
 
   function handleValasztott(modell, modellNev) {
@@ -48,8 +55,8 @@ export default function Admin() {
   }
 
   return (
-    <div>
-      {state.tolt ? (
+    <div className="inter-regular">
+      {!state.tolt ? (
         <Tabs
           defaultActiveKey="Modellek"
           id="uncontrolled-tab-example"
@@ -65,16 +72,16 @@ export default function Admin() {
                     type="submit"
                     value="Vissza"
                     onClick={() => {
-                      DS.get("/api/osszes_modell", getKat);
+                      DS.get("/api/osszes_modell", getMod);
                       handleState("szerkesztes", false);
                       handleState("modellek", [""]);
-                      handleState("tolt", false);
+                      handleState("tolt", true);
                     }}
                   />
                   <AdminAdatok
                     mod_id={state.valasztott[0]}
                     mod_nev={state.valasztott[1]}
-
+                    kategoriak={state.kategoriak}
                   />
                 </>
               ) : (
@@ -87,11 +94,15 @@ export default function Admin() {
                         type="submit"
                         value="Vissza"
                         onClick={() => {
-                          DS.get("/api/osszes_modell", getKat);
+                          DS.get("/api/osszes_modell", getMod);
+                          handleState("ujModell", true);
                           handleState("ujModell", false);
                         }}
                       />
-                      <AdminAdatok ujModell={true} />
+                      <AdminAdatok
+                        ujModell={true}
+                        kategoriak={state.kategoriak}
+                      />
                     </>
                   ) : (
                     <>
@@ -159,16 +170,16 @@ export default function Admin() {
             </div>
           </Tab>
           <Tab eventKey="Kategoriak" title="Kategóriák kezelése">
-            <KategoriakAdmin/>
+            <KategoriakAdmin />
           </Tab>
           <Tab eventKey="Felhasznalok" title="Felhasználókezelés">
-            <FelhasznalokAdmin/>
+            <FelhasznalokAdmin />
           </Tab>
           <Tab eventKey="Rendelesek" title="Rendelések">
-            <RendelesekAdmin/>
+            <RendelesekAdmin />
           </Tab>
-          <Tab eventKey="Beszerzés" title="Beszerzés" >
-            <Beszerzes/>
+          <Tab eventKey="Beszerzés" title="Beszerzés">
+            <Beszerzes />
           </Tab>
         </Tabs>
       ) : (

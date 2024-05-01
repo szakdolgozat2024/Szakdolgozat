@@ -9,7 +9,7 @@ export default function MainPage(props) {
   const DS = new DataService();
   const [state, setState] = useState({
     modellek: [""],
-    tolt: false,
+    tolt: true,
   })
 
   function handleState(key, value) {
@@ -19,8 +19,8 @@ export default function MainPage(props) {
   useEffect(() => {
     DS.get("/api/osszes_modell_termekkel", getKat);
   }, []);
-  if (state.modellek[0] !== "" && state.tolt == false) {
-    handleState("tolt", true);
+  if (state.modellek[0] !== "" && state.tolt == true) {
+    handleState("tolt", false);
   }
   function getKat(data) {
     handleState("modellek", data.data);
@@ -30,7 +30,7 @@ export default function MainPage(props) {
     <main className="text-center">
       <div className="mainContent mx-auto mt-20 p-80">
         <div className="row content">
-          {state.tolt ? (
+          {!state.tolt ? (
             <>              
               <ProductContainer
                 btsCol="col-11"

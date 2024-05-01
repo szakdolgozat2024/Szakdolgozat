@@ -20,11 +20,12 @@ export default function ProductContainer(props) {
         {props.modellek.map((model, idx) => (
           <Col key={idx}>
             <CostumCard
-              cardClass="productCard"            
+              cardClass="productCard text-center"            
               bodyClass="productBody"
               inCardGroup={true}
               cardImage={images[0]}
               cardTitle={model.nev}
+              titleClass="inter-medium"
               linkTo={"/termek/"+ model.mod_id+"="+model.nev} 
               routeData={{"id":model.mod_id, "name":model.nev}} 
             />

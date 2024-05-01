@@ -11,7 +11,7 @@ function VasarloLayout(props) {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-md navbar-light bg-light mb-5">
+      <nav className="navbar navbar-expand-md navbar-light bg-light mb-5 inter-bold">
         <div className="container-fluid">
           <a className="ms-5 navbar-brand" href="/">
             LOGO
@@ -32,14 +32,14 @@ function VasarloLayout(props) {
               <input
                 type="text"
                 placeholder="Keress itt..."
-                className="m-2 p-1 me-0 border border-1 rounded-start"
+                className="m-2 p-1 me-0 border border-1 rounded-start inter-medium border-dark"
                 onChange={(e) => setKereses(e.target.value)}
                 onKeyDown={(e) =>
                   e.key === "Enter" && navigate(`/kereses/${e.target.value}`)
                 }
               />
               <Button
-                className="m-2 ms-0 p-1 btn btn-secondary rounded-0 rounded-end pe-2 ps-2"
+                className="m-2 ms-0 p-1 border border-1 border-dark btn btn-dark rounded-0 rounded-end pe-2 ps-2 inter-medium text-white"
                 onClick={() => navigate(`/kereses/${kereses}`)}
               >
                 Keresés
@@ -48,7 +48,7 @@ function VasarloLayout(props) {
               <li className="nav-item">
                 <Link to="/felhasznalo" className="nav-link">
                   Felhasználó <br />
-                  <i className="text-muted">(Név: {props.user.name})</i>
+                  <i className="inter-medium">(Név: {props.user.name})</i>
                 </Link>
               </li>
               <li className="nav-item">

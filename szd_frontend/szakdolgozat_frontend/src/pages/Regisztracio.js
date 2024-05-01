@@ -26,9 +26,9 @@ export default function Regisztracio() {
   };
 
   return (
-    <div className=" m-auto" style={{ maxWidth: "400px" }}>
+    <div className="inter-medium m-auto" style={{ maxWidth: "400px" }}>
     <Card className='m-auto mt-5 p-4'>
-      <h1 className="text-center">Regisztráció</h1>
+      <h1 className="text-center inter-bold">Regisztráció</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3 mt-3">
           <label htmlFor="name" className="form-label">
