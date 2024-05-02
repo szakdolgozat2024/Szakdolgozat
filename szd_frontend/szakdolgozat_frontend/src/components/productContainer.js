@@ -18,7 +18,7 @@ export default function ProductContainer(props) {
             <CostumCard
               cardClass="productCard text-center"            
               bodyClass="productBody"
-              cardImage={model.kep == null ? "kepek/placeholder.png" : model.kep}
+              cardImage={model.kep == null ? "/kepek/placeholder.png" : model.kep}
               cardTitle={model.nev}
               titleClass="inter-medium"
               linkTo={"/termek/"+ model.mod_id+"="+model.nev} 
