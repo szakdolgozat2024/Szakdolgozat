@@ -78,6 +78,8 @@ export default function AdminAdatok(props) {
     }
     handleState("kategoria", props.kategoriak[0].kat_id);
   }, []);
+
+  
   
   function getTer(data) {
     handleState("termekek", data.data);
@@ -171,50 +173,7 @@ export default function AdminAdatok(props) {
                   }
                 />
               </Form.Group>
-              <Form.Group
-                controlId="formFile"
-                className="mb-3 fw-bold adminForm"
-              >
-                <Form.Label>Modell képei:</Form.Label>
-                <Form.Control disabled={state.modell} type="file" />
-              </Form.Group>
-              <Container>
-                <Row className="adminGallery">
-                  <Col xs={4} md={2}>
-                    <Image
-                      className="adminKep"
-                      src={
-                        props.Image ||
-                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
-                      }
-                      rounded
-                      fluid
-                    />
-                  </Col>
-                  <Col xs={4} md={2}>
-                    <Image
-                      className="adminKep"
-                      src={
-                        props.Image ||
-                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
-                      }
-                      rounded
-                      fluid
-                    />
-                  </Col>
-                  <Col xs={4} md={2}>
-                    <Image
-                      className="adminKep"
-                      src={
-                        props.Image ||
-                        "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-blank-avatar-modern-vector-png-image_40962406.jpg"
-                      }
-                      rounded
-                      fluid
-                    />
-                  </Col>
-                </Row>
-              </Container>
+              
             </Card.Body>
           </Card>
           <Button
@@ -492,8 +451,8 @@ export default function AdminAdatok(props) {
                     onChange={(e) => handleState("szin", e.target.value)}
                     disabled={state.termek}
                   >
-                    <option value={state.termek.length > 0 ? state.termekek[state.termekindex[0]].szin : 'black'}>
-                      {state.termek.length > 0 ? state.termekek[state.termekindex[0]].szin : 'black'}
+                    <option value={state.termekek[state.termekindex[0]].szin}>
+                      {state.termekek[state.termekindex[0]].szin}
                     </option>
                     {Object.entries(htmlColorNames).map(([name, value]) => (
                       <option key={value} value={name}>

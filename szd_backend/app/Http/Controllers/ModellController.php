@@ -67,4 +67,9 @@ class ModellController extends Controller
                 'gyarto' => $request->gyarto
             ]);
     }
+
+    public function modell_torles($mod_id)
+    {
+        DB::table('modells')->where('mod_id', $mod_id)->delete();
+    }
 }

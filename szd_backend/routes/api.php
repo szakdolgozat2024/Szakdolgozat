@@ -65,3 +65,7 @@ Route::post('/uj_beszerzes', [BeszerzesController::class, 'ujBeszerzes']);
 Route::get('/beszerzesek', [BeszerzesController::class, 'beszerzesek']);
 Route::post('/uj_modell', [ModellController::class, 'uj_modell']);
 Route::put('/update_modell/{mod_id}', [ModellController::class, 'update_modell']);
+Route::delete('/modell_torles/{mod_id}', [ModellController::class, 'modell_torles']);
+Route::post('/uj_termek', [TermekController::class, 'uj_termek']);
+Route::put('/update_termek/{ter_id}', [TermekController::class, 'update_termek']);
+Route::delete('/termek_torles/{ter_id}', [TermekController::class, 'termek_torles']);
