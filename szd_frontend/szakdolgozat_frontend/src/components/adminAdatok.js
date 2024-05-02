@@ -514,6 +514,8 @@ export default function AdminAdatok(props) {
                             anyag: state.anyag,
                           }
                         )
+                        handleState("alertmessage", "Termékek frissítve!");
+                        handleState("alert", true);
                       }
                     }
                   />

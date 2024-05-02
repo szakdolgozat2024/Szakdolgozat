@@ -56,7 +56,7 @@ export default function Kategoria() {
                   cardClass="productCard"
                   bodyClass="productBody"
                   inCardGroup={true}
-                  cardImage={model.kep == null ? "kepek/placeholder.png" : model.kep}
+                  cardImage={model.kep == null ? "/kepek/placeholder.png" : "/"+ model.kep}
                   cardTitle={model.nev}
                   titleClass="inter-medium"
                   linkTo={"/termek/" + model.mod_id + "=" + model.nev} //link mint string Link komponenshez
