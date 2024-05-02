@@ -19,11 +19,13 @@ export default function Admin() {
   const DS = new DataService();
   const [state, setState] = useState({
     modellek: [""],
+    ujModellLista: [],
     kategoriak: [""],
     szerkesztes: false,
     tolt: true,
     ujModell: false,
     valasztott: [[0, "", ""]],
+    kereses: ""
   });
 
   useEffect(() => {
@@ -53,6 +55,22 @@ export default function Admin() {
     handleState("szerkesztes", true);
     handleState("valasztott", [modell, modellNev]);
   }
+
+  function modellKereses(kereses) {
+    state.ujModellLista = [];
+    if (kereses !== "") {
+      state.modellek.forEach((modell) => {
+        if (modell.nev.toLowerCase().includes(kereses.toLowerCase())) {
+          state.ujModellLista.push(modell);
+        }
+      });
+      return state.ujModellLista;
+    }else{
+      return state.modellek
+    }
+
+  }
+  
 
   return (
     <div className="inter-regular">
@@ -115,6 +133,7 @@ export default function Admin() {
                             <Form.Control
                               style={{ width: "30%" }}
                               placeholder="Modell neve"
+                              onChange={(e)=>{handleState("kereses",e.target.value)}}
                             />
                           </Col>
                           <Col
@@ -139,7 +158,7 @@ export default function Admin() {
                           </tr>
                         </thead>
                         <tbody>
-                          {state.modellek.map((model, index) => (
+                          {modellKereses(state.kereses).map((model, index) => (
                             <tr key={index}>
                               <td>{model.mod_id}</td>
                               <td>{model.nev}</td>
