@@ -59,7 +59,7 @@ export default function KategoriakAdmin() {
       <Card>
         <Card.Body>
           <Card.Title>Kategoriák</Card.Title>
-          <button className="btn btn-primary" onClick={handleShowUj}>
+          <button className="btn btn-primary m-2 ms-0" onClick={handleShowUj}>
             Új kategória
           </button>
         </Card.Body>

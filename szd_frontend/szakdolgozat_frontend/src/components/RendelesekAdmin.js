@@ -33,11 +33,11 @@ export default function RendelesekAdmin() {
     setKivalasztottRendeles(elem)
     let allapot = elem.allapot;
     if (allapot === 0) {
-      setModalGombSzoveg("Becsomagolva");
+      setModalGombSzoveg("Becsomagol");
     } else if (allapot === 1) {
       setModalGombSzoveg("Átadás a futárnak");
     } else if (allapot === 2) {
-      setModalGombSzoveg("Kézbesítve");
+      setModalGombSzoveg("Kézbesít");
     } else if (allapot === 3) {
       setModalGombSzoveg("Rendben");
     }
@@ -112,7 +112,7 @@ export default function RendelesekAdmin() {
                         className="btn btn-primary"
                         onClick={rendelesReszletezes}
                       >
-                        Megtekintés
+                        Csomagkezelés
                       </button>
                     </td>
                     <td>
