@@ -62,7 +62,7 @@ function App() {
         <Route path={"kategoriak/:kateg"} element={<Kategoria/>} />
         <Route index element={<MainPage/>}/>
         <Route path="kategoriak" element={<Kategoriak />} />
-        <Route path="felhasznalo" element={<Felhasznalo />} />
+        <Route path="felhasznalo" element={<Felhasznalo user = {user}/>} />
         {user.hozzaferes ? (<Route path="admin" element={<Admin />} />) : (<Route path="kosar" element={<Kosar user = {user} setKosarMenny={setKosarMenny}/>} /> )}
         <Route path="*" element={<NoPage/>} />
       </Route>

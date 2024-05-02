@@ -15,8 +15,9 @@ export default function Rendelesek(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  
   useEffect(() => {
+    console.log(user);
     DS.get(`/api/user_rendelesei/${user.azon}`, getRendelesek);
   }, []);
 
@@ -38,6 +39,19 @@ export default function Rendelesek(props) {
     setRendelesReszletei(data.data);
   }
 
+  function csomagallapot(szam) {
+    //  0 – feldolgozás alatt,1 – csomagolva , 2 - átadva a futárnak, 3 - kézbesítve
+    if (szam === 0) {
+      return "Feldolgozás alatt";
+    } else if (szam === 1) {
+      return "Csomagolva";
+    } else if (szam === 2) {
+      return "Átadva a futárnak";
+    } else if (szam === 3) {
+      return "Kézbesítve";
+    }
+  }
+
   return (
     <Card className="m-auto mt-3 p-4">
       <Card.Title className="text-center">
@@ -54,17 +68,13 @@ export default function Rendelesek(props) {
               <p className="ms-5 ps-5" key={index}>
                 <b>Rendelés száma:</b> {elem.rend_szam} <br />
                 <b>Csomag azonosító:</b> {elem.csomag} <br /> <b>Kelt: </b>
-                {elem.kelt} <br /> <b>Kiszállítva:</b> {elem.kiszallitva}
+                {elem.kelt} <br /> <b>Csomag állapota:</b> {csomagallapot(elem.allapot)}
+                <br /> <b>Kiszállítva:</b> {elem.kiszallitva}
               </p>
               <div className="text-sm-end text-center">
-                <Button
-                  className="ms-3 m-2 "
-                  id={elem.rend_szam}
-                  onClick={rendelesReszletezes}
-                >
-                  Részletek megtekintése
-                </Button>
-                <Button
+                
+                {elem.kiszallitva === null ? (
+                  <Button
                   className="ms-3 m-2 "
                   variant="danger"
                   key={index}
@@ -73,6 +83,16 @@ export default function Rendelesek(props) {
                 >
                   Rendelés törlése
                 </Button>
+                ) : null}
+
+                <Button
+                  className="ms-3 m-2 "
+                  id={elem.rend_szam}
+                  onClick={rendelesReszletezes}
+                >
+                  Részletek megtekintése
+                </Button>
+                
               </div>
             </ListGroup.Item>
           ))}

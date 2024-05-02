@@ -55,6 +55,7 @@ class UserController extends Controller
     public function user_rendelesei($azon) {
         $rendelesek = DB::table('rendeles')
             ->select('*')
+            ->join('csomags', 'rendeles.csomag', '=', 'csomags.csom_azon')
             ->where('user', '=', $azon)
             ->get();
         return $rendelesek;
@@ -65,7 +66,11 @@ class UserController extends Controller
         $user = DB::table('users')
             ->where('azon', $azon)
             ->update([
-                'name' => "sanyi"
+                'name' => $request->name,
+                'cim' => $request->cim,
+                'email' => $request->email,
+                'password' => $request->password,
+                'hozzaferes' => $request->hozzaferes
             ]);
     }
 

@@ -9,6 +9,8 @@ class Kategoria extends Model
 {
     use HasFactory;
 
+    protected $primarykey = 'kat_id';
+
     protected $fillable = [
         'kategoria_nev'
     ];

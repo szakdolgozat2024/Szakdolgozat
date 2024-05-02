@@ -8,13 +8,13 @@ import Spinner from "react-bootstrap/esm/Spinner";
 import Rendelesek from "./Rendelesek";
 import FelhasznaloModositasModal from "../components/FelhasznaloModositasModal";
 
-export default function Felhasznalo() {
+export default function Felhasznalo(props) {
   const navigate = useNavigate();
   const DS = new DataService();
 
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(props.user);
 
-  useEffect(() => {
+  /* useEffect(() => {
     let tryuser = getUser();
     if (tryuser != {}) {
       DS.get(
@@ -22,10 +22,10 @@ export default function Felhasznalo() {
         getBejelentkezettUser
       );
     }
-  }, []);
-  if (user !== "") {
+  }, []); */
+  /* if (user !== "") {
     document.getElementById("spinner").style.display = "none";
-  }
+  } */
 
   
   //modal kezelesek
@@ -83,9 +83,7 @@ export default function Felhasznalo() {
   }
 
   function adatok_modosit(nev, email, cim) {
-    DS.delete("/api/user_torles/" + user.azon);
-    DS.post("/api/uj_user_azonositoval", {
-      azon: user.azon,
+    DS.put("/api/update_user/" + user.azon, {
       name: nev,
       email: email,
       password: user.password,
@@ -104,7 +102,6 @@ export default function Felhasznalo() {
         <Card.Title>
           <h1 className="m-2">Felhasználói adatok</h1>
         </Card.Title>
-        <Spinner animation="border" className="m-auto" id="spinner" />
         <Card.Body className="text-start ps-5">
           <p>
             <b>Név: </b>

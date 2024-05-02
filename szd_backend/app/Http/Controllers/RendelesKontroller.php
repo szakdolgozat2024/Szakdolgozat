@@ -53,6 +53,11 @@ class RendelesKontroller extends Controller
     }
 
     function osszesRendeles()  {
-        return Rendeles::all();
+        return DB::table('rendeles as r')
+        ->select('r.rend_szam', 'r.user', 'r.csomag', 'r.kelt', 'r.kiszallitva', 'cs.*', 'u.name as userNev')
+        ->join('users as u', 'r.user', '=', 'u.azon')
+        ->join('csomags as cs', 'r.csomag', '=', 'cs.csom_azon')
+        ->orderBy('r.kelt', 'desc')
+        ->get();
     }
 }

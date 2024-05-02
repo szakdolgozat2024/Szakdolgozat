@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeszerzesController;
+use App\Http\Controllers\CsomagController;
 use App\Http\Controllers\KategoriaController;
 use App\Http\Controllers\ModellController;
 use App\Http\Controllers\RendelesKontroller;
@@ -44,10 +45,13 @@ Route::post('/rendelesrogzites', [RendelesKontroller::class, 'rendelesRogzites']
 Route::post('/rendelestetelrogzites', [RendelesKontroller::class, 'rendelesTetelRogzites']);
 Route::delete('/rendelestorles/{rend_szam}', [RendelesKontroller::class, 'rendelesTorles']);
 
-
+Route::post('/uj_kategoria', [KategoriaController::class, 'uj_kategoria']);
+Route::delete('/kategoria_torles/{kat_id}', [KategoriaController::class, 'kategoria_torles']);
+Route::put('/update_kategoria/{kat_id}', [KategoriaController::class, 'update_kategoria']);
 
 Route::put('/update_user/{azon}', [UserController::class, 'update_user']);
 Route::put('/user_update_hozzaferes/{azon}', [UserController::class, 'user_update_hozzaferes']);
+Route::put('/update_csomag/{csom_azon}', [CsomagController::class, 'update_csomag']);
 
 Route::delete('/user_torles/{azon}', [UserController::class, 'user_torles']);
 Route::post('/uj_user', [UserController::class, 'uj_user']);
