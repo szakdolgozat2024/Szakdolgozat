@@ -7,18 +7,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 export default function ProductContainer(props) {
-  const images = [
-    "kepek/fur1.jpg",
-    "kepek/fur2.jpg",
-    "kepek/fur3.jpg",
-    "kepek/fur4.jpg",
-    "kepek/fur5.jpg",
-    "kepek/fur6.jpg",
-    "kepek/fur7.jpg",
-    "kepek/fur8.jpg",
-    "kepek/fur9.jpg",
-    "kepek/fur10.jpg"
-  ];
 
 
   
@@ -30,8 +18,7 @@ export default function ProductContainer(props) {
             <CostumCard
               cardClass="productCard text-center"            
               bodyClass="productBody"
-              inCardGroup={true}
-              cardImage={images[idx]}
+              cardImage={model.kep == null ? "kepek/placeholder.png" : model.kep}
               cardTitle={model.nev}
               titleClass="inter-medium"
               linkTo={"/termek/"+ model.mod_id+"="+model.nev} 

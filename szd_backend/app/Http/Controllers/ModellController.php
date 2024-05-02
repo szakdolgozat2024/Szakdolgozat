@@ -21,6 +21,7 @@ class ModellController extends Controller
                 'modells.leiras as leiras',
                 'kategorias.kategoria_nev as kategoria',
                 'modells.gyarto as gyarto',
+                'modells.kep as kep'
             )
             ->distinct()
             ->get();

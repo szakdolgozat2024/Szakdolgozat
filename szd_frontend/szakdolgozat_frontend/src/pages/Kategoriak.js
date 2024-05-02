@@ -22,7 +22,7 @@ export default function Kategoriak(){
         <div className="inter-medium text-center">
         <h1 className="inter-bold katCim">Kategóriák</h1>
         <ul className="list-group list-group-flush">
-        <Spinner animation="border" className="m-auto" id="spinner"/>
+        <Spinner animation="border" className="m-auto loadSpinner" id="spinner"/>
             {kategoriak.map((kat, index) => (<li className="list-group-item kategoriaItem" key={index}><Link to={`/kategoriak/${kat.kategoria_nev}`}>{kat.kategoria_nev}</Link></li>))}
         </ul>
         </div>
