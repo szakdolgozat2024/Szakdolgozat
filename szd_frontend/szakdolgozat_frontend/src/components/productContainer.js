@@ -8,8 +8,16 @@ import Row from "react-bootstrap/Row";
 
 export default function ProductContainer(props) {
   const images = [
-    "https://backend.orbitvu.com/sites/default/files/image/cover-FURNITURE-studio%20%281%29_0.jpg",
-    "https://www.archiproducts.com/images/sharingimage/1390.jpg",
+    "kepek/fur1.jpg",
+    "kepek/fur2.jpg",
+    "kepek/fur3.jpg",
+    "kepek/fur4.jpg",
+    "kepek/fur5.jpg",
+    "kepek/fur6.jpg",
+    "kepek/fur7.jpg",
+    "kepek/fur8.jpg",
+    "kepek/fur9.jpg",
+    "kepek/fur10.jpg"
   ];
 
 
@@ -23,7 +31,7 @@ export default function ProductContainer(props) {
               cardClass="productCard text-center"            
               bodyClass="productBody"
               inCardGroup={true}
-              cardImage={images[0]}
+              cardImage={images[idx]}
               cardTitle={model.nev}
               titleClass="inter-medium"
               linkTo={"/termek/"+ model.mod_id+"="+model.nev} 
