@@ -55,7 +55,7 @@ export default function Rendelesek(props) {
   return (
     <Card className="m-auto mt-3 p-4">
       <Card.Title className="text-center">
-        <h1>Rendelések</h1>
+        <h1 className="inter-bold">Rendelések</h1>
       </Card.Title>
       <Card.Text className="text-muted">
         <ListGroup variant="flush">

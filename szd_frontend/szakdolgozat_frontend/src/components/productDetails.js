@@ -49,15 +49,16 @@ export default function ProductDetails(props) {
 
   return (
     <div>
-      <h2 className="text-center">{props.name}</h2>
-      <h5>{props.termekek[state.termek].ar + " Ft"}</h5>
-      <p>{props.termekek[state.termek].leiras}</p>
-      <p className="szinText">{"Szín: " + props.termekek[state.termek].szin}</p>
+      <h2 className="text-center inter-bold">{props.name}</h2>
+      <h5 className="productProperties inter-bold">{props.termekek[state.termek].ar + " Ft"}</h5>
+      <p className="productProperties inter-regular">{props.termekek[state.termek].leiras}</p>
+      <p className="szinText productProperties inter-medium">{"Szín: " + props.termekek[state.termek].szin}</p>
       <ToggleButtonGroup
         onChange={colorChange}
         type="radio"
         name="options"
         defaultValue={0}
+        id="colorBtnGroup"
       >
         {props.termekek.map((mod, i) => (
           <ToggleButton
@@ -82,7 +83,7 @@ export default function ProductDetails(props) {
               state={state}
               stateSet={handleState}
               stateKey={"quantity"}
-              className=""
+              
               quantity={state.quantity}
               minusAmount={1}
               plusAmount={1}
@@ -90,8 +91,8 @@ export default function ProductDetails(props) {
               maxAmount={10}
             ></AmountCounter>
           </Col>
-          <Col xs={0} sm={6} md={6} lg={7} xl={7} xxl={8} className="kosarCol">
-            <Button onClick={kosarba} className="kosarba" variant="primary">
+          <Col xs={12} sm={12} md={12} lg={7} xl={7} xxl={8} className="kosarCol">
+            <Button onClick={kosarba} className="kosarba inter-medium text-white" variant="primary">
               Kosárba 🛒
             </Button>
           </Col>
@@ -104,11 +105,11 @@ export default function ProductDetails(props) {
           <Accordion.Header>További adatok</Accordion.Header>
           <Accordion.Body>
             <Row>
-              <Col lg={9}>Anyag:</Col>
+              <Col lg={9} xs={6} sm={6} md={6}>Anyag:</Col>
               <Col>{props.termekek[state.termek].anyag}</Col>
             </Row>
             <Row>
-              <Col lg={9}>Anyag:</Col>
+              <Col lg={9} xs={6} sm={6} md={6}>Anyag:</Col>
               <Col>{props.termekek[state.termek].anyag}</Col>
             </Row>
           </Accordion.Body>

@@ -26,8 +26,8 @@ export default function Bejelentkezes() {
     return (
         <div className="m-auto container" style={{ maxWidth: "400px" }}>
             <Card className='m-auto mt-5 p-4'>
-                <Card.Title><h1>Bejelentkezés</h1></Card.Title>
-                <Card.Text className="text-muted">
+                <Card.Title><h1 className="inter-bold">Bejelentkezés</h1></Card.Title>
+                <Card.Text className="inter-medium">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3 mt-3">
                             <label htmlFor="email" className="form-label">
@@ -75,14 +75,14 @@ export default function Bejelentkezes() {
                                 )}
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary w-100">
+                        <button type="submit" className="btn btn-primary w-100 inter-medium text-white">
                             Bejelentkezés
                         </button>
                     </form>
                 </Card.Text>
 
             </Card>
-            <div className=" text-center">
+            <div className="inter-medium text-center">
                 <p>
                     Még nincs fiókja? Regisztráljon most!
                     <Link className="nav-link text-info" to="/regisztracio">

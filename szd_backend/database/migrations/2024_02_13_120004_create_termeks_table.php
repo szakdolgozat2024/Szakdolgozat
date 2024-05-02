@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('termeks', function (Blueprint $table) {
             $table->id('ter_id');
-            $table->text('leiras')->nullable();
+            $table->string('leiras')->nullable();
             $table->decimal('ar', 10, 2);
             $table->foreignId('modell')->references('mod_id')->on('modells');
             $table->string("anyag")->nullable();

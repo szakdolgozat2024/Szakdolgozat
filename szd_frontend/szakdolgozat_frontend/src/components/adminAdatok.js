@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import AmountCounter from "./amountCounter";
 import Modal from "react-bootstrap/Modal";
 import htmlColorNames from "../colors";
-import axios from "../api/axios";
+import Spinner from "react-bootstrap/esm/Spinner";
 import Alert from "react-bootstrap/Alert";
 
 export default function AdminAdatok(props) {
@@ -19,11 +19,10 @@ export default function AdminAdatok(props) {
     besorolas: true,
     modell: true,
     termek: true,
-    kategoriak: [""],
     termekek: [""],
     kategoria_nev: "",
     kategoria: undefined,
-    tolt: false,
+    tolt: true,
     ar: undefined,
     show: false,
     szin: undefined,
@@ -42,7 +41,7 @@ export default function AdminAdatok(props) {
       state.szin === undefined ||
       state.termekindex[1] !== state.termekindex[0]
     ) {
-      handleState("szin", state.termekek[state.termekindex[0]].szin);
+      handleState("szin", state.termekek.length > 0 ? state.termekek[state.termekindex[0]].szin : "Aliceblue");
     } else {
       handleState("szin", state.szin);
     }
@@ -52,43 +51,42 @@ export default function AdminAdatok(props) {
       state.ar === undefined ||
       state.termekindex[1] !== state.termekindex[0]
     ) {
-      handleState("ar", parseInt(state.termekek[state.termekindex[0]].ar));
+      handleState("ar", parseInt(state.termekek.length > 0 ? state.termekek[state.termekindex[0]].ar : 0));
     } else {
       handleState("ar", state.ar);
     }
   }, [state.termekek, state.termekindex]);
 
+  useEffect(() => {
+    if (state.termekek[0] !== "") {
+      handleState("tolt", false);
+    }
+  }, [state.termekek]);
+
   function handleState(key, value) {
     setState((prevState) => ({ ...prevState, [key]: value }));
   }
 
-  if ((state.termekek[0] === "" || state.termekek[0] == "defined") && !props.ujModell) {
-    DS.get(
-      "/api/modell_termekei/" + props.mod_id + "/" + props.mod_nev,
-      getTer
-    );
-    DS.get("/api/osszes_kategoria", getKat);
-  } else if (state.termekek[0] == "" && props.ujModell) {
-    handleState("termekek", ["defined"]);
-    DS.get("/api/osszes_kategoria", getKat);
-  }
-   else if (
-    (state.termekek[0] !== "" || state.kategoriak[0] !== "") &&
-    state.tolt == false
-  ) {
-    handleState("tolt", true);
-  }
+  useEffect(() => {
+    if (!props.ujModell) {
+      DS.get(
+        "/api/modell_termekei/" + props.mod_id + "/" + props.mod_nev,
+        getTer
+      )
+    }else{
+      handleState("modell", false);
+    }
+    handleState("kategoria", props.kategoriak[0].kat_id);
+  }, []);
+  
   function getTer(data) {
     handleState("termekek", data.data);
   }
 
-  function getKat(data) {
-    handleState("kategoriak", data.data);
-  }
 
   return (
     <div>
-      {state.alert && (
+      {props.ujModell || !state.tolt ?(<>{state.alert && (
         <Alert variant="success" style={{ margin: "1vh" }}>
           {state.alertmessage}
         </Alert>
@@ -99,18 +97,7 @@ export default function AdminAdatok(props) {
 
           <Card className="szerkElem" style={{ width: "90%" }}>
             <Card.Body>
-              <Form.Check // prettier-ignore
-                type="switch"
-                id="custom-switch"
-                label="szerkesztés"
-                style={{ float: "right" }}
-                onClick={() => {
-                  handleState("modell", !state.modell);
-                  handleState("kategoria", state.kategoriak[0].kat_id);
-                }}
-              />
               <Card.Title>Modell létrehozása</Card.Title>
-
               <Form.Group className="mb-3 adminForm">
                 <Form.Label className="fw-bold">Kategória:</Form.Label>
                 <Form.Select
@@ -126,7 +113,7 @@ export default function AdminAdatok(props) {
                   }}
                   disabled={state.modell}
                 >
-                  {state.kategoriak.map((kat, index) => (
+                  {props.kategoriak.map((kat, index) => (
                     <option kat_id={kat.kat_id} key={index}>
                       {kat.kategoria_nev}
                     </option>
@@ -286,7 +273,7 @@ export default function AdminAdatok(props) {
                   }}
                   disabled={state.besorolas}
                 >
-                  {state.kategoriak.map((kat, index) => (
+                  {props.kategoriak.map((kat, index) => (
                     <option kat_id={kat.kat_id} key={index}>
                       {kat.kategoria_nev}
                     </option>
@@ -334,7 +321,7 @@ export default function AdminAdatok(props) {
                   <Form.Control
                     disabled={state.modell}
                     type="email"
-                    placeholder={state.termekek[0].gyarto}
+                    placeholder={state.termekek.length > 0 ? state.termekek[0].gyarto : ''}
                     onChange={(e) =>
                       handleState("ujModellgyarto", e.target.value)
                     }
@@ -348,7 +335,7 @@ export default function AdminAdatok(props) {
                 <Form.Label>Leirás:</Form.Label>
                 <Form.Control
                   disabled={state.modell}
-                  value={state.termekek[0].leiras}
+                  value={state.termekek.length > 0 ? state.termekek[0].leiras : ''}
                   as="textarea"
                   rows={3}
                   onChange={(e) =>
@@ -442,7 +429,7 @@ export default function AdminAdatok(props) {
               <Form.Group className="mb-3 adminForm">
                 <Form.Label className="fw-bold">termék (id):</Form.Label>
                 <Form.Select
-                  defaultValue={state.termekek[0].ter_id}
+                  defaultValue={state.termekek.length > 0 ? state.termekek[0].ter_id : ''}
                   onChange={(e) =>
                     handleState("termekindex", [
                       e.target.options.selectedIndex,
@@ -493,7 +480,7 @@ export default function AdminAdatok(props) {
                   <Form.Control
                     disabled={state.termek}
                     type="email"
-                    placeholder={props.mod_nev}
+                    placeholder={state.termekek.length > 0 ? state.termekek[state.termekindex[0]].anyag : ''}
                   />
                 </Col>
               </Form.Group>
@@ -501,12 +488,12 @@ export default function AdminAdatok(props) {
                 <Form.Label className="fw-bold">szín:</Form.Label>
                 <Col sm={10}>
                   <Form.Select
-                    defaultValue={state.termekek[state.termekindex[0]].szin}
+                    defaultValue={state.termek.length > 0 ? state.termekek[state.termekindex[0]].szin : 'black'}
                     onChange={(e) => handleState("szin", e.target.value)}
                     disabled={state.termek}
                   >
-                    <option value={state.termekek[state.termekindex[0]].szin}>
-                      {state.termekek[state.termekindex[0]].szin}
+                    <option value={state.termek.length > 0 ? state.termekek[state.termekindex[0]].szin : 'black'}>
+                      {state.termek.length > 0 ? state.termekek[state.termekindex[0]].szin : 'black'}
                     </option>
                     {Object.entries(htmlColorNames).map(([name, value]) => (
                       <option key={value} value={name}>
@@ -573,7 +560,11 @@ export default function AdminAdatok(props) {
             </Modal.Footer>
           </Modal>
         </>
-      )}
+      )}</>):(<Spinner
+        animation="border"
+        className="m-auto loadingSpinner"
+        id="spinner"
+      />) }
     </div>
   );
 }

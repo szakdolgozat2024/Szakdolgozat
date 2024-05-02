@@ -97,10 +97,10 @@ export default function Felhasznalo(props) {
     );
   }
   return (
-    <div className="container mt-5 mb-5 text-center m-auto">
+    <div className="container mt-5 mb-5 text-center m-auto inter-regular">
       <Card className="m-auto mt-5 p-4">
         <Card.Title>
-          <h1 className="m-2">Felhasználói adatok</h1>
+          <h1 className="m-2 inter-bold">Felhasználói adatok</h1>
         </Card.Title>
         <Card.Body className="text-start ps-5">
           <p>
