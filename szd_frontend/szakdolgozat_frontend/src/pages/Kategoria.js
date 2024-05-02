@@ -15,8 +15,8 @@ export default function Kategoria() {
   const pathsArray = locationPath.split("/");
   const kateg = decodeURIComponent(pathsArray[2]);
   const DS = new DataService();
-
   const [tolt, setTolt] = useState(true);
+
   useEffect(() => {
     DS.get("/api/adott_kategoria/" + kateg, getAdottModell);
   }, []);
