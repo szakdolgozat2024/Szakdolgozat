@@ -108,10 +108,6 @@ export default function ProductDetails(props) {
               <Col lg={9} xs={6} sm={6} md={6}>Anyag:</Col>
               <Col>{props.termekek[state.termek].anyag}</Col>
             </Row>
-            <Row>
-              <Col lg={9} xs={6} sm={6} md={6}>Anyag:</Col>
-              <Col>{props.termekek[state.termek].anyag}</Col>
-            </Row>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
