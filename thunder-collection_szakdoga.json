@@ -1,0 +1,369 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "szakdoga",
+    "collectionId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+    "dateExported": "2024-05-03T07:19:09.325Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a959e7b6-1dbc-4fbd-91ce-a4339ac239d2",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "loginreq",
+            "url": "login?email=admin@admin.com&password=jelszo",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-08T18:39:17.048Z",
+            "modified": "2024-03-14T23:06:17.158Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "email",
+                    "value": "admin@admin.com",
+                    "isPath": false
+                },
+                {
+                    "name": "password",
+                    "value": "jelszo",
+                    "isPath": false
+                }
+            ],
+            "reqType": "post",
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "asd",
+                    "password": "d"
+                }
+            },
+            "tests": []
+        },
+        {
+            "_id": "e57f72e7-385a-4c6e-bfe2-987bd582c012",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "getuser",
+            "url": "api/user",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-08T20:20:08.692Z",
+            "modified": "2024-03-30T12:18:41.298Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "XSRF-TOKEN",
+                    "value": "eyJpdiI6Ii9FK1FKT1VBcnk0Vi9mTWJENmZDbHc9PSIsInZhbHVlIjoicHBxV0dxZ3kvSHBCR25qSWVOUldESGFUa0NzVWthaW51NGtDK09YT3Bvd1g5SWN4bC9KekR5ZWZsWVhBdU52MWlVMW9GUDg4ZDNIQ2FUa1Z1TG5QakdWQVhweW9qRlZzMVY5Z2E3OXJGSklXbUlpN0o4cStQL3MzQm9uV2NxVHQiLCJtYWMiOiIzNjM0OTliOTNlZDE3NDFmMTM5ZjViZmIzNjU4MzFhOGU1YzE3MDdjM2Y4ZDM3OTg2Y2FmYjE2NWNjY2E5MTJjIiwidGFnIjoiIn0%3D"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "zQmYI7iGPEn2bHIPNMs3CUMcT25S9Z2isDTE3wyZ",
+                "bearerPrefix": "Sanctum"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8b347804-302d-466e-b1bf-f7b4362417ff",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "kategorianevek",
+            "url": "api/kategoria_nevek",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-03-10T14:46:55.900Z",
+            "modified": "2024-03-10T16:20:08.855Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "a19b25b0-283c-4646-81d7-85d34257c4a3",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "adott_termek",
+            "url": "api/adott_termek/1",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-03-26T16:46:12.111Z",
+            "modified": "2024-03-26T16:48:22.266Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ec4912cf-e27f-4fdd-8983-9b29d194f680",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "osszes_modell",
+            "url": "api/osszes_modell",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-03-30T12:03:31.710Z",
+            "modified": "2024-03-30T12:04:14.928Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "516138ea-98a1-4754-a7c2-7851547d9d95",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "bej_user",
+            "url": "api/bejelentkezett_user/admin@admin.com/jelszo",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-04-09T18:13:19.480Z",
+            "modified": "2024-04-09T18:20:20.460Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "90f3b4d6-34cf-4057-add8-fc7aebe59e78",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "user_rend",
+            "url": "api/user_rendelesei/1",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-04-09T20:38:09.343Z",
+            "modified": "2024-04-09T20:38:31.320Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1331c3b5-fd8b-4798-801b-88b0a1eac135",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "rendelesRogzites",
+            "url": "api/rendelesrogzites?user=1",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-04-14T11:19:27.160Z",
+            "modified": "2024-04-14T11:33:33.028Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "user",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "ec8cc861-d8c3-4a2a-bd5f-678da9705402",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "rendelestorles",
+            "url": "api/rendelestorles/11",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2024-04-14T14:58:41.239Z",
+            "modified": "2024-04-14T14:59:32.686Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1f9a910d-6e2b-4819-94f8-c52ef9c1f870",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "rendtetelrog",
+            "url": "api/rendelestetelrogzites?termek=1&mennyiseg=2",
+            "method": "POST",
+            "sortNum": 105000,
+            "created": "2024-04-14T12:23:06.163Z",
+            "modified": "2024-04-14T12:24:00.666Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "termek",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "mennyiseg",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "c77a2765-3c6f-42b4-aced-5d22f55f4f01",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "rendelszletei",
+            "url": "api/rendelestermekei/18",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2024-04-14T16:32:05.103Z",
+            "modified": "2024-04-14T16:33:26.002Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "340dc766-a5fb-4b83-a990-13cde132af20",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "updateuser",
+            "url": "api/update_user/2?cim=proba",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2024-04-18T19:07:46.677Z",
+            "modified": "2024-05-02T22:01:56.614Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "cim",
+                    "value": "proba",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "3531a330-b62c-443a-a215-b73293269834",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "userdel",
+            "url": "api/user_torles/2",
+            "method": "DELETE",
+            "sortNum": 130000,
+            "created": "2024-04-21T14:29:45.379Z",
+            "modified": "2024-04-21T14:30:09.599Z",
+            "headers": []
+        },
+        {
+            "_id": "767cd692-7f6c-4087-9610-4020e30b2fcd",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "ujbesz",
+            "url": "api/uj_beszerzes?termek=1&mennyiseg=20",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2024-04-23T16:56:52.605Z",
+            "modified": "2024-04-23T16:58:56.427Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "termek",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "mennyiseg",
+                    "value": "20",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "46af2212-08c2-48ba-8d1b-6d21064dff4c",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "osszuser",
+            "url": "api/osszes_user",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2024-04-25T16:27:03.833Z",
+            "modified": "2024-04-25T16:27:24.959Z",
+            "headers": []
+        },
+        {
+            "_id": "ff02d00c-f50f-4ccc-a9ed-f289ce5f165c",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "ujuserhoz",
+            "url": "api/uj_user_azonositoval_hozzaferessel?azon=2&name=vendes&email=vendeg@vendeg.com&cim&password=jelszo&hozzaferes=1",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2024-04-25T17:15:21.112Z",
+            "modified": "2024-04-25T17:23:26.063Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "azon",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "name",
+                    "value": "vendes",
+                    "isPath": false
+                },
+                {
+                    "name": "email",
+                    "value": "vendeg@vendeg.com",
+                    "isPath": false
+                },
+                {
+                    "name": "cim",
+                    "value": "",
+                    "isPath": false
+                },
+                {
+                    "name": "password",
+                    "value": "jelszo",
+                    "isPath": false
+                },
+                {
+                    "name": "hozzaferes",
+                    "value": "1",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "4aaacd9b-a858-4fae-ae91-4fbb2dcbbdbe",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "kattorles",
+            "url": "api/kategoria_torles/3 5",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2024-05-01T15:31:35.056Z",
+            "modified": "2024-05-01T15:31:45.886Z",
+            "headers": []
+        },
+        {
+            "_id": "d23f86b1-69bb-487e-9f5d-064ed4812d83",
+            "colId": "8aeea0c0-bb94-46b7-94fe-ad0fa79dc271",
+            "containerId": "",
+            "name": "updatekat",
+            "url": "api/update_kategoria/1?kategoria_nev=proba",
+            "method": "PUT",
+            "sortNum": 180000,
+            "created": "2024-05-02T22:04:14.436Z",
+            "modified": "2024-05-02T22:05:00.943Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "kategoria_nev",
+                    "value": "proba",
+                    "isPath": false
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "http://localhost:8000/"
+        }
+    },
+    "ref": "C53bBUEDJ3WtiZ5nO00CTBJ8Rrt3C_ZxuLecbER6CaCJMJUDo2RBbSyW_QkMoHHW7Wvpi6B5JCuSb1urIVcLmQ"
+}
